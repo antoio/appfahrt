@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
+import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
