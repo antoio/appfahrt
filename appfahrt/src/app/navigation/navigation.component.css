@@ -1,0 +1,19 @@
+nav {
+	height: 30 px;
+	background-color: blueviolet;
+	display: flex;
+}
+
+#title {
+	flex-direction: row;
+	font-style: italic;
+	margin: 0px 200px;
+	height: auto;
+}
+
+nav a {
+	flex-direction: row;
+	margin: 10px 60px;
+	text-decoration: none;
+	
+}
