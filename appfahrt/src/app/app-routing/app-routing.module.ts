@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { MapViewComponent } from '../map-view/map-view.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: NavigationComponent
+    component: MapViewComponent
   }
 ];
 
