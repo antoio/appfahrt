@@ -30,8 +30,8 @@ export class MapViewComponent implements OnInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([6.661594, 50.433237]),
-      zoom: 3
+      center: fromLonLat([8.522655, 47.386688]),
+      zoom: 13
     });
 
     this.map = new OlMap({
