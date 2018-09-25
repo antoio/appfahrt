@@ -9,6 +9,7 @@ import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/mater
 import { UsersettingsComponent } from './usersettings/usersettings.component';
 import { MonitoroverviewComponent } from './monitoroverview/monitoroverview.component';
 import { MonitordetailComponent } from './monitordetail/monitordetail.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MonitordetailComponent } from './monitordetail/monitordetail.component'
     AboutComponent,
     UsersettingsComponent,
     MonitoroverviewComponent,
-    MonitordetailComponent
+    MonitordetailComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
