@@ -24,7 +24,6 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/theme.css"
             ],
             "scripts": []
           },
