@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import {  } from '@types/googlemaps';
+
+import OlMap from 'ol/Map';
+import OlXYZ from 'ol/source/XYZ';
+import OlTileLayer from 'ol/layer/Tile';
+import OlView from 'ol/View';
+import { fromLonLat } from 'ol/proj';
 
 @Component({
   selector: 'app-map-view',
@@ -9,18 +13,32 @@ import {  } from '@types/googlemaps';
 })
 export class MapViewComponent implements OnInit {
 
-  @ViewChild('gmap') gmapElement: any;
-  map: google.maps.Map;
+  map: OlMap;
+  source: OlXYZ;
+  layer: OlTileLayer;
+  view: OlView;
 
   constructor() { }
 
   ngOnInit() {
-    var mapProp = {
-      center: new google.maps.LatLng(18.5793, 73.8143),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    this.source = new OlXYZ({
+      url: 'http://tile.osm.org/{z}/{x}/{y}.png'
+    });
+
+    this.layer = new OlTileLayer({
+      source: this.source
+    });
+
+    this.view = new OlView({
+      center: fromLonLat([6.661594, 50.433237]),
+      zoom: 3
+    });
+
+    this.map = new OlMap({
+      target: 'map',
+      layers: [this.layer],
+      view: this.view
+    });
   }
 
 }
