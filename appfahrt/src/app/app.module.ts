@@ -17,10 +17,10 @@ import { SearchComponent } from './search/search.component';
     NavigationComponent,
     MapViewComponent,
     AboutComponent,
+    SearchComponent,
     UsersettingsComponent,
     MonitoroverviewComponent,
     MonitordetailComponent,
-    SearchComponent
   ],
   imports: [
     BrowserModule,

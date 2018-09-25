@@ -6,6 +6,7 @@ import { AboutComponent } from '../about/about.component';
 import { UsersettingsComponent } from '../usersettings/usersettings.component';
 import { MonitordetailComponent } from '../monitordetail/monitordetail.component';
 import { MonitoroverviewComponent } from '../monitoroverview/monitoroverview.component';
+import { SearchComponent } from '../search/search.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path:'details',
     component: MonitordetailComponent
+  },
+  {
+    path:'search',
+    component: SearchComponent
   },
   {
     path:'settings',
