@@ -6,13 +6,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import { UsersettingsComponent } from './usersettings/usersettings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     MapViewComponent,
-    AboutComponent
+    AboutComponent,
+    UsersettingsComponent
   ],
   imports: [
     BrowserModule,
