@@ -7,6 +7,8 @@ import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/material';
 import { UsersettingsComponent } from './usersettings/usersettings.component';
+import { MonitoroverviewComponent } from './monitoroverview/monitoroverview.component';
+import { MonitordetailComponent } from './monitordetail/monitordetail.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { UsersettingsComponent } from './usersettings/usersettings.component';
     NavigationComponent,
     MapViewComponent,
     AboutComponent,
-    UsersettingsComponent
+    UsersettingsComponent,
+    MonitoroverviewComponent,
+    MonitordetailComponent
   ],
   imports: [
     BrowserModule,
