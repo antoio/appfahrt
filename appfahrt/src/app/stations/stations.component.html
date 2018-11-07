@@ -4,7 +4,10 @@
   <span *ngIf="stations">
     <div>
       <ul>
-        <li *ngFor="let station of stations.stations">{{station.id}}: {{station.name}}</li>
+        <li *ngFor="let station of stations.stations">
+          {{station.id}}: {{station.name}} (x: {{station.coordinate.x}} y: {{station.coordinate.y}})
+          <a routerLink="/details/{{station.id}}">Abfahrt</a>
+        </li>
       </ul>
     </div>
   </span>

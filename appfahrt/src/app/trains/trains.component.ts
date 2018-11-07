@@ -12,11 +12,13 @@ export class TrainsComponent {
   trains: any;
 
   private _stationId = '8503110';
+  private _stationName = '';
 
   @Input()
   set stationId(stationId: string) {
     this._stationId = stationId;
   }
+  get stationName() { return this._stationId; }
 
   constructor(private trainsService: TrainsService) {}
 

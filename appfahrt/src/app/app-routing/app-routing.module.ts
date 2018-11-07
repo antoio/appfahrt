@@ -10,27 +10,30 @@ import { SearchComponent } from '../search/search.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: MapViewComponent
   },
   {
-    path:'overview',
+    path: 'overview',
     component: MonitoroverviewComponent
   },
   {
-    path:'details',
+    path: 'details',
+    component: MonitordetailComponent
+  },
+  { path: 'details/:id',
     component: MonitordetailComponent
   },
   {
-    path:'search',
+    path: 'search',
     component: SearchComponent
   },
   {
-    path:'settings',
+    path: 'settings',
     component: UsersettingsComponent
   },
   {
-    path:'about',
+    path: 'about',
     component: AboutComponent
   }
 ];
