@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import OlMap from 'ol/Map';
 import OlXYZ from 'ol/source/XYZ';
+import LonLat from 'ol/layer';
 import OlTileLayer from 'ol/layer/Tile';
 import OlView from 'ol/View';
 import { fromLonLat } from 'ol/proj';
@@ -22,7 +23,22 @@ export class MapViewComponent implements OnInit {
   layer: OlTileLayer;
   view: OlView;
 
-  constructor() { }
+  constructor() {
+    // Get current location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => this.setCoordinates(position));
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  }
+  private setCoordinates = (position: any) => {
+    const newCoordinates = {
+      x: position.coords.longitude,
+      y: position.coords.latitude
+    };
+    this._coordinates = newCoordinates;
+    this.view.setCenter( fromLonLat([newCoordinates.x, newCoordinates.y]));
+  }
   get coordinates(): {x: number, y: number} { return this._coordinates; }
 
   ngOnInit() {
@@ -36,7 +52,7 @@ export class MapViewComponent implements OnInit {
 
     this.view = new OlView({
       center: fromLonLat([this.coordinates.x, this.coordinates.y]),
-      zoom: 13
+      zoom: 16
     });
 
     this.map = new OlMap({
