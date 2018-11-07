@@ -1,0 +1,13 @@
+<h3>Get Stations</h3>
+<div>
+  <button (click)="clear(); getStations()">get</button>
+  <span *ngIf="stations">
+    <div>
+      <ul>
+        <li *ngFor="let station of stations.stations">{{station.id}}: {{station.name}}</li>
+      </ul>
+    </div>
+  </span>
+</div>
+<p *ngIf="error" class="error">{{error | json}}</p>
+

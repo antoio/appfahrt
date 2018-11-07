@@ -6,10 +6,13 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import {StationsComponent} from './stations/stations.component';
+import {TrainsComponent} from './trains/trains.component';
 import { UsersettingsComponent } from './usersettings/usersettings.component';
 import { MonitoroverviewComponent } from './monitoroverview/monitoroverview.component';
 import { MonitordetailComponent } from './monitordetail/monitordetail.component';
 import { SearchComponent } from './search/search.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,13 +24,16 @@ import { SearchComponent } from './search/search.component';
     UsersettingsComponent,
     MonitoroverviewComponent,
     MonitordetailComponent,
+    StationsComponent,
+    TrainsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,10 @@ import { fromLonLat } from 'ol/proj';
   styleUrls: ['./map-view.component.css']
 })
 export class MapViewComponent implements OnInit {
+  private _coordinates = {
+    x: 8.815174,
+    y: 47.2233607
+  };
 
   map: OlMap;
   source: OlXYZ;
@@ -19,6 +23,7 @@ export class MapViewComponent implements OnInit {
   view: OlView;
 
   constructor() { }
+  get coordinates(): {x: number, y: number} { return this._coordinates; }
 
   ngOnInit() {
     this.source = new OlXYZ({
@@ -30,7 +35,7 @@ export class MapViewComponent implements OnInit {
     });
 
     this.view = new OlView({
-      center: fromLonLat([8.522655, 47.386688]),
+      center: fromLonLat([this.coordinates.x, this.coordinates.y]),
       zoom: 13
     });
 
