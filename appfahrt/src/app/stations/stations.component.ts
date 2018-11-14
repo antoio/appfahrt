@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { StationsService } from './stations.service';
-import { Station } from './station';
 
 @Component({
   selector: 'app-stations',

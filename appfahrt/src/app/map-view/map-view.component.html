@@ -1,9 +1,15 @@
-<div>coordinates: {{coordinates.x}} {{coordinates.y}}</div>
-<div>
-  <app-stations [coordinates]="coordinates"></app-stations>
-</div>
-<div id="map" class="map">
-  <!-- Div for the map 
-  <p>behold the map!</p> -->
+<div (mouseup)="mouseUpEvent($event)" id="map-container">
+<agm-map id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
+         [scrollwheel]="true"
+         [zoom]="16"
+         (centerChange)="mapChanged($event)">
+    <agm-marker *ngFor="let station of stations" [latitude]="station.lat" [longitude]="station.long"
+                (markerClick)="markerClick(station)">
+      <agm-info-window class="info-window">
+        {{station.name}}<br>
+        <button mat-button color="accent" [routerLink]="['/details', station.id]">Ansehen</button>
+      </agm-info-window>
+    </agm-marker>
+</agm-map>
 </div>
 

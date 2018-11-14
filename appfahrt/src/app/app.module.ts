@@ -13,6 +13,7 @@ import { MonitoroverviewComponent } from './monitoroverview/monitoroverview.comp
 import { MonitordetailComponent } from './monitordetail/monitordetail.component';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBiSgwTypZQB4ozSa5qhHu8bHQy5irJqCA',
+      libraries: ['places']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
