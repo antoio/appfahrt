@@ -14,6 +14,7 @@ import { MonitordetailComponent } from './monitordetail/monitordetail.component'
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { config } from './config';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { AgmCoreModule } from '@agm/core';
     MatIconModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBiSgwTypZQB4ozSa5qhHu8bHQy5irJqCA',
+      apiKey: config.googleMapsKey,
       libraries: ['places']
     })
   ],
