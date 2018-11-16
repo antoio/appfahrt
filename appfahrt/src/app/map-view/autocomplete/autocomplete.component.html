@@ -1,0 +1,6 @@
+<div  *ngIf="ready">
+  <mat-form-field class="example-full-width">
+    <mat-icon matPrefix="">search</mat-icon>
+    <input placeholder="Standort suchen..." matInput (FormatAddress)="getFormattedAddress($event)" [options]="options"  angularGooglePlace/>
+  </mat-form-field>
+</div>

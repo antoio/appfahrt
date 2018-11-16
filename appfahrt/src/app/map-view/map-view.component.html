@@ -1,4 +1,5 @@
 <div (mouseup)="mouseUpEvent($event)" id="map-container">
+  <app-autocomplete (location)="getLocationFromAutocomplete($event)"></app-autocomplete>
 <agm-map id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
          [scrollwheel]="true"
          [zoom]="16"

@@ -57,6 +57,10 @@ export class MapViewComponent implements OnInit {
   markerClick(station: Station) {
     console.log('show station', station);
   }
+  getLocationFromAutocomplete(location: {x: number, y: number}) {
+    this.setCoordinates(location.x, location.y);
+    this.getStations();
+  }
 
   ngOnInit() {
     this.getStations();
