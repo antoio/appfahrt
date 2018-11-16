@@ -8,22 +8,13 @@ import { Address } from 'angular-google-place';
 })
 export class AutocompleteComponent implements OnInit {
   ready = false;
-  get currentValue(): string { return this._currentValue; }
 
-  constructor() {
-
-  }
-
-  _currentValue = 'Bern';
   public searchControl: FormControl;
   @Output() location: EventEmitter<any> = new EventEmitter<any>();
   public options = {type : 'address', componentRestrictions: { country: 'CH' }};
-  setLocation(location: {x: number, y: number}) {
-    this.location.emit(location);
-  }
+
   getFormattedAddress(event: any) {
-    console.log(event);
-    this.setLocation({x: event.lng, y: event.lat});
+    this.location.emit({x: event.lng, y: event.lat});
   }
 
   ngOnInit() {
