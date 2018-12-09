@@ -2,7 +2,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NavigationService} from '../navigation/navigation.service';
 import {Station} from '../stations/station';
-import {OBERGLATT} from '../trains/stations';
 import {TrainsService} from '../trains/trains.service';
 import {Subscription} from 'rxjs';
 
