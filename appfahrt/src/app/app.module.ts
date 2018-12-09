@@ -25,6 +25,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
 import { AuthServiceService } from './services/auth-service.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { AuthServiceService } from './services/auth-service.service';
     StationsComponent,
     TrainsComponent,
     AutocompleteComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,8 @@ import { AuthServiceService } from './services/auth-service.service';
     AngularGooglePlaceModule,
     AngularFireModule.initializeApp(environment.firebase, 'appfahrt-1537907755048'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [NavigationService, AuthServiceService],
   bootstrap: [AppComponent]

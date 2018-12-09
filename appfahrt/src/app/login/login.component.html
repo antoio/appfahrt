@@ -1,6 +1,10 @@
-<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
 
-<p>
-  login works!
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label for="username">username</label>
+  <input type="text" name="username" id="username" formControlName="username">
+  <br/>
+  <label for="password">password</label>
+  <input type="password" name="password" id="password" formControlName="password">
+  <br/>
+  <button type="submit">log in</button>
+</form>

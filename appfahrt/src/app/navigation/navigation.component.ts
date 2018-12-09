@@ -2,6 +2,7 @@ import {Component, OnInit, Injectable, EventEmitter} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {NavigationService} from './navigation.service';
 import {Title} from '@angular/platform-browser';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,6 +13,7 @@ import {Title} from '@angular/platform-browser';
 export class NavigationComponent {
   title = 'Appfahrt';
   constructor(
+    private authService: AuthServiceService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) {
@@ -23,4 +25,10 @@ export class NavigationComponent {
     });
 
   }
+
+  logout() {
+    console.log("logout");
+    this.authService.logout();
+  }
+  
 }

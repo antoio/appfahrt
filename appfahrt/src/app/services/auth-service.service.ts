@@ -19,7 +19,7 @@ export class AuthServiceService {
       (user) => {
         if (user) {
           this.userDetails = user;
-          console.table(this.userDetails)
+          console.log(this.userDetails)
         } else {
           this.userDetails = null;
         }
@@ -33,12 +33,16 @@ export class AuthServiceService {
      return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
    }
 
-   isLoggedIn() {
-     return this.userDetails == null ? false : true;
-   }
+   //isLoggedIn() {
+   //  return this.userDetails == null ? false : true;
+   //}
 
    logout() {
      this._firebaseAuth.auth.signOut()
-     .then((res) => this.router.navigate(['/']));
+     .then((res) => this.router.navigate(['/search']))
+     .catch((err) => {
+       console.log('Something went wrong:');
+       console.log(err);
+     });
    }
 }
