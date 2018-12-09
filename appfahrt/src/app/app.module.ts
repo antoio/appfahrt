@@ -20,6 +20,10 @@ import { config } from './config';
 import {AngularGooglePlaceModule} from 'angular-google-place';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { LoginComponent } from './login/login.component';
       apiKey: config.googleMapsKey,
       libraries: ['places']
     }),
-    AngularGooglePlaceModule
+    AngularGooglePlaceModule,
+    AngularFireModule.initializeApp(environment.firebase, 'appfahrt-1537907755048'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [NavigationService],
   bootstrap: [AppComponent]
