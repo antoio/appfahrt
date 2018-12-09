@@ -1,14 +1,16 @@
 <div (mouseup)="mouseUpEvent($event)" id="map-container">
   <app-autocomplete (location)="getLocationFromAutocomplete($event)"></app-autocomplete>
-<agm-map id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
+<agm-map class="map-view" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
          [scrollwheel]="true"
          [zoom]="16"
          (centerChange)="mapChanged($event)">
-    <agm-marker *ngFor="let station of stations" [latitude]="station.lat" [longitude]="station.long"
+    <agm-marker *ngFor="let station of stations"
+                [latitude]="station.lat" [longitude]="station.long"
+                [iconUrl]="marker"
                 (markerClick)="markerClick(station)">
-      <agm-info-window class="info-window">
-        {{station.name}}<br>
-        <button mat-button color="accent" [routerLink]="['/details', station.id]">Ansehen</button>
+      <agm-info-window class="map-view___info-window">
+        <h3>{{station.name}}</h3>
+        <button mat-button color="primary" class="map-view___info-window___button" [routerLink]="['/details', station.id]">Ansehen</button>
       </agm-info-window>
     </agm-marker>
 </agm-map>

@@ -1,12 +1,7 @@
-p {
-	height: 100vh;
-	background-color: grey;
+.map-view {
+  width: 100%;
+  height: calc(100vh - 68px);
 }
-
-agm-map {
-	width: 100%;
-	height: calc(100vh - 68px);
-}
-.info-window {
-  color: black;
+.map-view___info-window___button{
+  width: 100%;
 }

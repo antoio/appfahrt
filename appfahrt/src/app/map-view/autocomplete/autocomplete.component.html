@@ -1,6 +1,6 @@
-<div  *ngIf="ready">
-  <mat-form-field class="example-full-width">
-    <mat-icon matPrefix="">search</mat-icon>
+<mat-card  *ngIf="ready" class="autocomplete">
+  <mat-form-field class="autocomplete___formfield">
+    <mat-icon matPrefix="" class="autocomplete___icon">search</mat-icon>
     <input placeholder="Standort suchen..." matInput (FormatAddress)="getFormattedAddress($event)" [options]="options"  angularGooglePlace/>
   </mat-form-field>
-</div>
+</mat-card>

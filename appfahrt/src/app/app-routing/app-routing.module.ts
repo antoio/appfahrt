@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {LoginComponent} from '../login/login.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { AboutComponent } from '../about/about.component';
 import { UsersettingsComponent } from '../usersettings/usersettings.component';
@@ -11,30 +12,42 @@ import { SearchComponent } from '../search/search.component';
 const routes: Routes = [
   {
     path: '',
-    component: MapViewComponent
+    redirectTo: '/details',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {title: 'Login'}
   },
   {
     path: 'overview',
-    component: MonitoroverviewComponent
+    component: MonitoroverviewComponent,
+    data: {title: 'Dashboard'}
   },
   {
     path: 'details',
-    component: MonitordetailComponent
+    component: MonitordetailComponent,
+    data: {title: 'Bahnhof'}
   },
   { path: 'details/:id',
-    component: MonitordetailComponent
+    component: MonitordetailComponent,
+    data: {title: 'Bahnhof'}
   },
   {
     path: 'search',
-    component: SearchComponent
+    component: MapViewComponent,
+    data: {title: 'Suche'}
   },
   {
     path: 'settings',
-    component: UsersettingsComponent
+    component: UsersettingsComponent,
+    data: {title: 'Einstellungen'}
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    data: {title: 'Über'}
   }
 ];
 

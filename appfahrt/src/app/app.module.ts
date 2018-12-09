@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
-import {AutocompleteComponent} from './map-view/autocomplete/autocomplete.component';
+import { AutocompleteComponent } from './map-view/autocomplete/autocomplete.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import {StationsComponent} from './stations/stations.component';
+import { MatButtonModule, MatToolbarModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import {NavigationService} from './navigation/navigation.service';
+import { StationsComponent } from './stations/stations.component';
 import {TrainsComponent} from './trains/trains.component';
 import { UsersettingsComponent } from './usersettings/usersettings.component';
 import { MonitoroverviewComponent } from './monitoroverview/monitoroverview.component';
@@ -18,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 import { config } from './config';
 import {AngularGooglePlaceModule} from 'angular-google-place';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MonitordetailComponent,
     StationsComponent,
     TrainsComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: config.googleMapsKey,
@@ -49,7 +53,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     }),
     AngularGooglePlaceModule
   ],
-  providers: [],
+  providers: [NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

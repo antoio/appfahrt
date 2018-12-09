@@ -4,7 +4,8 @@ import { Address } from 'angular-google-place';
 
 @Component({
   selector: 'app-autocomplete',
-  templateUrl: './autocomplete.component.html'
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.css'],
 })
 export class AutocompleteComponent implements OnInit {
   ready = false;

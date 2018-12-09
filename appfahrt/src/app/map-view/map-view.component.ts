@@ -11,18 +11,6 @@ import { Station } from './../stations/station';
 })
 export class MapViewComponent implements OnInit {
 
-  error: any;
-  stations: Station[];
-
-  private _coordinates = {
-    x: 8.815174,
-    y: 47.2233607
-  };
-  private _tempCoordintes = {
-    x: 8.815174,
-    y: 47.2233607
-  };
-
   constructor(private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
               private stationsService: StationsService) {
@@ -34,6 +22,26 @@ export class MapViewComponent implements OnInit {
       console.log('Geolocation is not supported by this browser.');
     }
   }
+  get coordinates(): {x: number, y: number} { return this._coordinates; }
+
+  error: any;
+  stations: Station[];
+
+  private _coordinates = {
+    x: 8.815174,
+    y: 47.2233607
+  };
+  private _tempCoordintes = {
+    x: 8.815174,
+    y: 47.2233607
+  };
+  marker = {
+    url: 'assets/marker_small.svg',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  };
   private setCoordinates = (long: number, lat: number) => {
     const newCoordinates = {
       x: long,
@@ -41,7 +49,6 @@ export class MapViewComponent implements OnInit {
     };
     this._coordinates = newCoordinates;
   }
-  get coordinates(): {x: number, y: number} { return this._coordinates; }
   mapChanged($event: any) {
     this._tempCoordintes = {
       x: $event.lng,

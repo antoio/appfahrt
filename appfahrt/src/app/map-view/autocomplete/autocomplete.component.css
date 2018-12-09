@@ -1,0 +1,19 @@
+.autocomplete{
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 80px;
+  z-index: 1000;
+  background: white;
+  padding: 8px;
+}
+
+.autocomplete___formfield {
+  width: 100%;
+  height: 52px;
+}
+.autocomplete___icon {
+  position: relative;
+  top: 6px;
+  margin-right: 10px;
+}
