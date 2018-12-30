@@ -3,6 +3,8 @@
 
   <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end">
     <mat-action-list>
+      <button mat-list-item routerLink="dashboard" (click)="close()"><mat-icon mat-list-icon>dashboard</mat-icon> Dashboard </button>
+      <mat-divider></mat-divider>
       <button mat-list-item routerLink="favorites" (click)="close()"><mat-icon mat-list-icon>favorite</mat-icon> Favoriten </button>
       <mat-divider></mat-divider>
       <button mat-list-item routerLink="settings" (click)="close()"><mat-icon mat-list-icon>settings</mat-icon> Einstellungen </button>
