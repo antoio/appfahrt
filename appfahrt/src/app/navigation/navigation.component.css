@@ -1,3 +1,9 @@
+.sidenav {
+  min-height: 100vh;
+}
+.sidenav___content{
+  min-height: 100vh;
+}
 .navigation-icon {
   padding: 0 14px;
 }

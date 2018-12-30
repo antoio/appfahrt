@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayout.xs="column" class="dashboard">
+  <div *ngIf="boards.length === 0">Keine Favoriten vorhanden. Bitte neue hinzufügen</div>
   <mat-card *ngFor="let board of boards" fxFlex="calc(50% - 20px)" class="dashboard___card">
     <h3>{{board.station.name}}</h3>
     <table mat-table [dataSource]="board.trains" class="dashboard___card___table">
@@ -6,7 +7,6 @@
         <th mat-header-cell *matHeaderCellDef>Name </th>
         <td mat-cell *matCellDef="let train">{{train.name}}</td>
       </ng-container>
-
       <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef> Time </th>
         <td mat-cell *matCellDef="let train"> {{getTime(train.stop.departureTimestamp * 1000)}}</td>

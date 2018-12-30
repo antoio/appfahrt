@@ -78,10 +78,11 @@ export class MapViewComponent implements OnInit {
         (data: any) => {
           this.stations = [];
           data.stations.map((station: any) => {
-            const newStation = {
+            const newStation: Station = {
               name: station.name,
               id: station.id,
               coordinate: {
+                type: station.coordinate.type,
                 x: station.coordinate.x,
                 y: station.coordinate.y
               }

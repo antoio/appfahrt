@@ -1,8 +1,30 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>{{title}}</span>
-    <span class="spacer"></span>
-    <button mat-button routerLink="login"><mat-icon class="navigation-icon">person</mat-icon></button>
-    <button mat-button (click)="logout()"><mat-icon class="navigation-icon">search</mat-icon></button>
-  </mat-toolbar-row>
-</mat-toolbar>
+<mat-sidenav-container
+  class="sidenav" (backdropClick)="close('backdrop')">
+
+  <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end">
+    <mat-action-list>
+      <button mat-list-item routerLink="favorites" (click)="close()"><mat-icon mat-list-icon>favorite</mat-icon> Favoriten </button>
+      <mat-divider></mat-divider>
+      <button mat-list-item routerLink="settings" (click)="close()"><mat-icon mat-list-icon>settings</mat-icon> Einstellungen </button>
+      <mat-divider></mat-divider>
+      <button mat-list-item routerLink="about" (click)="close()"><mat-icon mat-list-icon>help</mat-icon> Über Appfahrt </button>
+      <mat-divider></mat-divider>
+      <button mat-list-item (click)="logout()"><mat-icon mat-list-icon>account_circle</mat-icon> Logout </button>
+    </mat-action-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav___content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>{{title}}</span>
+        <span class="spacer"></span>
+        <button mat-button routerLink="search">
+          <mat-icon class="navigation-icon">search</mat-icon>
+        </button>
+        <button mat-button (click)="sidenav.open()">
+          <mat-icon class="navigation-icon">person</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

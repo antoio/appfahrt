@@ -44,7 +44,7 @@ export class AuthServiceService {
 
   logout() {
     this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/search']))
+      .then((res) => this.router.navigate(['/login']))
       .catch((err) => {
         console.log('Something went wrong:');
         console.log(err);

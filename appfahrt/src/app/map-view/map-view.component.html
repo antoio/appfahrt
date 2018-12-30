@@ -5,7 +5,7 @@
          [zoom]="16"
          (centerChange)="mapChanged($event)">
     <agm-marker *ngFor="let station of stations"
-                [latitude]="station.lat" [longitude]="station.long"
+                [latitude]="station.coordinate.x" [longitude]="station.coordinate.y"
                 [iconUrl]="marker"
                 (markerClick)="markerClick(station)">
       <agm-info-window class="map-view___info-window">

@@ -1,5 +1,6 @@
-import {Component, OnInit, Injectable, EventEmitter} from '@angular/core';
+import {Component, ViewChild, Injectable, EventEmitter} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {MatSidenav} from '@angular/material/sidenav';
 import {NavigationService} from './navigation.service';
 import {Title} from '@angular/platform-browser';
 import { AuthServiceService } from '../services/auth-service.service';
@@ -11,6 +12,7 @@ import { AuthServiceService } from '../services/auth-service.service';
   providers: [NavigationService]
 })
 export class NavigationComponent {
+  @ViewChild('sidenav') sidenav: MatSidenav;
   title = 'Appfahrt';
   constructor(
     private authService: AuthServiceService,
@@ -25,10 +27,12 @@ export class NavigationComponent {
     });
 
   }
-
+  close() {
+    this.sidenav.close();
+  }
   logout() {
-    console.log("logout");
+    console.log('logout');
+    this.close();
     this.authService.logout();
   }
-  
 }
