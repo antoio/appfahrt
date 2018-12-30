@@ -6,7 +6,9 @@ import { AutocompleteComponent } from './map-view/autocomplete/autocomplete.comp
 import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatIconModule,
+  MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
 import { StationsComponent } from './stations/stations.component';
 import {TrainsComponent} from './trains/trains.component';
@@ -20,6 +22,10 @@ import { config } from './config';
 import {AngularGooglePlaceModule} from 'angular-google-place';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,8 @@ import { LoginComponent } from './login/login.component';
     StationsComponent,
     TrainsComponent,
     AutocompleteComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -47,13 +54,18 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     MatCardModule,
     HttpClientModule,
+    MatGridListModule,
+    MatListModule,
+    MatTableModule,
     AgmCoreModule.forRoot({
       apiKey: config.googleMapsKey,
       libraries: ['places']
     }),
-    AngularGooglePlaceModule
+    AngularGooglePlaceModule,
+    FlexLayoutModule
   ],
   providers: [NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

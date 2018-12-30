@@ -6,7 +6,8 @@ export const RAPPERSWIL = {
     'coordinate': {'type': 'WGS84', 'x': 47.224876, 'y': 8.816729},
     'distance': null
   },
-  stationboard: [{
+  stationboard: [
+    {
     'stop': {
       'station': {
         'id': '8503110',

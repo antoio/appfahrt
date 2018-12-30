@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {DashboardComponent} from '../dashboard/dashboard.component';
 import {LoginComponent} from '../login/login.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { AboutComponent } from '../about/about.component';
@@ -21,8 +22,8 @@ const routes: Routes = [
     data: {title: 'Login'}
   },
   {
-    path: 'overview',
-    component: MonitoroverviewComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
     data: {title: 'Dashboard'}
   },
   {

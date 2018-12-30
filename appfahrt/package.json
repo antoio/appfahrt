@@ -17,6 +17,7 @@
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
     "@angular/core": "^6.1.0",
+    "@angular/flex-layout": "^5.0.0-beta.15",
     "@angular/forms": "^6.1.0",
     "@angular/http": "^6.1.0",
     "@angular/material": "^6.4.7",
@@ -26,8 +27,10 @@
     "@types/googlemaps": "^3.30.16",
     "angular-google-place": "0.0.3",
     "core-js": "^2.5.4",
-    "rxjs": "^6.3.3",
-    "zone.js": "~0.8.26"
+    "moment": "^2.22.2",
+    "rxjs": "6.0.0-beta.1",
+    "zone.js": "~0.8.26",
+    "rxjs-compat": "6.0.0-beta.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0-rc.0",

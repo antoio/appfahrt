@@ -1,6 +1,9 @@
 export interface Station {
   id: number;
   name: string;
-  long: number;
-  lat: number;
+  coordinate: {
+    type: string;
+    x: number;
+    y: number;
+  };
 }

@@ -81,8 +81,10 @@ export class MapViewComponent implements OnInit {
             const newStation = {
               name: station.name,
               id: station.id,
-              long: station.coordinate.y,
-              lat: station.coordinate.x
+              coordinate: {
+                x: station.coordinate.x,
+                y: station.coordinate.y
+              }
             };
             if (newStation.name && newStation.id) {
               this.stations.push(newStation as Station);

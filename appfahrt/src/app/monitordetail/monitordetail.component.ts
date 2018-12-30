@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NavigationService} from '../navigation/navigation.service';
 import {Station} from '../stations/station';
-import {OBERGLATT} from '../trains/stations';
+import {Train} from '../trains/train';
 import {TrainsService} from '../trains/trains.service';
 import {Subscription} from 'rxjs';
 
@@ -15,14 +15,13 @@ import {Subscription} from 'rxjs';
 export class MonitordetailComponent implements OnInit {
 
   station: Station = null;
-  trains: any = null;
+  trains: Train[] = null;
 
   private _stationId: string;
 
   constructor(
     private route: ActivatedRoute,
-    private trainsService: TrainsService,
-    private navigationService: NavigationService) {
+    private trainsService: TrainsService) {
 
   }
 
@@ -36,8 +35,8 @@ export class MonitordetailComponent implements OnInit {
     });
 
     this.trainsService.getTrains(this.stationId).subscribe((data: any) => {
-      this.station = data.station;
-      this.trains = data.stationboard;
+      this.station = data.station as Station;
+      this.trains = data.stationboard as Train[];
     });
   }
 
