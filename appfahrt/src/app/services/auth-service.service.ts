@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
 
 
@@ -19,30 +19,35 @@ export class AuthServiceService {
       (user) => {
         if (user) {
           this.userDetails = user;
-          console.log(this.userDetails)
+          console.log(this.userDetails);
         } else {
           this.userDetails = null;
         }
       }
     );
-   }
+  }
 
-   signInRegular(email, password) {
-     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+  signInRegular(email, password) {
+    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
-     return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
-   }
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
+  }
 
-   //isLoggedIn() {
-   //  return this.userDetails == null ? false : true;
-   //}
+  createUserRegular(email, password) {
+    console.log('Create User', email);
+    return this._firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
 
-   logout() {
-     this._firebaseAuth.auth.signOut()
-     .then((res) => this.router.navigate(['/search']))
-     .catch((err) => {
-       console.log('Something went wrong:');
-       console.log(err);
-     });
-   }
+  //isLoggedIn() {
+  //  return this.userDetails == null ? false : true;
+  //}
+
+  logout() {
+    this._firebaseAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/search']))
+      .catch((err) => {
+        console.log('Something went wrong:');
+        console.log(err);
+      });
+  }
 }

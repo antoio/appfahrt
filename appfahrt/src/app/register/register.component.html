@@ -1,16 +1,18 @@
-<div fxLayout="column" fxLayoutAlign="center" class="login">
+<div fxLayout="column" fxLayoutAlign="center" class="register">
   <div fxFlexOffset="40px" fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column">
-      <form fxLayout="column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form fxLayout="column" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <input matInput formControlName="username" name="username" placeholder="E-Mail">
         </mat-form-field>
         <mat-form-field>
           <input matInput type="password" name="password" formControlName="password" placeholder="Passwort">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Einlogen</button>
+        <mat-form-field>
+          <input matInput type="password" name="passwordConfirm" formControlName="passwordConfirm" placeholder="Passwort Wiederholen">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Registrieren</button>
       </form>
-      <a href="/register" fxFlexOffset="10px" mat-button color="primary">Neu Registrieren</a>
     </mat-card>
   </div>
 </div>

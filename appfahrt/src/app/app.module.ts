@@ -30,6 +30,7 @@ import { environment } from 'src/environments/environment';
 import { AuthServiceService } from './services/auth-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TrainsComponent,
     AutocompleteComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

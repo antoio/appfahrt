@@ -5,6 +5,7 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import {LoginComponent} from '../login/login.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { AboutComponent } from '../about/about.component';
+import {RegisterComponent} from '../register/register.component';
 import { UsersettingsComponent } from '../usersettings/usersettings.component';
 import { MonitordetailComponent } from '../monitordetail/monitordetail.component';
 import { MonitoroverviewComponent } from '../monitoroverview/monitoroverview.component';
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: {title: 'Login'}
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: {title: 'Registrieren'}
   },
   {
     path: 'dashboard',
