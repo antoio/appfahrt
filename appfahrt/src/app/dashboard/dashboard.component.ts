@@ -18,7 +18,7 @@ interface Board {
   providers: [TrainsService, NavigationService]
 })
 export class DashboardComponent implements OnInit {
-  favorites = ['8503110', '8503110', '8503110', '8503110'];
+  favorites = [];
   boards: Board[] = [];
   displayedColumns: string[] = ['name', 'time', 'destination', 'track'];
 

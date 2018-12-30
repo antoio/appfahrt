@@ -2,9 +2,9 @@ import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NavigationService} from '../navigation/navigation.service';
 import {Station} from '../stations/station';
-import {Train} from '../trains/train';
 import {TrainsService} from '../trains/trains.service';
 import {Subscription} from 'rxjs';
+import { Train } from './../trains/train';
 
 @Component({
   selector: 'app-monitordetail',

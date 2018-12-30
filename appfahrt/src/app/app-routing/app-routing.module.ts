@@ -13,7 +13,7 @@ import { SearchComponent } from '../search/search.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/details',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {

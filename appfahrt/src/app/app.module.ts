@@ -7,7 +7,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule, MatToolbarModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
 import { StationsComponent } from './stations/stations.component';
@@ -23,8 +23,12 @@ import {AngularGooglePlaceModule} from 'angular-google-place';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {MatListModule} from '@angular/material/list';
-import {MatTableModule} from '@angular/material/table';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from 'src/environments/environment';
+import { AuthServiceService } from './services/auth-service.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -62,9 +66,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       libraries: ['places']
     }),
     AngularGooglePlaceModule,
+    AngularFireModule.initializeApp(environment.firebase, 'appfahrt-1537907755048'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    ReactiveFormsModule,
+    AngularGooglePlaceModule,
     FlexLayoutModule
   ],
-  providers: [NavigationService],
+  providers: [NavigationService, AuthServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
