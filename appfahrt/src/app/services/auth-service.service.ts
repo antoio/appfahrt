@@ -38,10 +38,6 @@ export class AuthServiceService {
     return this._firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  //isLoggedIn() {
-  //  return this.userDetails == null ? false : true;
-  //}
-
   logout() {
     this._firebaseAuth.auth.signOut()
       .then((res) => this.router.navigate(['/login']))

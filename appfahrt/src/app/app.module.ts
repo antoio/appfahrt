@@ -27,8 +27,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {environment} from 'src/environments/environment';
 import {AuthServiceService} from './services/auth-service.service';
+import {DatabaseService} from './services/database-service.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RegisterComponent} from './register/register.component';
@@ -88,11 +90,12 @@ export class MaterialModule {}
     AngularFireModule.initializeApp(environment.firebase, 'appfahrt-1537907755048'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     ReactiveFormsModule,
     AngularGooglePlaceModule,
     FlexLayoutModule
   ],
-  providers: [NavigationService, AuthServiceService],
+  providers: [NavigationService, AuthServiceService, DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

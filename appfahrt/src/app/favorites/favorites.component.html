@@ -1,3 +1,7 @@
-<p>
-  favorites works!
-</p>
+<div *ngIf="favorites.length === 0">Keine Favoriten</div>
+<ul *ngFor="let favorite of favorites">
+  <li>{{favorite.stationId}}</li>
+</ul>
+<section class="mat-typography" fxLayout="column" fxFlexAlign="center">
+  <button mat-raised-button color="primary" fxFlexOffset="20px" routerLink="/search">Favorit hinzufügen</button>
+</section>

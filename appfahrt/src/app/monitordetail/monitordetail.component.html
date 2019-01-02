@@ -1,4 +1,14 @@
-<mat-card>
-  <app-board [stationId]="stationId"></app-board>
-</mat-card>
-<button mat-raised-button color="primary">Favorit</button>
+<div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="loading === false">
+  <mat-card>
+    <app-board [stationId]="stationId"></app-board>
+  </mat-card>
+  <div *ngIf="isFavorite">
+    <button mat-raised-button (click)="onUnFavorite()">Aus Favoriten entfernen</button>
+  </div>
+  <div *ngIf="isFavorite === false">
+    <button mat-raised-button color="primary" (click)="onFavorite()">Zu Favorit hinzufügen</button>
+  </div>
+</div>

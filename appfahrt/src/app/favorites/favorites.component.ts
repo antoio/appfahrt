@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {DatabaseService, Favorite} from '../services/database-service.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor() { }
+  private favorites: Favorite[] = [];
+
+  constructor( private route: ActivatedRoute, public afAuth: AngularFireAuth, private databaseService: DatabaseService ) { }
 
   ngOnInit() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.databaseService.getFavorites(user.uid).subscribe(favorites => {
+          this.favorites = favorites;
+        });
+      } else {
+        console.error('no user id');
+        this.favorites = [];
+      }
+    });
   }
 
 }
