@@ -1,7 +1,5 @@
-<mat-sidenav-container
-  class="sidenav" (backdropClick)="close('backdrop')">
-
-  <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end">
+<mat-sidenav-container class="sidenav" (backdropClick)="close('backdrop')">
+  <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end" class="sidenav">
     <mat-action-list>
       <button mat-list-item routerLink="dashboard" (click)="close()"><mat-icon mat-list-icon>dashboard</mat-icon> Dashboard </button>
       <mat-divider></mat-divider>
@@ -18,7 +16,9 @@
     <mat-toolbar color="primary">
       <mat-toolbar-row>
         <span>{{title}}</span>
-        <span class="spacer"></span>
+        <span class="spacer">
+          <app-clock></app-clock>
+        </span>
         <button mat-button routerLink="search">
           <mat-icon class="navigation-icon">search</mat-icon>
         </button>

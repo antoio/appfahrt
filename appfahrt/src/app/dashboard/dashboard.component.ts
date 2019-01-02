@@ -1,15 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {getTimeFromTimestamp} from '../helpers/dateFormat';
 import {NavigationService} from '../navigation/navigation.service';
-import {Station} from '../stations/station';
-import {Train} from '../trains/train';
-import {TrainsService} from '../trains/trains.service';
-
-
-interface Board {
-  station: Station;
-  trains: Train[];
-}
+import {TrainsService} from '../board/trains/trains.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,24 +10,13 @@ interface Board {
 })
 export class DashboardComponent implements OnInit {
   favorites = [];
-  boards: Board[] = [];
-  displayedColumns: string[] = ['name', 'time', 'destination', 'track'];
+  loading = true;
 
-  constructor( private trainsService: TrainsService ) { }
-
-  public getTime(date: number): string {
-    return getTimeFromTimestamp(date);
-  }
+  constructor( ) { }
 
   ngOnInit() {
-    this.favorites.map((stationId) => {
-      this.trainsService.getTrains(stationId).subscribe((data: any) => {
-        const newBoard: Board = { station: null, trains: null};
-        newBoard.station = data.station as Station;
-        newBoard.trains = data.stationboard as Train[];
-        this.boards.push(newBoard);
-      });
-    });
+    // this.favorites = ['8503312', '8503312'];
+    this.loading = false;
   }
 
 }

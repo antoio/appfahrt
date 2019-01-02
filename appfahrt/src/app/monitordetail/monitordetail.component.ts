@@ -1,10 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NavigationService} from '../navigation/navigation.service';
-import {Station} from '../stations/station';
-import {TrainsService} from '../trains/trains.service';
+import {Station} from '../board/stations/station';
+import {TrainsService} from '../board/trains/trains.service';
 import {Subscription} from 'rxjs';
-import { Train } from './../trains/train';
+import { Train } from '../board/trains/train';
 
 @Component({
   selector: 'app-monitordetail',
@@ -14,14 +14,10 @@ import { Train } from './../trains/train';
 })
 export class MonitordetailComponent implements OnInit {
 
-  station: Station = null;
-  trains: Train[] = null;
-
   private _stationId: string;
 
   constructor(
-    private route: ActivatedRoute,
-    private trainsService: TrainsService) {
+    private route: ActivatedRoute) {
 
   }
 
@@ -32,11 +28,6 @@ export class MonitordetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this._stationId = params.id;
-    });
-
-    this.trainsService.getTrains(this.stationId).subscribe((data: any) => {
-      this.station = data.station as Station;
-      this.trains = data.stationboard as Train[];
     });
   }
 

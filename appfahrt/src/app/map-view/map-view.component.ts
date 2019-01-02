@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import { StationsService } from './../stations/stations.service';
-import { Station } from './../stations/station';
+import { StationsService } from '../board/stations/stations.service';
+import { Station } from '../board/stations/station';
 
 @Component({
   selector: 'app-map-view',

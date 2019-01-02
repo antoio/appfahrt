@@ -9,8 +9,6 @@ import { AboutComponent } from '../about/about.component';
 import {RegisterComponent} from '../register/register.component';
 import { UsersettingsComponent } from '../usersettings/usersettings.component';
 import { MonitordetailComponent } from '../monitordetail/monitordetail.component';
-import { MonitoroverviewComponent } from '../monitoroverview/monitoroverview.component';
-import { SearchComponent } from '../search/search.component';
 
 const routes: Routes = [
   {

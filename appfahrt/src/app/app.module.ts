@@ -12,12 +12,11 @@ import {
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
-import {StationsComponent} from './stations/stations.component';
-import {TrainsComponent} from './trains/trains.component';
+import {StationsComponent} from './board/stations/stations.component';
+import {TrainsComponent} from './board/trains/trains.component';
 import {UsersettingsComponent} from './usersettings/usersettings.component';
 import {MonitoroverviewComponent} from './monitoroverview/monitoroverview.component';
 import {MonitordetailComponent} from './monitordetail/monitordetail.component';
-import {SearchComponent} from './search/search.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
 import {config} from './config';
@@ -34,6 +33,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RegisterComponent} from './register/register.component';
 import {FavoritesComponent} from './favorites/favorites.component';
+import { BoardComponent } from './board/board.component';
+import { SpinnerComponent } from './other/spinner/spinner.component';
+import { ClockComponent } from './other/clock/clock.component';
 
 
 @NgModule({
@@ -58,7 +60,6 @@ export class MaterialModule {}
     NavigationComponent,
     MapViewComponent,
     AboutComponent,
-    SearchComponent,
     UsersettingsComponent,
     MonitoroverviewComponent,
     MonitordetailComponent,
@@ -68,7 +69,10 @@ export class MaterialModule {}
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    BoardComponent,
+    SpinnerComponent,
+    ClockComponent
   ],
   imports: [
     BrowserModule,
