@@ -4,6 +4,7 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {NavigationService} from './navigation.service';
 import {Title} from '@angular/platform-browser';
 import { AuthServiceService } from '../services/auth-service.service';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-navigation',
@@ -15,6 +16,7 @@ export class NavigationComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
   title = 'Appfahrt';
   constructor(
+    public afAuth: AngularFireAuth,
     private authService: AuthServiceService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -26,6 +28,15 @@ export class NavigationComponent {
       }
     });
 
+  }
+  onUser() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.sidenav.open();
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
   }
   close() {
     this.sidenav.close();

@@ -12,8 +12,8 @@ export class ClockComponent implements OnInit, OnDestroy {
   secDeg = this._time.getSeconds() * 6;
   minDeg = this._time.getMinutes() * 6;
   hourDeg = (this._time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
-
   interval: number;
+  type = 'digital';
 
   get secTransform() {
     return `rotate(${this.secDeg}, 256, 256)`;
@@ -24,12 +24,23 @@ export class ClockComponent implements OnInit, OnDestroy {
   get hourTransform() {
     return `rotate(${this.hourDeg}, 256, 256)`;
   }
+  getTime() {
+    return moment(this._time).format('HH:mm');
+  }
+  onChangeType() {
+    if ( this.type === 'digital') {
+      this.type = 'analog';
+    } else {
+      this.type = 'digital';
+    }
+  }
 
   constructor() { }
 
   ngOnInit() {
     this.interval = setInterval(() => {
       const time = new Date();
+      this._time = time;
       this.secDeg = time.getSeconds() * 6;
       this.minDeg = time.getMinutes() * 6;
       this.hourDeg = (time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
