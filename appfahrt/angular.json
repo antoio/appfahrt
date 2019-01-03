@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css","src/theme.scss"
+              "src/styles.css","src/theme.scss","node_modules/basscss/css/basscss-cp.css","node_modules/basscss/css/basscss.css"
             ],
             "scripts": []
           },

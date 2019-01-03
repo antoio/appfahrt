@@ -13,7 +13,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   minDeg = this._time.getMinutes() * 6;
   hourDeg = (this._time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
   interval: number;
-  type = 'digital';
+  type = 'analog';
 
   get secTransform() {
     return `rotate(${this.secDeg}, 256, 256)`;

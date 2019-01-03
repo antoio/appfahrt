@@ -1,7 +1,18 @@
-<div *ngIf="favorites.length === 0">Keine Favoriten</div>
-<ul *ngFor="let favorite of favorites">
-  <li>{{favorite.stationId}} <button mat-button [routerLink]="['/details', favorite.stationId]">edit</button> </li>
-</ul>
-<section class="mat-typography" fxLayout="column" fxFlexAlign="center">
-  <button mat-raised-button color="primary" fxFlexOffset="20px" routerLink="/search">Favorit hinzufügen</button>
-</section>
+<div class="favorites max-width-4 mx-auto mt4">
+  <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="loading == false">
+    <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+      <app-emptyfavorites></app-emptyfavorites>
+    </div>
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="column">
+      <div fxFlexFill fxLayout="row wrap" fxLayout.xs = "column">
+        <app-item fxFlex="25" fxFlex.md="33" fxFlex.sm="50" *ngFor="let favorite of favorites" [favorite]="favorite"></app-item>
+      </div>
+      <section class="mat-typography" fxLayout="column" fxFlexAlign="center">
+        <button mat-raised-button color="primary" fxFlexOffset="20px" routerLink="/search">Favorit hinzufügen</button>
+      </section>
+    </div>
+  </div>
+</div>

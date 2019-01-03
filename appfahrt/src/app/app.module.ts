@@ -38,6 +38,8 @@ import {FavoritesComponent} from './favorites/favorites.component';
 import { BoardComponent } from './board/board.component';
 import { SpinnerComponent } from './other/spinner/spinner.component';
 import { ClockComponent } from './other/clock/clock.component';
+import { ItemComponent } from './favorites/item/item.component';
+import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.component';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ export class MaterialModule {}
     FavoritesComponent,
     BoardComponent,
     SpinnerComponent,
-    ClockComponent
+    ClockComponent,
+    ItemComponent,
+    EmptyfavoritesComponent
   ],
   imports: [
     BrowserModule,
