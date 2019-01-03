@@ -1,3 +1,58 @@
-<p>
-  usersettings works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center" class="userSettingsForm">
+  <div fxFlexOffset="40px" fxLayout="row" fxLayoutAlign="center">
+    <mat-card fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column">
+      <form fxLayout="column" [formGroup]="userSettingsForm" (ngSubmit)="onSubmit()">
+
+        <div fxLayout="row">
+          <div fxLayout="column" fxFlex.md="30%">
+            <label>Username</label>
+          </div>
+          <div fxLayout="column" fxFlex.md="70%">
+            <mat-form-field>
+              <input matInput formControlName="username" name="username" placeholder="E-Mail">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column" fxFlex.md="50%">
+            <label>Passwort</label>
+          </div>
+          <div fxLayout="column" fxFlex.md="50%">
+            <mat-form-field>
+              <label>Passwort</label>
+              <input matInput type="password" name="password" formControlName="password" placeholder="Passwort">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+            <div fxLayout="column" fxFlex.md="50%">
+              <label>Heimstation</label>
+            </div>
+            <div fxLayout="column" fxFlex.md="50%">
+              <mat-form-field>
+                <label>Heimstation</label>
+                <input matInput type="homestation" name="homestation" formControlName="homestation" placeholder="Homestation">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row">
+              <div fxLayout="column" fxFlex.md="50%">
+                <label>Heimstation</label>
+              </div>
+              <div fxLayout="column" fxFlex.md="50%">
+                <mat-form-field>
+                  <label>Heimstation</label>
+                  <input matInput type="homestation" name="homestation" formControlName="homestation" placeholder="Homestation">
+                </mat-form-field>
+              </div>
+            </div>
+
+        <button mat-raised-button color="primary" type="submit">Ändern</button>
+      </form>
+      <a href="/register" fxFlexOffset="10px" mat-button color="primary">Verwerfen</a>
+    </mat-card>
+  </div>
+</div>
