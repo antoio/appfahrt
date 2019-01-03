@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import {TimeInterval} from 'rxjs';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-clock',
@@ -13,7 +14,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   minDeg = this._time.getMinutes() * 6;
   hourDeg = (this._time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
   interval: number;
-  type = 'analog';
+  type = this.settings.clockType;
 
   get secTransform() {
     return `rotate(${this.secDeg}, 256, 256)`;
@@ -27,18 +28,19 @@ export class ClockComponent implements OnInit, OnDestroy {
   getTime() {
     return moment(this._time).format('HH:mm');
   }
-  onChangeType() {
+  /* onChangeType() {
     if ( this.type === 'digital') {
       this.type = 'analog';
     } else {
       this.type = 'digital';
     }
-  }
+  } */
 
-  constructor() { }
+  constructor(private settings: SettingsService) { }
 
   ngOnInit() {
     this.interval = setInterval(() => {
+      this.type = this.settings.clockType;
       const time = new Date();
       this._time = time;
       this.secDeg = time.getSeconds() * 6;

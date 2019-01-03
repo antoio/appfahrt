@@ -1,6 +1,16 @@
 .board{
   width: 100%;
+  height: calc(100% - 20px);
 }
 .board___table{
-  width: 100%;
+  display: grid;
+  grid-template-columns:80px 80px auto 100px;
+  grid-template-rows: 30px auto;
+}
+.board___table .header{
+  background: lightgrey;
+  line-height: 30px;
+}
+.board___table .cell{
+  align-self: center;
 }

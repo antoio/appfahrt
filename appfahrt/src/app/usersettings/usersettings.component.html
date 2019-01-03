@@ -1,3 +1,36 @@
-<p>
-  usersettings works!
-</p>
+<div class="user-settings max-width-2 mt4 mx-auto">
+  <mat-list>
+    <h3 matSubheader>Anzeige</h3>
+    <mat-list-item>
+      <div>Digitale Uhr</div>
+      <mat-slide-toggle [checked]="settings.clockType === 'digital' ? true : false" (change)="onClockChange()"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Anzahl Abfahrten pro Station</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="number" (change)="onStationCountChange($event)" [value]="settings.stationCount">
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Max. Anzahl Stationen im Dashboard</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="number" (change)="onMaxDashboardsChange($event)" [value]="settings.maxDashboards">
+      </mat-form-field>
+    </mat-list-item>
+    <h3 matSubheader>Benutzer</h3>
+    <mat-list-item>
+      <div>E-Mail</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="email">
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Passwort ändern</div>
+      <button mat-button>Ändern</button>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Konto löschen</div>
+      <button mat-button>Löschen</button>
+    </mat-list-item>
+  </mat-list>
+</div>

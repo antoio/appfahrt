@@ -7,13 +7,14 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {MapViewComponent} from './map-view/map-view.component';
 import {AboutComponent} from './about/about.component';
 import {
-  MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule
+  MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatSliderModule,
+  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
 import {StationsComponent} from './board/stations/stations.component';
 import {TrainsComponent} from './board/trains/trains.component';
+import {SettingsService} from './services/settings.service';
 import {UsersettingsComponent} from './usersettings/usersettings.component';
 import {MonitoroverviewComponent} from './monitoroverview/monitoroverview.component';
 import {MonitordetailComponent} from './monitordetail/monitordetail.component';
@@ -53,7 +54,9 @@ import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.c
     MatListModule,
     MatSidenavModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatSliderModule
   ]
 })
 export class MaterialModule {}
@@ -99,7 +102,7 @@ export class MaterialModule {}
     AngularGooglePlaceModule,
     FlexLayoutModule
   ],
-  providers: [NavigationService, AuthServiceService, DatabaseService],
+  providers: [NavigationService, AuthServiceService, DatabaseService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
