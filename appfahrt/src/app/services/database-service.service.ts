@@ -4,6 +4,7 @@ import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firesto
 import {BehaviorSubject, Observable} from 'rxjs';
 import { mergeMap, switchMap, map } from 'rxjs/operators';
 import { forkJoin, combineLatest } from 'rxjs';
+import {Settings} from '../usersettings/usersettings.component';
 
 export interface Favorite { userId: string; stationId: string; addedAt: number; }
 @Injectable({
@@ -32,5 +33,22 @@ export class DatabaseService {
   }
   private getUserId(): Observable<any> {
     return this.afAuth.authState;
+  }
+
+  /////////////////////
+  // Settings
+  ////////////////////
+  public addSettings(userId: string, settings: Settings) {
+    this._db.collection<Settings>('settings').add(settings);
+  }
+
+  public getSettings(userId: string) {
+    //FIXME: to implement
+    return this._db.collection<Settings>('settings', ref => ref.where('userId', '==', userId)).valueChanges();
+  }
+
+  public updateSettings(userId: string) {
+    //FIXME: to implement
+    this._db.collection<Favorite>('favorites').add({ userId: userId, stationId: stationId, addedAt: added.getTime() });
   }
 }

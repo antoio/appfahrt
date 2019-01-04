@@ -3,6 +3,12 @@ import {AuthServiceService} from '../services/auth-service.service';
 import {FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 
+export interface Settings {
+  userId: string,
+  username: string,
+  password: string,
+  homestation: string
+}
 @Component({
   selector: 'app-usersettings',
   templateUrl: './usersettings.component.html',
