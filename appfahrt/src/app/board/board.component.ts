@@ -38,18 +38,23 @@ export class BoardComponent implements OnInit {
         const newBoard: Board = {station: null, trains: null};
         newBoard.station = data.station as Station;
         newBoard.trains = data.stationboard as Train[];
-        newBoard.trains.map((train) => {
-          this.displayTable.push({label: train.name, classes: 'cell'});
-          this.displayTable.push({label: this.getTime(train.stop.departureTimestamp * 1000), classes: 'cell center'});
-          this.displayTable.push({label: train.to, classes: 'cell'});
-          this.displayTable.push({label: train.stop.platform, classes: 'cell center'});
-        });
+        this.fillDisplayTable(newBoard);
         this.board = newBoard;
         this.loading = false;
       });
     } else {
       // Board already loaded
+      this.fillDisplayTable(this.board);
       this.loading = false;
     }
+  }
+
+  private fillDisplayTable(inputBoard: Board) {
+    inputBoard.trains.map((train) => {
+      this.displayTable.push({label: train.name, classes: 'cell'});
+      this.displayTable.push({label: this.getTime(train.stop.departureTimestamp * 1000), classes: 'cell center'});
+      this.displayTable.push({label: train.to, classes: 'cell'});
+      this.displayTable.push({label: train.stop.platform, classes: 'cell center'});
+    });
   }
 }
