@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+
+/* Material Overwrites */
+.mat-list-item .mat-list-item-content {
+  width: 100%;
+  justify-content: space-between;
+}
+.mat-list-item .mat-list-item-content .right-align.mat-input-element {
+  text-align: right;
+}

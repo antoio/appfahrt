@@ -1,58 +1,36 @@
-<div fxLayout="column" fxLayoutAlign="center" class="userSettingsForm">
-  <div fxFlexOffset="40px" fxLayout="row" fxLayoutAlign="center">
-    <mat-card fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column">
-      <form fxLayout="column" [formGroup]="userSettingsForm" (ngSubmit)="onSubmit()">
-
-        <div fxLayout="row">
-          <div fxLayout="column" fxFlex.md="30%">
-            <label>Username</label>
-          </div>
-          <div fxLayout="column" fxFlex.md="70%">
-            <mat-form-field>
-              <input matInput formControlName="username" name="username" placeholder="E-Mail">
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div fxLayout="row">
-          <div fxLayout="column" fxFlex.md="50%">
-            <label>Passwort</label>
-          </div>
-          <div fxLayout="column" fxFlex.md="50%">
-            <mat-form-field>
-              <label>Passwort</label>
-              <input matInput type="password" name="password" formControlName="password" placeholder="Passwort">
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div fxLayout="row">
-            <div fxLayout="column" fxFlex.md="50%">
-              <label>Heimstation</label>
-            </div>
-            <div fxLayout="column" fxFlex.md="50%">
-              <mat-form-field>
-                <label>Heimstation</label>
-                <input matInput type="homestation" name="homestation" formControlName="homestation" placeholder="Homestation">
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div fxLayout="row">
-              <div fxLayout="column" fxFlex.md="50%">
-                <label>Heimstation</label>
-              </div>
-              <div fxLayout="column" fxFlex.md="50%">
-                <mat-form-field>
-                  <label>Heimstation</label>
-                  <input matInput type="homestation" name="homestation" formControlName="homestation" placeholder="Homestation">
-                </mat-form-field>
-              </div>
-            </div>
-
-        <button mat-raised-button color="primary" type="submit">Ändern</button>
-      </form>
-      <a href="/register" fxFlexOffset="10px" mat-button color="primary">Verwerfen</a>
-    </mat-card>
-  </div>
+<div class="user-settings max-width-2 mt4 mx-auto">
+  <mat-list>
+    <h3 matSubheader>Anzeige</h3>
+    <mat-list-item>
+      <div>Digitale Uhr</div>
+      <mat-slide-toggle [checked]="settings.clockType === 'digital' ? true : false" (change)="onClockChange()"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Anzahl Abfahrten pro Station</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="number" (change)="onStationCountChange($event)" [value]="settings.stationCount">
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Max. Anzahl Stationen im Dashboard</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="number" (change)="onMaxDashboardsChange($event)" [value]="settings.maxDashboards">
+      </mat-form-field>
+    </mat-list-item>
+    <h3 matSubheader>Benutzer</h3>
+    <mat-list-item>
+      <div>E-Mail</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="email">
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Passwort ändern</div>
+      <button mat-button>Ändern</button>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Konto löschen</div>
+      <button mat-button>Löschen</button>
+    </mat-list-item>
+  </mat-list>
 </div>

@@ -1,14 +1,16 @@
-<div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
-  <app-spinner></app-spinner>
-</div>
-<div *ngIf="loading === false">
-  <mat-card>
-    <app-board [stationId]="stationId"></app-board>
-  </mat-card>
-  <div *ngIf="isFavorite">
-    <button mat-raised-button (click)="onUnFavorite()">Aus Favoriten entfernen</button>
+<div class="mx-auto max-width-4 mt3">
+  <div *ngIf="loading.stationBoard && loading.favorites" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <app-spinner></app-spinner>
   </div>
-  <div *ngIf="isFavorite === false">
-    <button mat-raised-button color="primary" (click)="onFavorite()">Zu Favorit hinzufügen</button>
+  <div *ngIf="loading.favorites === false && loading.stationBoard === false">
+    <mat-card>
+      <app-board [board]="board"></app-board>
+    </mat-card>
+    <div *ngIf="isFavorite">
+      <button mat-raised-button (click)="onUnFavorite()">Aus Favoriten entfernen</button>
+    </div>
+    <div *ngIf="isFavorite === false">
+      <button mat-raised-button color="primary" (click)="onFavorite()">Zu Favorit hinzufügen</button>
+    </div>
   </div>
 </div>

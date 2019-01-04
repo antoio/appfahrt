@@ -1,15 +1,12 @@
 <div class="dashboard">
-  <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayout="row" fxLayoutAlign="center center">
+  <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
   <div *ngIf="favorites.length === 0 && loading === false" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
-    <section class="mat-typography" fxLayout="column" fxFlexAlign="center">
-      <div>Keine Favoriten vorhanden.</div>
-      <button mat-raised-button color="secondary" fxFlexOffset="20px" routerLink="/search">Favorit hinzufügen</button>
-    </section>
+    <app-emptyfavorites></app-emptyfavorites>
   </div>
   <div *ngIf="loading === false" fxLayout="row wrap" fxLayout.xs="column" fxFlexFill>
-    <mat-card *ngFor="let favorite of favorites" fxFlex="calc(50% - 20px)" class="dashboard___card">
+    <mat-card *ngFor="let favorite of favorites" class="dashboard___card" [ngStyle]="getDashboardStyle()">
       <app-board [stationId]="favorite.stationId"></app-board>
     </mat-card>
   </div>
