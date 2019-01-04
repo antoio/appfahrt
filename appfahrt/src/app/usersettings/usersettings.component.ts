@@ -13,12 +13,16 @@ export class UsersettingsComponent implements OnInit {
     this.settings = {
       maxDashboards: settingsService.maxDashboards,
       clockType: settingsService.clockType,
-      stationCount: settingsService.stationCount
+      stationCount: settingsService.stationCount,
+      updateRate: settingsService.updateRate,
+      showDuration: settingsService.showDuration
     };
-    console.log(this.settings);
   }
   public onClockChange() {
     this.settingsService.changeClockType();
+  }
+  public onShowDurationChange() {
+    this.settingsService.switchDuration();
   }
   public onStationCountChange(event: any) {
     const newValue = event.target.value;
@@ -35,6 +39,14 @@ export class UsersettingsComponent implements OnInit {
       return;
     }
     this.settingsService.maxDashboards = event.target.value;
+  }
+  public onUpdateIntervalChange(event: any) {
+    const newValue = event.target.value;
+    if (newValue === NaN) {
+      console.error('not a value');
+      return;
+    }
+    this.settingsService.updateRate = event.target.value;
   }
 
   ngOnInit() {

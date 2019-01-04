@@ -6,6 +6,10 @@
       <mat-slide-toggle [checked]="settings.clockType === 'digital' ? true : false" (change)="onClockChange()"></mat-slide-toggle>
     </mat-list-item>
     <mat-list-item>
+      <div>Zeige Zeitdauer (min)</div>
+      <mat-slide-toggle [checked]="settings.showDuration" (change)="onShowDurationChange()"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
       <div>Anzahl Abfahrten pro Station</div>
       <mat-form-field>
         <input class="right-align" matInput type="number" (change)="onStationCountChange($event)" [value]="settings.stationCount">
@@ -15,6 +19,12 @@
       <div>Max. Anzahl Stationen im Dashboard</div>
       <mat-form-field>
         <input class="right-align" matInput type="number" (change)="onMaxDashboardsChange($event)" [value]="settings.maxDashboards">
+      </mat-form-field>
+    </mat-list-item>
+    <mat-list-item>
+      <div>Aktualisierungs Intervall (sec)</div>
+      <mat-form-field>
+        <input class="right-align" matInput type="number" (change)="onUpdateIntervalChange($event)" [value]="settings.updateRate">
       </mat-form-field>
     </mat-list-item>
     <h3 matSubheader>Benutzer</h3>

@@ -39,12 +39,16 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  constructor( private route: ActivatedRoute, public afAuth: AngularFireAuth, private databaseService: DatabaseService, private settings: SettingsService ) { }
+  constructor(
+    private route: ActivatedRoute,
+    public afAuth: AngularFireAuth,
+    private databaseService: DatabaseService,
+    private settings: SettingsService ) { }
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.databaseService.getFavorites(user.uid).subscribe(favorites => {
+        this.databaseService.getShownFavorites(user.uid).subscribe(favorites => {
           this.favorites = favorites;
         });
       } else {

@@ -1,5 +1,6 @@
 .dashboard{
   height: calc(100vh - 64px);
+  overflow: auto;
 }
 .dashboard___card{
   margin: 10px;

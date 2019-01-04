@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Favorite} from '../../services/database-service.service';
+import {Board} from '../../board/board.component';
+import {DatabaseService, Favorite} from '../../services/database-service.service';
 
 @Component({
   selector: 'app-item',
@@ -10,9 +11,15 @@ export class ItemComponent implements OnInit {
   @Input() favorite: Favorite;
 
 
-  constructor( ) { }
+  constructor( private databaseService: DatabaseService) { }
 
   ngOnInit() {
+  }
+
+  onChangeDisplayStatus(index: number) {
+    this.databaseService.getFavoriteSnapshot(this.favorite.stationId, this.favorite.userId).subscribe(favorite => {
+      this.databaseService.changeFavoriteDisplayStatus(favorite.docs[0].id, index, this.favorite);
+    });
   }
 
 }

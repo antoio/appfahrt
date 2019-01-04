@@ -4,13 +4,36 @@
 }
 .board___table{
   display: grid;
-  grid-template-columns:80px 80px auto 100px;
+  grid-template-columns:80px 60px auto 100px;
   grid-template-rows: 30px auto;
 }
 .board___table .header{
-  background: lightgrey;
+  background: #f3f3f3;
   line-height: 30px;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
 }
 .board___table .cell{
   align-self: center;
+}
+.board___table .cell.train-type{
+  font-size: 0.8rem;
+  padding-left: 4px;
+}
+.board___table .cell.train-type.red{
+  background: red;
+  color: white;
+}
+.board___table .cell.train-type.blue{
+  background: blue;
+  color: white;
+}
+.board___table .cell.train-type.outlined-red{
+  border: 1px solid red;
+  color: red;
+}
+.board___table .cell.train-type.sbahn{
+  color: yellow;
 }

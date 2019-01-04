@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    data: {title: 'Dashboard'}
+    data: {title: 'Appfahrten'}
   },
   {
     path: 'details',

@@ -1,4 +1,6 @@
 <mat-card class="favorites___item m1">
   <h1>{{favorite.stationName}}</h1>
   <button mat-button [routerLink]="['/details', favorite.stationId]">edit</button>
+  <button mat-button (click)="onChangeDisplayStatus(1)">Show in Dashboard</button>
+  <button mat-button (click)="onChangeDisplayStatus(null)">Hide in Dashboard</button>
 </mat-card>
