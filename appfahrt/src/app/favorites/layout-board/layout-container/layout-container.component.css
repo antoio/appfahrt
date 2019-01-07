@@ -1,0 +1,16 @@
+.layout-container{
+  overflow: visible;
+}
+.layout-container___number{
+  font-size: 4rem;
+}
+.layout-container___rect {
+  stroke-dasharray: 20;
+  animation: dash 5s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 200;
+  }
+}

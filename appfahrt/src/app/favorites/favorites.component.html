@@ -1,8 +1,8 @@
-<div class="favorites max-width-4 mx-auto mt4">
+<div class="favorites max-width-4 mx-auto mt4" fxLayout="column">
   <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
-  <div *ngIf="loading == false">
+  <div *ngIf="loading == false" fxFlex="auto">
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>

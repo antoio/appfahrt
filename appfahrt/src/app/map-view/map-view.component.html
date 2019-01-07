@@ -1,18 +1,36 @@
-<div (mouseup)="mouseUpEvent($event)" id="map-container">
-  <app-autocomplete (location)="getLocationFromAutocomplete($event)"></app-autocomplete>
-<agm-map class="map-view" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
-         [scrollwheel]="true"
-         [zoom]="16"
-         (centerChange)="mapChanged($event)">
-    <agm-marker *ngFor="let station of stations"
-                [latitude]="station.coordinate.x" [longitude]="station.coordinate.y"
-                [iconUrl]="marker"
-                (markerClick)="markerClick(station)">
-      <agm-info-window class="map-view___info-window">
-        <h3>{{station.name}}</h3>
-        <button mat-button color="primary" class="map-view___info-window___button" [routerLink]="['/details', station.id]">Ansehen</button>
-      </agm-info-window>
-    </agm-marker>
-</agm-map>
+<div class="map-view">
+  <div *ngIf="loading"  fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="loading === false">
+    <div>
+      <app-autocomplete (location)="getLocationFromAutocomplete($event)"></app-autocomplete>
+      <agm-map class="map-view___map" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
+               [scrollwheel]="true"
+               [zoom]="16"
+               (centerChange)="mapChanged($event)"
+      (mapReady)="mapReady($event)">
+        <agm-marker *ngIf="geolocationDenied == false && userCoordinates != null" [latitude]="userCoordinates.y" [longitude]="userCoordinates.x" [iconUrl]="markerPos"></agm-marker>
+        <agm-marker *ngFor="let station of stations"
+                    [latitude]="station.coordinate.x" [longitude]="station.coordinate.y"
+                    [iconUrl]="marker"
+                    (markerClick)="markerClick(station)">
+          <agm-info-window class="map-view___map___info-window">
+            <h3>{{station.name}}</h3>
+            <button mat-button color="primary" class="map-view___map___info-window___button"
+                    [routerLink]="['/details', station.id]">Ansehen
+            </button>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+      <div *ngIf="geolocationDenied">
+        <button mat-raised-button class="map-view___button" (click)="onActivateGeolocation()" >Geolocation aktivieren</button>
+      </div>
+      <div *ngIf="geolocationDenied === false">
+        <button mat-raised-button class="map-view___button" (click)="onMyLocation()" >Mein Standort</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 

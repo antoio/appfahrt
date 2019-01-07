@@ -1,7 +1,15 @@
-.map-view {
+.map-view, .map-view___map {
   width: 100%;
   height: calc(100vh - 68px);
 }
-.map-view___info-window___button{
+.map-view___map___info-window___button{
   width: 100%;
+}
+.map-view___button{
+  position: absolute;
+  width: 200px;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -100px;
+  background: white;
 }

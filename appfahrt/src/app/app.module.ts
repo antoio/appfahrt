@@ -8,7 +8,7 @@ import {MapViewComponent} from './map-view/map-view.component';
 import {AboutComponent} from './about/about.component';
 import {
   MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatSliderModule,
-  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule
+  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule, MatDialogModule
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
@@ -41,6 +41,9 @@ import { SpinnerComponent } from './other/spinner/spinner.component';
 import { ClockComponent } from './other/clock/clock.component';
 import { ItemComponent } from './favorites/item/item.component';
 import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.component';
+import { LayoutBoardComponent } from './favorites/layout-board/layout-board.component';
+import { LayoutContainerComponent } from './favorites/layout-board/layout-container/layout-container.component';
+import { EnableGeolocationDialogComponent } from './map-view/enable-geolocation-dialog/enable-geolocation-dialog.component';
 
 
 @NgModule({
@@ -56,7 +59,8 @@ import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.c
     MatTableModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}
@@ -81,7 +85,13 @@ export class MaterialModule {}
     SpinnerComponent,
     ClockComponent,
     ItemComponent,
-    EmptyfavoritesComponent
+    EmptyfavoritesComponent,
+    LayoutBoardComponent,
+    LayoutContainerComponent,
+    EnableGeolocationDialogComponent
+  ],
+  entryComponents: [
+    EnableGeolocationDialogComponent
   ],
   imports: [
     BrowserModule,
