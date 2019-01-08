@@ -1,6 +1,5 @@
 .map-view, .map-view___map {
   width: 100%;
-  height: calc(100vh - 68px);
 }
 .map-view___map___info-window___button{
   width: 100%;

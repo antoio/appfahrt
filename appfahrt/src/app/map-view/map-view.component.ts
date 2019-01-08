@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
 import {EnableGeolocationDialogComponent} from './enable-geolocation-dialog/enable-geolocation-dialog.component';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 interface Coordinates {
   x: number;
@@ -40,6 +43,13 @@ export class MapViewComponent implements OnInit, OnDestroy {
   map: any;
   dragEventListener: any;
 
+  resizeObservable$: Observable<Event>;
+  resizeSubscription$: Subscription;
+  windowHeight: number = window.innerHeight;
+  get mapHeight(): number {
+    return this.windowHeight - 64;
+  }
+
   private _coordinates: Coordinates = {
     x: 8.815174,
     y: 47.2233607
@@ -74,7 +84,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
         queryParams: this._coordinates,
         queryParamsHandling: 'merge'
       }));
-  }
+  };
 
   mapChanged($event: any) {
     this._tempCoordintes = {
@@ -87,12 +97,12 @@ export class MapViewComponent implements OnInit, OnDestroy {
     // Hack: https://github.com/SebastianM/angular-google-maps/issues/1092
     // GMaps events: https://developers.google.com/maps/documentation/javascript/events
     this.map = map;
-    this. dragEventListener = this.map.addListener('dragend', () => {
+    this.dragEventListener = this.map.addListener('dragend', () => {
       if (this._tempCoordintes) {
         this.setCoordinates(this._tempCoordintes.x, this._tempCoordintes.y);
         this.getStations();
       }
-    });
+    }, {passive: true});
   }
 
   markerClick(station: Station) { }
@@ -127,6 +137,10 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.resizeObservable$ = fromEvent(window, 'resize')
+    this.resizeSubscription$ = this.resizeObservable$.subscribe( evt => {
+      this.windowHeight = window.innerHeight;
+    });
     this.route.queryParams.forEach(next => {
       if (next.x && next.y) {
         this.setCoordinates(+next.x, +next.y);
@@ -142,6 +156,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
+    this.resizeSubscription$.unsubscribe();
     if (this.map.event) {
       this.map.event.removeListener(this.dragEventListener);
     }

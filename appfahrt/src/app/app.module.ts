@@ -44,6 +44,7 @@ import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.c
 import { LayoutBoardComponent } from './favorites/layout-board/layout-board.component';
 import { LayoutContainerComponent } from './favorites/layout-board/layout-container/layout-container.component';
 import { EnableGeolocationDialogComponent } from './map-view/enable-geolocation-dialog/enable-geolocation-dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ export class MaterialModule {}
     AngularFirestoreModule,
     ReactiveFormsModule,
     AngularGooglePlaceModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [NavigationService, AuthServiceService, DatabaseService, SettingsService],
   bootstrap: [AppComponent]

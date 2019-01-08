@@ -1,4 +1,4 @@
-<div class="map-view">
+<div class="map-view" fxFlexFill>
   <div *ngIf="loading"  fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
@@ -9,7 +9,7 @@
                [scrollwheel]="true"
                [zoom]="16"
                (centerChange)="mapChanged($event)"
-      (mapReady)="mapReady($event)">
+               (mapReady)="mapReady($event)" [style.height.px]="mapHeight">
         <agm-marker *ngIf="geolocationDenied == false && userCoordinates != null" [latitude]="userCoordinates.y" [longitude]="userCoordinates.x" [iconUrl]="markerPos"></agm-marker>
         <agm-marker *ngFor="let station of stations"
                     [latitude]="station.coordinate.x" [longitude]="station.coordinate.y"

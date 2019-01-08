@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import {config} from '../../config';
 
 @Injectable()
 export class StationsService {
-  url = 'http://transport.opendata.ch/v1/';
+  url = config.opentransURL;
   constructor(private http: HttpClient) { }
 
   getStations(x: number = 8.522655, y: number = 47.386688) {
