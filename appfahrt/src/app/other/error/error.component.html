@@ -1,0 +1,8 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="mat-typography">
+  <mat-icon color="warn" class="error___icon">error_outline</mat-icon>
+  <div fxFlexOffset="10px">Ein Fehler ist aufgetreten!</div>
+  <div *ngIf="error.message && error.message != ''">{{error.message}}</div>
+  <div *ngIf="retry" fxFlexOffset="10px">
+    <button mat-raised-button color="primary" (click)="onRetry()">Wiederholen</button>
+  </div>
+</div>
