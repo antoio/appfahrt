@@ -14,7 +14,7 @@ import {SettingsService} from '../services/settings.service';
   providers: [TrainsService, NavigationService]
 })
 export class DashboardComponent implements OnInit {
-  private favorites: Favorite[] = [];
+  favorites: Favorite[] = [];
   loading = true;
   smallSize = false;
 
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
         console.error('no user id');
         this.favorites = [Nearest];
       }
-    });
+    }, error => console.log('error user login', error) );
     this.loading = false;
   }
 

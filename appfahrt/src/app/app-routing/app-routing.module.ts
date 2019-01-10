@@ -43,7 +43,7 @@ const routes: Routes = [
   {
     path: 'search',
     component: MapViewComponent,
-    data: {title: 'Suche', bottomNav: 'search'}
+    data: {title: 'Karte', bottomNav: 'search'}
   },
   {
     path: 'favorites',

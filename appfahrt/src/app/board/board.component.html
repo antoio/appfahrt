@@ -1,7 +1,10 @@
 <div *ngIf="loading === true" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
   <app-spinner></app-spinner>
 </div>
-<div *ngIf="loading === false" class="board" fxLayout="column">
+<div *ngIf="loading === false && error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+  <app-error (retry)="ngOnInit()" [error]="error"></app-error>
+</div>
+<div *ngIf="loading === false && error === null" class="board" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="space-between">
     <div>
       <button *ngIf="nearestStationsIds.length != 0" mat-icon-button (click)="prevStation()">

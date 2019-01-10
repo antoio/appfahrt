@@ -5,11 +5,12 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
+import {AppError} from '../other/error/error.component';
 import {SettingsService} from '../services/settings.service';
-import {EnableGeolocationDialogComponent} from './enable-geolocation-dialog/enable-geolocation-dialog.component';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import {EnableGeolocationDialogComponent} from '../dialogs/enable-geolocation/enable-geolocation-dialog.component';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {fromEvent} from 'rxjs/observable/fromEvent';
 
 interface Coordinates {
   x: number;
@@ -51,7 +52,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   userCoordinates: Coordinates | null = null;
 
   loading = true;
-  error: any;
+  error: AppError = null;
   stations: Station[];
   geolocationDenied = false;
   map: any;
@@ -61,6 +62,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   windowHeight: number = window.innerHeight;
+
   get mapHeight(): number {
     return this.windowHeight - 64 - (this.smallSize ? 46 : 0);
   }
@@ -99,7 +101,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
         queryParams: this._coordinates,
         queryParamsHandling: 'merge'
       }));
-  };
+  }
 
   mapChanged($event: any) {
     this._tempCoordintes = {
@@ -120,12 +122,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
     }, {passive: true});
   }
 
-  markerClick(station: Station) { }
+  markerClick(station: Station) {
+  }
 
   getLocationFromAutocomplete(location: { x: number, y: number }) {
     this.setCoordinates(location.x, location.y);
     this.getStations();
   }
+
   onMyLocation() {
     this.getLocation();
   }
@@ -152,8 +156,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.resizeObservable$ = fromEvent(window, 'resize')
-    this.resizeSubscription$ = this.resizeObservable$.subscribe( evt => {
+    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
       this.windowHeight = window.innerHeight;
     });
     this.route.queryParams.forEach(next => {
@@ -170,6 +174,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
     if (this.map.event) {
@@ -178,6 +183,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   getStations() {
+    this.error = null;
     this.stationsService.getStations(this.coordinates.x, this.coordinates.y)
       .subscribe(
         (data: any) => {
@@ -198,8 +204,12 @@ export class MapViewComponent implements OnInit, OnDestroy {
           });
           this.loading = false;
         },
-        error => this.error = error
-      );
+        (error) => {
+          this.error = {
+            status: true,
+            message: String(error)
+          };
+        });
   }
 
 }

@@ -7,7 +7,7 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {MapViewComponent} from './map-view/map-view.component';
 import {AboutComponent} from './about/about.component';
 import {
-  MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatSliderModule,
+  MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatSliderModule, MatBottomSheetModule,
   MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule, MatDialogModule
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -43,8 +43,10 @@ import { ItemComponent } from './favorites/item/item.component';
 import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.component';
 import { LayoutBoardComponent } from './favorites/layout-board/layout-board.component';
 import { LayoutContainerComponent } from './favorites/layout-board/layout-container/layout-container.component';
-import { EnableGeolocationDialogComponent } from './map-view/enable-geolocation-dialog/enable-geolocation-dialog.component';
+import { EnableGeolocationDialogComponent } from './dialogs/enable-geolocation/enable-geolocation-dialog.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { InstallAppDialogComponent } from './dialogs/install-app/install-app-dialog.component';
+import { ErrorComponent } from './other/error/error.component';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatToolbarModule,
     MatSlideToggleModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBottomSheetModule
   ]
 })
 export class MaterialModule {}
@@ -84,15 +87,18 @@ export class MaterialModule {}
     FavoritesComponent,
     BoardComponent,
     SpinnerComponent,
+    ErrorComponent,
     ClockComponent,
     ItemComponent,
     EmptyfavoritesComponent,
     LayoutBoardComponent,
     LayoutContainerComponent,
-    EnableGeolocationDialogComponent
+    EnableGeolocationDialogComponent,
+    InstallAppDialogComponent
   ],
   entryComponents: [
-    EnableGeolocationDialogComponent
+    EnableGeolocationDialogComponent,
+    InstallAppDialogComponent
   ],
   imports: [
     BrowserModule,

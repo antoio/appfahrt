@@ -1,8 +1,11 @@
-<div class="map-view" fxFlexFill>
+<div class="map-view" fxFlexFill [style.height.px]="mapHeight">
   <div *ngIf="loading"  fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
-  <div *ngIf="loading === false">
+  <div *ngIf="error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <app-error [error]="error" (retry)="getStations()"></app-error>
+  </div>
+  <div *ngIf="loading === false && error === null">
     <div>
       <app-autocomplete (location)="getLocationFromAutocomplete($event)" [leftSpace]="smallSize ? 10 : 120"></app-autocomplete>
       <agm-map class="map-view___map" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
@@ -31,6 +34,5 @@
       </div>
     </div>
   </div>
-
 </div>
 

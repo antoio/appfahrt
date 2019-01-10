@@ -11,7 +11,7 @@ import {DatabaseService, Favorite} from '../services/database-service.service';
 export class FavoritesComponent implements OnInit {
 
   private favorites: Favorite[] = [];
-  private loading = true;
+  loading = true;
 
   constructor( private route: ActivatedRoute, public afAuth: AngularFireAuth, private databaseService: DatabaseService ) { }
 

@@ -20,13 +20,13 @@ export class StationsService {
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
+      console.log('An error occurred:', error.error.message);
     } else {
-      console.error(
+      console.log(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
     return throwError(
-      'Something bad happened; please try again later.');
+      'Fehler beim laden der Stations-Daten. Bitte versuchen Sie es später nochmals.');
   }
 }

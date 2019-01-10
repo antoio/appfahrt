@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {getTimeDifferenceFromTimestamp, getTimeFromTimestamp} from '../helpers/dateFormat';
+import {AppError} from '../other/error/error.component';
 import {SettingsService} from '../services/settings.service';
 import {Station} from './stations/station';
 import {StationsService} from './stations/stations.service';
@@ -31,6 +32,7 @@ export class BoardComponent implements OnInit {
   displayTable: TrainCellItem[] = [];
   nearestStationsIds: string[] = [];
   currentStationIndex = 0;
+  error: AppError = null;
 
   headerRow: TrainCellItem[] = [
     {label: 'Time', classes: 'header center'},
@@ -65,7 +67,9 @@ export class BoardComponent implements OnInit {
     this.loadBoard();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.error = null;
+    this.loading = true;
     if (this.board === undefined) {
       // Load nearest Station
       if (this.stationId === null) {
@@ -78,6 +82,11 @@ export class BoardComponent implements OnInit {
         }, error => {
           if (error.code === 1) {
             console.warn('Geolocation is denied by user.');
+            this.error = {
+              status: true,
+              message: 'Geolocation ist deaktiviert. Diese kann in den Browsereinstellungen aktiviert werden.'
+            };
+            this.loading = false;
           }
         });
       } else {
@@ -99,6 +108,13 @@ export class BoardComponent implements OnInit {
       this.board = newBoard;
       this.displayTable = [...this.headerRow, ...this.fillCellsWithTrains(this.board.trains)];
       this.loading = false;
+      this.error = null;
+    }, (error) => {
+      this.error = {
+        status: true,
+        message: String(error)
+      };
+      this.loading = false;
     });
   }
 
@@ -112,9 +128,16 @@ export class BoardComponent implements OnInit {
           }
         });
         this.stationId = this.nearestStationsIds[this.currentStationIndex];
+        this.error = null;
         this.loadBoard();
       },
-      error => console.log('error', error)
+      (error) => {
+        this.error = {
+          status: true,
+          message: String(error)
+        };
+        this.loading = false;
+      }
     );
   }
 

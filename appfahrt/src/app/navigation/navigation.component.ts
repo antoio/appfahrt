@@ -2,6 +2,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, ViewChild, Injectable, EventEmitter} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {MatSidenav} from '@angular/material/sidenav';
+import {config} from '../config';
 import {SettingsService} from '../services/settings.service';
 import {NavigationService} from './navigation.service';
 import {Title} from '@angular/platform-browser';
@@ -19,6 +20,7 @@ export class NavigationComponent {
   title = 'Appfahrt';
   bottomNav = '';
   smallSize = false;
+  appVersion = config.appVersion;
   constructor(
     public afAuth: AngularFireAuth,
     private authService: AuthServiceService,
