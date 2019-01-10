@@ -156,6 +156,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.resizeObservable$ = fromEvent(window, 'resize');
     this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
       this.windowHeight = window.innerHeight;
@@ -205,6 +206,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
           this.loading = false;
         },
         (error) => {
+          this.loading = false;
           this.error = {
             status: true,
             message: String(error)
