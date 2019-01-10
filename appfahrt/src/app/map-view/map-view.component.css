@@ -6,9 +6,8 @@
 }
 .map-view___button{
   position: absolute;
-  width: 200px;
-  bottom: 10px;
-  left: 50%;
-  margin-left: -100px;
+  width: 180px;
+  top: 152px;
+  right: 10px;
   background: white;
 }

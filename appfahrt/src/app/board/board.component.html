@@ -2,7 +2,20 @@
   <app-spinner></app-spinner>
 </div>
 <div *ngIf="loading === false" class="board" fxLayout="column">
-  <h3 class="mt1 mb2">{{board.station.name}}</h3>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+      <button *ngIf="nearestStationsIds.length != 0" mat-icon-button (click)="prevStation()">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+    </div>
+    <div>
+    <h3 class="mt1 mb2 center">{{board.station.name}}</h3>
+    </div>
+    <div class="right-align"><button *ngIf="nearestStationsIds.length != 0" mat-icon-button (click)="nextStation()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+    </div>
+  </div>
   <div class="board___table" fxFlex="1 100%">
     <div *ngFor="let cell of displayTable" [classList]="cell.classes">{{cell.label}}</div>
   </div>

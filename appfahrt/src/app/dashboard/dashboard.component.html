@@ -5,7 +5,7 @@
   <div *ngIf="favorites.length === 0 && loading === false" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-emptyfavorites></app-emptyfavorites>
   </div>
-  <div *ngIf="loading === false" fxLayout="row wrap" fxLayout.xs="column" fxFlexFill>
+  <div *ngIf="loading === false && favorites.length != 0" fxLayout="row wrap" fxLayout.xs="column">
     <mat-card *ngFor="let favorite of favorites" class="dashboard___card" [ngStyle]="getDashboardStyle()">
       <app-board [stationId]="favorite.stationId"></app-board>
     </mat-card>

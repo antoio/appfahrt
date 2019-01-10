@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthServiceService} from '../services/auth-service.service';
+import {DatabaseService} from '../services/database-service.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthServiceService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private databaseService: DatabaseService) {
   }
   get form() {
     return this.registerForm.controls;
@@ -38,7 +40,8 @@ export class RegisterComponent implements OnInit {
     this.authService.createUserRegular(email, password)
       .then((res) => {
         this.router.navigate(['/']);
-        console.log('Registered worked too 😃');
+        console.log('successful Registered 😃', res.user.uid);
+        this.databaseService.addNearestFavorite(res.user.uid);
       })
       .catch((err) => {
         console.log(err);

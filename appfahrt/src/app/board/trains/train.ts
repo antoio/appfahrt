@@ -13,4 +13,6 @@ export interface Train {
   category: string;
   to: string;
   passList: any;
+  number: string;
+  operator: string;
 }

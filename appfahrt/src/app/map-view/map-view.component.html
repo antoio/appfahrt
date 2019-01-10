@@ -4,7 +4,7 @@
   </div>
   <div *ngIf="loading === false">
     <div>
-      <app-autocomplete (location)="getLocationFromAutocomplete($event)"></app-autocomplete>
+      <app-autocomplete (location)="getLocationFromAutocomplete($event)" [leftSpace]="smallSize ? 10 : 120"></app-autocomplete>
       <agm-map class="map-view___map" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
                [scrollwheel]="true"
                [zoom]="16"

@@ -1,32 +1,60 @@
 <mat-sidenav-container class="sidenav" (backdropClick)="close('backdrop')">
   <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end" class="sidenav">
     <mat-action-list>
-      <button mat-list-item routerLink="dashboard" (click)="close()"><mat-icon mat-list-icon>dashboard</mat-icon> Dashboard </button>
       <mat-divider></mat-divider>
-      <button mat-list-item routerLink="favorites" (click)="close()"><mat-icon mat-list-icon>favorite</mat-icon> Favoriten </button>
+      <button mat-list-item routerLink="favorites" (click)="close()">
+        <mat-icon mat-list-icon>favorite</mat-icon>
+        Favoriten
+      </button>
       <mat-divider></mat-divider>
-      <button mat-list-item routerLink="settings" (click)="close()"><mat-icon mat-list-icon>settings</mat-icon> Einstellungen </button>
+      <button mat-list-item routerLink="settings" (click)="close()">
+        <mat-icon mat-list-icon>settings</mat-icon>
+        Einstellungen
+      </button>
       <mat-divider></mat-divider>
-      <button mat-list-item routerLink="about" (click)="close()"><mat-icon mat-list-icon>help</mat-icon> Über Appfahrt </button>
+      <button mat-list-item routerLink="about" (click)="close()">
+        <mat-icon mat-list-icon>help</mat-icon>
+        Über Appfahrt
+      </button>
       <mat-divider></mat-divider>
-      <button mat-list-item (click)="logout()"><mat-icon mat-list-icon>account_circle</mat-icon> Logout </button>
+      <button mat-list-item (click)="logout()">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        Logout
+      </button>
     </mat-action-list>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav___content">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <span>{{title}}</span>
-        <span class="spacer">
+        <div class="toolbar___left">
           <app-clock></app-clock>
-        </span>
-        <button mat-button routerLink="search">
-          <mat-icon class="navigation-icon">search</mat-icon>
-        </button>
-        <button mat-button (click)="onUser()">
-          <mat-icon class="navigation-icon">person</mat-icon>
-        </button>
+        </div>
+        <div class="toolbar___middle">
+          <span>{{title}}</span>
+        </div>
+        <div class="toolbar___right">
+          <button *ngIf="!smallSize" mat-icon-button routerLink="dashboard">
+            <mat-icon class="navigation-icon">access_time</mat-icon>
+          </button>
+          <button *ngIf="!smallSize" mat-icon-button routerLink="search">
+            <mat-icon class="navigation-icon">search</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onUser()">
+            <mat-icon class="navigation-icon">person</mat-icon>
+          </button>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet></router-outlet>
+    <mat-toolbar *ngIf="smallSize">
+      <mat-toolbar-row class="bottom-nav" fxLayout="row" fxLayoutAlign="space-around">
+        <button mat-flat-button routerLink="dashboard" fxFlex="auto" [color]="bottomNav === 'dashboard' ? 'primary' : ''" >
+          <mat-icon class="navigation-icon" color="">access_time</mat-icon>
+        </button>
+        <button mat-flat-button routerLink="search" fxFlex="auto" [color]="bottomNav === 'search' ? 'primary' : ''">
+          <mat-icon class="navigation-icon">search</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>

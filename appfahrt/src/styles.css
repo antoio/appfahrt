@@ -7,6 +7,16 @@ body {
   right: 0;
   bottom: 0;
 }
+router-outlet + *{
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 0;
+}
+router-outlet + * > div{
+  width: 100%;
+}
 /* Material Overwrites */
 .mat-list-item .mat-list-item-content {
   width: 100%;
@@ -14,4 +24,19 @@ body {
 }
 .mat-list-item .mat-list-item-content .right-align.mat-input-element {
   text-align: right;
+}
+.mat-toolbar-row {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+.mat-toolbar .mat-icon-button{
+  width: 52px;
+  height: 52px;
+}
+.bottom-nav.mat-toolbar-row{
+  padding: 0;
+}
+.bottom-nav .mat-flat-button{
+  border-radius: 0;
 }

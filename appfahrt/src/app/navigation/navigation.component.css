@@ -13,11 +13,17 @@
 .navigation-icon {
   padding: 0 14px;
 }
-
-.spacer {
-  flex: 1 1 auto;
+.toolbar___left{
+  flex: .2;
 }
-
+.toolbar___middle{
+  flex: .6;
+  text-align: center;
+}
+.toolbar___right{
+  flex: .2;
+  text-align: right;
+}
 a {
   text-decoration: none;
   color: white;

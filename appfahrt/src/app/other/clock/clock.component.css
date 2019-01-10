@@ -9,20 +9,31 @@
 .clock {
   font-family: 'digital-7regular';
   color: #000;
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   background: white;
   position: absolute;
   z-index: 10000;
   top: 6px;
-  left: 50%;
-  margin-left: -52px;
+  left: 6px;
   border: 4px solid white;
   box-shadow: 0px 2px 11px 0px rgba(0,0,0,0.75);
 }
+.clock.small{
+  top: 2px;
+  left: 2px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+}
 .clock .digital{
   text-align: center;
-  font-size: 38px;
-  line-height: 100px;
+  font-size: 50px;
+  line-height: 125px;
+}
+.clock.small .digital{
+  text-align: center;
+  font-size: 22px;
+  line-height: 50px;
 }

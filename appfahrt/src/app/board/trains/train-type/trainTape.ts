@@ -1,11 +1,12 @@
-export const GetTrainType = (t: string) => {
+export const GetTrainType = (t: string, o: string = '') => {
   const type = t.toLowerCase();
+  const operator = o.toLowerCase();
   switch (type) {
     case 's': {
       return 'train sbahn blue';
     }
     case 'bus': {
-      return 'bus blue';
+      return (operator === 'pag') ? 'bus yellow' : 'bus blue';
     }
     case 'nfb': {
       return 'bus blue';
@@ -25,9 +26,11 @@ export const GetTrainType = (t: string) => {
     default : return '';
   }
 };
-export const GetTrainLabel = (l: string) => {
-  let label = l;
-  // Remove contet after whitespace
-  label = label.substr(0, label.indexOf(' '));
+const hideNumberWhenCategory = ['re', 'ic', 'ir'];
+export const GetTrainLabel = (cat: string, number: string = '') => {
+  let label = cat;
+  if (number !== '' && (hideNumberWhenCategory.indexOf(cat.toLowerCase()) === -1)) {
+    label = cat + ' ' + number;
+  }
   return label;
 };

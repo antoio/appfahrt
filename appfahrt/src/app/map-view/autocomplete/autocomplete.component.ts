@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, Input} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Address } from 'angular-google-place';
 
@@ -9,6 +9,7 @@ import { Address } from 'angular-google-place';
 })
 export class AutocompleteComponent implements OnInit {
   ready = false;
+  @Input() leftSpace = 100;
 
   public searchControl: FormControl;
   @Output() location: EventEmitter<any> = new EventEmitter<any>();

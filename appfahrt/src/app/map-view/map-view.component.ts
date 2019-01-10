@@ -1,9 +1,11 @@
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
 import {MapsAPILoader} from '@agm/core';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
+import {SettingsService} from '../services/settings.service';
 import {EnableGeolocationDialogComponent} from './enable-geolocation-dialog/enable-geolocation-dialog.component';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -27,7 +29,19 @@ export class MapViewComponent implements OnInit, OnDestroy {
               private ngZone: NgZone,
               private stationsService: StationsService,
               public dialog: MatDialog,
-              public router: Router) {
+              public router: Router,
+              private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.Handset,
+      Breakpoints.Small
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.smallSize = result.matches;
+        return;
+      } else {
+        this.smallSize = false;
+      }
+    });
   }
 
   get coordinates(): Coordinates {
@@ -42,12 +56,13 @@ export class MapViewComponent implements OnInit, OnDestroy {
   geolocationDenied = false;
   map: any;
   dragEventListener: any;
+  smallSize = false;
 
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   windowHeight: number = window.innerHeight;
   get mapHeight(): number {
-    return this.windowHeight - 64;
+    return this.windowHeight - 64 - (this.smallSize ? 46 : 0);
   }
 
   private _coordinates: Coordinates = {

@@ -46,12 +46,6 @@ export class MonitordetailComponent implements OnInit {
     this.databaseService.getFavoriteSnapshot(this._stationId, this._userId).subscribe(favorite => {
       this.databaseService.deleteFavorite(favorite.docs[0].id);
       this.isFavorite = false;
-      /* return favorite.map(f => {
-        if (f) {
-          this.databaseService.deleteFavorite(f.payload.doc.id);
-          this.isFavorite = false;
-        }
-      }); */
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import {TimeInterval} from 'rxjs';
 import {SettingsService} from '../../services/settings.service';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-clock',
@@ -15,6 +16,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   hourDeg = (this._time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
   interval: number;
   type = this.settings.clockType;
+  smallSize = false;
 
   get secTransform() {
     return `rotate(${this.secDeg}, 256, 256)`;
@@ -36,7 +38,19 @@ export class ClockComponent implements OnInit, OnDestroy {
     }
   } */
 
-  constructor(private settings: SettingsService) { }
+  constructor(private settings: SettingsService, private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.Handset,
+      Breakpoints.Small
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.smallSize = result.matches;
+        return;
+      } else {
+        this.smallSize = false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.interval = setInterval(() => {

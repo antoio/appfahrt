@@ -16,6 +16,7 @@ export class FavoritesComponent implements OnInit {
   constructor( private route: ActivatedRoute, public afAuth: AngularFireAuth, private databaseService: DatabaseService ) { }
 
   ngOnInit() {
+    this.favorites = [];
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.databaseService.getFavorites(user.uid).subscribe(favorites => {
@@ -24,9 +25,7 @@ export class FavoritesComponent implements OnInit {
         });
       } else {
         console.error('no user id');
-        this.favorites = [];
       }
     });
   }
-
 }

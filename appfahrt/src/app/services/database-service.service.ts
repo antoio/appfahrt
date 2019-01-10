@@ -7,12 +7,20 @@ import { forkJoin, combineLatest } from 'rxjs';
 import {SettingsService} from './settings.service';
 
 export interface Favorite {
-  userId: string;
-  stationId: string;
+  userId: string | null;
+  stationId: string | null;
   stationName: string;
   addedAt: number;
   display: number;
 }
+export const Nearest: Favorite = {
+  addedAt: 0,
+  display: 1,
+  stationName: 'Näheste',
+  stationId: null,
+  userId: null
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +47,11 @@ export class DatabaseService {
       addedAt: added.getTime(),
       display: 0
     });
+  }
+  public addNearestFavorite(userId: string) {
+    const nearest = Nearest;
+    nearest.userId = userId;
+    this._db.collection<Favorite>('favorites').add(nearest);
   }
   public changeFavoriteDisplayStatus(docId: string, index: number, favorite: Favorite) {
     this._db.doc(`favorites/${docId}`).update({

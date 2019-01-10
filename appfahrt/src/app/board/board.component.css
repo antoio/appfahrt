@@ -37,3 +37,7 @@
 .board___table .cell.train-type.sbahn{
   color: yellow;
 }
+.board___table .cell.train-type.bus.yellow{
+  background: yellow;
+  color: black;
+}

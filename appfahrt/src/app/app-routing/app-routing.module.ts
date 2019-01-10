@@ -19,46 +19,46 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: {title: 'Login'}
+    data: {title: 'Login', bottomNav: ''}
   },
   {
     path: 'register',
     component: RegisterComponent,
-    data: {title: 'Registrieren'}
+    data: {title: 'Registrieren', bottomNav: ''}
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    data: {title: 'Appfahrten'}
+    data: {title: 'Appfahrten', bottomNav: 'dashboard'}
   },
   {
     path: 'details',
     component: MonitordetailComponent,
-    data: {title: 'Bahnhof'}
+    data: {title: 'Bahnhof', bottomNav: ''}
   },
   { path: 'details/:id',
     component: MonitordetailComponent,
-    data: {title: 'Bahnhof'}
+    data: {title: 'Bahnhof', bottomNav: ''}
   },
   {
     path: 'search',
     component: MapViewComponent,
-    data: {title: 'Suche'}
+    data: {title: 'Suche', bottomNav: 'search'}
   },
   {
     path: 'favorites',
     component: FavoritesComponent,
-    data: {title: 'Favoriten'}
+    data: {title: 'Favoriten', bottomNav: ''}
   },
   {
     path: 'settings',
     component: UsersettingsComponent,
-    data: {title: 'Einstellungen'}
+    data: {title: 'Einstellungen', bottomNav: ''}
   },
   {
     path: 'about',
     component: AboutComponent,
-    data: {title: 'Über'}
+    data: {title: 'Über', bottomNav: ''}
   }
 ];
 
