@@ -1,6 +1,6 @@
 {
   "name": "appfahrt",
-  "version": "0.0.0",
+  "version": "0.8.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=0.0.0.0 --ssl --ssl-key certificate/localhost.key  --ssl-cert certificate/localhost.crt",

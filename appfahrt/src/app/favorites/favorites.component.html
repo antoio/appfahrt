@@ -2,6 +2,9 @@
   <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
+  <div *ngIf="loading === false && error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+    <app-error (retry)="ngOnInit()" [error]="error"></app-error>
+  </div>
   <div *ngIf="loading == false" fxFlex="auto">
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
