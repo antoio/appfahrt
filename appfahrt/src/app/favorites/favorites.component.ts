@@ -24,7 +24,8 @@ export class FavoritesComponent implements OnInit {
       if (user) {
         this.databaseService.getFavorites(user.uid).subscribe(favorites => {
           this.favorites = favorites;
-          this.loading = null;
+          this.error = null;
+          this.loading = false;
         });
       } else {
         this.loading = false;
