@@ -1,0 +1,15 @@
+<form [formGroup]="deleteForm" (ngSubmit)="onSubmit()">
+<h1 mat-dialog-title>Account löschen?</h1>
+<div mat-dialog-content class="mat-typography" fxLayout="column">
+  <p>Ihre Daten werden unwiederruflich gelöscht. Möchten Sie Ihren Account wirklich löschen?</p>
+  <p>Geben Sie Ihr Passwort ein um zu bestätigen</p>
+  <mat-form-field>
+    <input matInput type="password" name="password" formControlName="password"
+           placeholder="Passwort">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayoutAlign="space-around" class="p3">
+  <button mat-button color="primary" type="submit">Löschen</button>
+  <button mat-button (click)="onCancel()">Abbrechen</button>
+</div>
+</form>

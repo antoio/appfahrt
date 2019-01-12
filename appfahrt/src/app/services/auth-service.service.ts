@@ -41,6 +41,29 @@ export class AuthServiceService {
     console.log('Create User', email);
     return this._firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
   }
+  changeUserPassword(oldPassword, newPassword) {
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(this.userDetails.email, oldPassword).then((user) => {
+      this._firebaseAuth.auth.currentUser.updatePassword(newPassword).then(() => {
+        // console.log('password change success');
+      }).catch((err) => {
+        console.error('password change failed');
+      });
+    }).catch((err) => {
+      console.error('user credential failed');
+    });
+  }
+  deleteUser(password: string) {
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(this.userDetails.email, password).then((user) => {
+      this._firebaseAuth.auth.currentUser.delete().then(() => {
+        // console.log('user successfull deleted');
+        this.router.navigate(['/login']);
+      }).catch((err) => {
+        console.error('password change failed');
+      });
+    }).catch((err) => {
+      console.error('user credential failed');
+    });
+  }
 
   logout() {
     this._firebaseAuth.auth.signOut()

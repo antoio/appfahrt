@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MatSliderChange} from '@angular/material';
+import {MatDialog, MatSliderChange} from '@angular/material';
+import {StationsService} from '../board/stations/stations.service';
+import {DeleteUserDialogComponent} from '../dialogs/delete-user/delete-user-dialog.component';
+import {ResetPasswordDialogComponent} from '../dialogs/reset-password/reset-password-dialog.component';
+import {AuthServiceService} from '../services/auth-service.service';
 import {ISettings, SettingsService} from '../services/settings.service';
 
 @Component({
@@ -9,9 +13,9 @@ import {ISettings, SettingsService} from '../services/settings.service';
 })
 export class UsersettingsComponent implements OnInit {
   settings: ISettings;
-  test = 100;
+  email = null;
 
-  constructor(private settingsService: SettingsService) {
+  constructor(private settingsService: SettingsService, public dialog: MatDialog, private auth: AuthServiceService) {
     this.settings = {
       maxDashboards: settingsService.maxDashboards,
       clockType: settingsService.clockType,
@@ -59,7 +63,16 @@ export class UsersettingsComponent implements OnInit {
     this.settingsService.updateRate = newValue;
   }
 
-  ngOnInit() {
+  public onOpenResetPasswordDialog() {
+    const changePasswordDialog = this.dialog.open(ResetPasswordDialogComponent);
+  }
+  public onOpenDeleteUserDialog() {
+    const deleteUserDialog = this.dialog.open(DeleteUserDialogComponent);
   }
 
+  ngOnInit() {
+    this.email = this.auth.getCurrentUser().subscribe(result => {
+      this.email = result.email;
+    });
+  }
 }

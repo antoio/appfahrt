@@ -6,11 +6,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
 import {AppError} from '../other/error/error.component';
-import {SettingsService} from '../services/settings.service';
 import {EnableGeolocationDialogComponent} from '../dialogs/enable-geolocation/enable-geolocation-dialog.component';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {fromEvent} from 'rxjs/observable/fromEvent';
+import {STYLE} from './map-style';
 
 interface Coordinates {
   x: number;
@@ -79,7 +79,11 @@ export class MapViewComponent implements OnInit, OnDestroy {
     url: 'assets/marker_small.svg',
     scaledSize: {
       width: 40,
-      height: 40
+      height: 60
+    },
+    anchor: {
+      x: 20,
+      y: 60
     }
   };
   markerPos = {
@@ -111,6 +115,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   mapReady(map) {
+    console.log(map);
+    map.styles = STYLE;
     // Hack: https://github.com/SebastianM/angular-google-maps/issues/1092
     // GMaps events: https://developers.google.com/maps/documentation/javascript/events
     this.map = map;
