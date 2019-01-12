@@ -47,6 +47,7 @@ import { EnableGeolocationDialogComponent } from './dialogs/enable-geolocation/e
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { InstallAppDialogComponent } from './dialogs/install-app/install-app-dialog.component';
 import { ErrorComponent } from './other/error/error.component';
+import 'hammerjs';
 
 
 @NgModule({

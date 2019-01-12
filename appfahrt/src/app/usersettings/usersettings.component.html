@@ -11,21 +11,33 @@
     </mat-list-item>
     <mat-list-item>
       <div>Anzahl Abfahrten pro Station</div>
-      <mat-form-field>
-        <input class="right-align" matInput type="number" (change)="onStationCountChange($event)" [value]="settings.stationCount">
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
+        thumbLabel
+        (change)="onStationCountChange($event)" [value]="settingsService.stationCount"
+        tickInterval="2"
+        step="1"
+        min="6"
+        max="16"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
     </mat-list-item>
     <mat-list-item>
-      <div>Max. Anzahl Stationen im Dashboard</div>
-      <mat-form-field>
-        <input class="right-align" matInput type="number" (change)="onMaxDashboardsChange($event)" [value]="settings.maxDashboards">
-      </mat-form-field>
+      <div>Anzahl Stationen im Dashboard</div>
+      <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
+        thumbLabel
+        (change)="onMaxDashboardsChange($event)" [value]="settingsService.maxDashboards"
+        tickInterval="1"
+        step="1"
+        min="1"
+        max="4"></mat-slider><div fxFlex="30px" class="right-align">{{settings.maxDashboards}}</div></div>
     </mat-list-item>
     <mat-list-item>
       <div>Aktualisierungs Intervall (sec)</div>
-      <mat-form-field>
-        <input class="right-align" matInput type="number" (change)="onUpdateIntervalChange($event)" [value]="settings.updateRate">
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
+        thumbLabel
+        (change)="onUpdateIntervalChange($event)" [value]="settingsService.updateRate"
+        tickInterval="10"
+        step="5"
+        min="30"
+        max="120"></mat-slider><div fxFlex="30px" class="right-align">{{settings.updateRate}}</div></div>
     </mat-list-item>
     <h3 matSubheader>Benutzer</h3>
     <mat-list-item>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatSliderChange} from '@angular/material';
 import {ISettings, SettingsService} from '../services/settings.service';
 
 @Component({
@@ -9,6 +10,7 @@ import {ISettings, SettingsService} from '../services/settings.service';
 export class UsersettingsComponent implements OnInit {
   settings: ISettings;
   test = 100;
+
   constructor(private settingsService: SettingsService) {
     this.settings = {
       maxDashboards: settingsService.maxDashboards,
@@ -18,35 +20,43 @@ export class UsersettingsComponent implements OnInit {
       showDuration: settingsService.showDuration
     };
   }
+
   public onClockChange() {
     this.settingsService.changeClockType();
   }
+
   public onShowDurationChange() {
     this.settingsService.switchDuration();
   }
-  public onStationCountChange(event: any) {
-    const newValue = event.target.value;
+
+  public onStationCountChange(event: MatSliderChange) {
+    const newValue = event.value;
     if (newValue === NaN) {
       console.error('not a value');
       return;
     }
-    this.settingsService.stationCount = event.target.value;
+    this.settings.stationCount = newValue;
+    this.settingsService.stationCount = newValue;
   }
-  public onMaxDashboardsChange(event: any) {
-    const newValue = event.target.value;
+
+  public onMaxDashboardsChange(event: MatSliderChange) {
+    const newValue = event.value;
     if (newValue === NaN) {
       console.error('not a value');
       return;
     }
-    this.settingsService.maxDashboards = event.target.value;
+    this.settings.maxDashboards = newValue;
+    this.settingsService.maxDashboards = newValue;
   }
-  public onUpdateIntervalChange(event: any) {
-    const newValue = event.target.value;
+
+  public onUpdateIntervalChange(event: MatSliderChange) {
+    const newValue = event.value;
     if (newValue === NaN) {
       console.error('not a value');
       return;
     }
-    this.settingsService.updateRate = event.target.value;
+    this.settings.updateRate = newValue;
+    this.settingsService.updateRate = newValue;
   }
 
   ngOnInit() {
