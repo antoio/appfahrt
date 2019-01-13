@@ -7,6 +7,10 @@
 .sidenav___info{
   height: 150px;
 }
+.sidenav___info___icon{
+  width: 120px;
+  height: 120px;
+}
 .sidenav___content{
   min-height: 100%;
   flex: 1;

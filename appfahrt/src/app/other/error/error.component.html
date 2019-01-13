@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="mat-typography">
-  <mat-icon color="warn" class="error___icon">error_outline</mat-icon>
+  <img class="error___icon" src="assets/error_icon.svg" alt="error icon"/>
   <div fxFlexOffset="10px">Ein Fehler ist aufgetreten!</div>
   <div *ngIf="error.message && error.message != ''">{{error.message}}</div>
   <div *ngIf="retry" fxFlexOffset="10px">

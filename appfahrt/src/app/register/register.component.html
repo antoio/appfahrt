@@ -3,7 +3,7 @@
     <mat-card fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column">
       <form fxLayout="column" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <input matInput formControlName="username" name="username" placeholder="E-Mail">
+          <input matInput type="email" formControlName="username" name="username" placeholder="E-Mail">
         </mat-form-field>
         <mat-form-field>
           <input matInput type="password" name="password" formControlName="password" placeholder="Passwort">

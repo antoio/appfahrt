@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'favorites',
     component: FavoritesComponent,
-    data: {title: 'Favoriten', bottomNav: ''}
+    data: {title: 'Favoriten', bottomNav: 'favorites'}
   },
   {
     path: 'settings',

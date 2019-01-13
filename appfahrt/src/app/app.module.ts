@@ -48,6 +48,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { InstallAppDialogComponent } from './dialogs/install-app/install-app-dialog.component';
 import { ErrorComponent } from './other/error/error.component';
 import 'hammerjs';
+import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
+import { DeleteUserDialogComponent } from './dialogs/delete-user/delete-user-dialog.component';
 
 
 @NgModule({
@@ -95,11 +97,15 @@ export class MaterialModule {}
     LayoutBoardComponent,
     LayoutContainerComponent,
     EnableGeolocationDialogComponent,
-    InstallAppDialogComponent
+    InstallAppDialogComponent,
+    ResetPasswordDialogComponent,
+    DeleteUserDialogComponent
   ],
   entryComponents: [
     EnableGeolocationDialogComponent,
-    InstallAppDialogComponent
+    ResetPasswordDialogComponent,
+    InstallAppDialogComponent,
+    DeleteUserDialogComponent
   ],
   imports: [
     BrowserModule,

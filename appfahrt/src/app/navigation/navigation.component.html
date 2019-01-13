@@ -1,15 +1,17 @@
 <mat-sidenav-container class="sidenav" (backdropClick)="close()">
   <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end" class="sidenav">
     <div class="sidenav___info" fxLayout="column" fxLayoutAlign="center center">
-      <div>Appicon</div>
+      <div class="sidenav___info___icon"><img class="fit" src="/assets/icons/icon-384x384.png"></div>
       <div class="mat-typography">version: {{appVersion}}</div>
     </div>
     <mat-action-list>
-      <mat-divider></mat-divider>
-      <button mat-list-item routerLink="favorites" (click)="close()">
-        <mat-icon mat-list-icon>favorite</mat-icon>
-        Favoriten
-      </button>
+      <div *ngIf="!smallSize">
+        <mat-divider></mat-divider>
+        <button mat-list-item routerLink="favorites" (click)="close()">
+          <mat-icon mat-list-icon>favorite</mat-icon>
+          Favoriten
+        </button>
+      </div>
       <mat-divider></mat-divider>
       <button mat-list-item routerLink="settings" (click)="close()">
         <mat-icon mat-list-icon>settings</mat-icon>
@@ -52,11 +54,15 @@
     <router-outlet></router-outlet>
     <mat-toolbar *ngIf="smallSize">
       <mat-toolbar-row class="bottom-nav" fxLayout="row" fxLayoutAlign="space-around">
-        <button mat-flat-button routerLink="dashboard" fxFlex="auto" [color]="bottomNav === 'dashboard' ? 'primary' : ''" >
+        <button mat-flat-button routerLink="dashboard" fxFlex="auto"
+                [color]="bottomNav === 'dashboard' ? 'primary' : ''">
           <mat-icon class="navigation-icon" color="">access_time</mat-icon>
         </button>
         <button mat-flat-button routerLink="search" fxFlex="auto" [color]="bottomNav === 'search' ? 'primary' : ''">
           <mat-icon class="navigation-icon">search</mat-icon>
+        </button>
+        <button mat-flat-button routerLink="favorites" fxFlex="auto" [color]="bottomNav === 'favorites' ? 'primary' : ''">
+          <mat-icon class="navigation-icon">favorite</mat-icon>
         </button>
       </mat-toolbar-row>
     </mat-toolbar>

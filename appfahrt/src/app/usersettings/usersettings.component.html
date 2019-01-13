@@ -43,16 +43,16 @@
     <mat-list-item>
       <div>E-Mail</div>
       <mat-form-field>
-        <input class="right-align" matInput type="email">
+        <input class="right-align" matInput type="email" [value]="email" disabled>
       </mat-form-field>
     </mat-list-item>
     <mat-list-item>
       <div>Passwort ändern</div>
-      <button mat-button>Ändern</button>
+      <button mat-button (click)="onOpenResetPasswordDialog()">Ändern</button>
     </mat-list-item>
     <mat-list-item>
       <div>Konto löschen</div>
-      <button mat-button>Löschen</button>
+      <button mat-button (click)="onOpenDeleteUserDialog()">Löschen</button>
     </mat-list-item>
   </mat-list>
 </div>
