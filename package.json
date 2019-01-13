@@ -1,3 +1,5 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "@angular/cdk": "^7.2.1"
+  }
 }

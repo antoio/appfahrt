@@ -50,6 +50,7 @@ import { ErrorComponent } from './other/error/error.component';
 import 'hammerjs';
 import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
 import { DeleteUserDialogComponent } from './dialogs/delete-user/delete-user-dialog.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ export class MaterialModule {}
     ReactiveFormsModule,
     AngularGooglePlaceModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DragDropModule
   ],
   providers: [NavigationService, AuthServiceService, DatabaseService, SettingsService],
   bootstrap: [AppComponent]

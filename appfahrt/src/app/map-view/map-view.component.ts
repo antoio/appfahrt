@@ -1,6 +1,6 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
-import {MapsAPILoader} from '@agm/core';
+import {MapsAPILoader, MapTypeStyle} from '@agm/core';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
@@ -58,6 +58,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   map: any;
   dragEventListener: any;
   smallSize = false;
+  style = STYLE;
 
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
@@ -115,11 +116,10 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   mapReady(map) {
-    console.log(map);
-    map.styles = STYLE;
     // Hack: https://github.com/SebastianM/angular-google-maps/issues/1092
     // GMaps events: https://developers.google.com/maps/documentation/javascript/events
     this.map = map;
+    // this.map.style = JSON.parse(STYLE);
     this.dragEventListener = this.map.addListener('dragend', () => {
       if (this._tempCoordintes) {
         this.setCoordinates(this._tempCoordintes.x, this._tempCoordintes.y);

@@ -24,16 +24,6 @@
         max="20"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
     </mat-list-item>
     <mat-list-item>
-      <div>Anzahl Stationen im Dashboard</div>
-      <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
-        thumbLabel
-        (change)="onMaxDashboardsChange($event)" [value]="settingsService.maxDashboards"
-        tickInterval="1"
-        step="1"
-        min="1"
-        max="4"></mat-slider><div fxFlex="30px" class="right-align">{{settings.maxDashboards}}</div></div>
-    </mat-list-item>
-    <mat-list-item>
       <div>Aktualisierungs Intervall (sec)</div>
       <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
         thumbLabel

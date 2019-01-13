@@ -107,7 +107,6 @@ export class BoardComponent implements OnInit, AfterViewInit {
   public ngOnInit() {
     this.error = null;
     this.loading = true;
-    console.log(this.settings.fit);
     this.fit = this.settings.fit;
     if (this.board === undefined) {
       // Load nearest Station

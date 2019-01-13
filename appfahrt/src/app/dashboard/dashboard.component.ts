@@ -17,9 +17,10 @@ export class DashboardComponent implements OnInit {
   favorites: Favorite[] = [];
   loading = true;
   smallSize = false;
+  maxDashboards = 4;
 
   getDashboardStyle() {
-    const maxBoards = this.settings.maxDashboards;
+    const maxBoards = Math.min(this.favorites.length, this.maxDashboards);
     let height = 100;
     let width = 100;
     let toolbarOffset = 84 + (this.smallSize ? 64 : 0);
@@ -62,17 +63,26 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.databaseService.getShownFavorites(user.uid).subscribe(favorites => {
-          this.favorites = favorites;
+          if (favorites.length > this.maxDashboards) {
+            this.favorites = favorites.slice(0, this.maxDashboards);
+          } else {
+            this.favorites = favorites;
+          }
+          this.loading = false;
         });
       } else {
         console.error('no user id');
         this.favorites = [Nearest];
+        this.loading = false;
       }
-    }, error => console.log('error user login', error) );
-    this.loading = false;
+    }, error => {
+      this.loading = false;
+      console.log('error user login', error);
+    });
   }
 
 }

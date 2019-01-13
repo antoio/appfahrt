@@ -11,6 +11,7 @@
       <agm-map class="map-view___map" id="map" [latitude]="coordinates.y" [longitude]="coordinates.x"
                [scrollwheel]="true"
                [zoom]="16"
+               [styles]="style"
                (centerChange)="mapChanged($event)"
                (mapReady)="mapReady($event)" [style.height.px]="mapHeight">
         <agm-marker *ngIf="geolocationDenied == false && userCoordinates != null" [latitude]="userCoordinates.y" [longitude]="userCoordinates.x" [iconUrl]="markerPos"></agm-marker>
