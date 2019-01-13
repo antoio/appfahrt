@@ -12,14 +12,35 @@
       </button>
     </div>
     <div>
-    <h3 class="mt1 mb2 center">{{board.station.name}}</h3>
+      <h3 class="mt1 mb2 center">{{board.station.name}}</h3>
     </div>
     <div class="right-align"><button *ngIf="nearestStationsIds.length != 0" mat-icon-button (click)="nextStation()">
       <mat-icon>navigate_next</mat-icon>
     </button>
     </div>
   </div>
-  <div class="board___table" fxFlex="1 100%">
-    <div *ngFor="let cell of displayTable" [classList]="cell.classes">{{cell.label}}</div>
-  </div>
+
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="100%" width="100%"
+       [attr.viewBox]="'0 0 ' + relativeWidth + ' ' + relativeHeight" [attr.preserveAspectRatio]="fit ? 'none' : 'xMidYMid'" >
+    <style type="text/css">
+      .i0{fill:#1565c0; stroke: #f3f3f3; stroke-width: 2px}
+      .i2{fill:#494949}
+      .i3{fill:#ffffff}
+      .i5{font-size:16px;}
+    </style>
+    <g *ngFor="let train of board.trains; let i = index" [attr.transform]="translateItem(i)">
+      <rect x="0" y="0" class="i0" [attr.width]="relativeWidth" [attr.height]="itemHeight"/>
+      <text [attr.x]="relativeWidth * 0.02" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize">{{getTime(train.stop.departureTimestamp * 1000)}}</text>
+      <text [attr.x]="relativeWidth * 0.16" [attr.y]="textItemPos - (fontSize * 0.1)" class="i3" [style.fontSize]="fontSize * 0.8">{{trainLabel(train)}}</text>
+      <text [attr.x]="relativeWidth * 0.33" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize">{{train.to}}</text>
+      <text [attr.x]="relativeWidth * 0.98" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize" text-anchor="end">{{train.stop.platform}}</text>
+    </g>
+    <g>
+      <rect class="i2" [attr.width]="relativeWidth" height="44"/>
+      <text [attr.x]="relativeWidth * 0.02" y="32"  class="i3 i5">Ab</text>
+      <text [attr.x]="relativeWidth * 0.33" y="32" class="i3 i5">Nach</text>
+      <text [attr.x]="relativeWidth * 0.98" y="32" class="i3 i5" text-anchor="end">Gleis</text>
+    </g>
+
+  </svg>
 </div>

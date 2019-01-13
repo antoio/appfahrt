@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {getTimeDifferenceFromTimestamp, getTimeFromTimestamp} from '../helpers/dateFormat';
 import {AppError} from '../other/error/error.component';
 import {SettingsService} from '../services/settings.service';
@@ -25,7 +26,7 @@ interface TrainCellItem {
   providers: [StationsService]
 })
 
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, AfterViewInit {
   @Input() stationId: string;
   @Input() board: Board;
   loading = true;
@@ -33,15 +34,45 @@ export class BoardComponent implements OnInit {
   nearestStationsIds: string[] = [];
   currentStationIndex = 0;
   error: AppError = null;
+  fontSize = 18;
+  relativeWidth = 1024;
+  relativeHeight = 768;
+  fit = false;
 
   headerRow: TrainCellItem[] = [
-    {label: 'Time', classes: 'header center'},
+    {label: 'Ab', classes: 'header center'},
     {label: '', classes: 'header'},
-    {label: 'Destination', classes: 'header pl1'},
-    {label: 'Platform', classes: 'header center'}
+    {label: 'Nach', classes: 'header pl1'},
+    {label: 'Gleis', classes: 'header center'}
   ];
 
-  constructor(private trainsService: TrainsService, private stationService: StationsService, private settings: SettingsService) {
+  constructor(private trainsService: TrainsService, private stationService: StationsService,
+              private settings: SettingsService,
+              private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.WebPortrait,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.TabletPortrait
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.relativeWidth = 768;
+        this.relativeHeight = 1024;
+        return;
+      } else {
+        this.relativeWidth = 1200;
+        this.relativeHeight = 768;
+      }
+    });
+  }
+
+  public translateItem(index) {
+    return `translate(0 ${44 + (index * this.itemHeight) })`;
+  }
+  get textItemPos() {
+    return (this.itemHeight / 2 + (this.fontSize / 2)) - (this.fontSize * 0.2);
+  }
+  get itemHeight() {
+    return (this.relativeHeight - 44) / this.board.trains.length;
   }
 
   public getTime(timestamp: number): string {
@@ -52,16 +83,22 @@ export class BoardComponent implements OnInit {
       return getTimeFromTimestamp(timestamp);
     }
   }
+
   public prevStation() {
-    this.currentStationIndex --;
-    if (this.currentStationIndex < 0) { this.currentStationIndex = this.nearestStationsIds.length - 1; }
+    this.currentStationIndex--;
+    if (this.currentStationIndex < 0) {
+      this.currentStationIndex = this.nearestStationsIds.length - 1;
+    }
     this.stationId = this.nearestStationsIds[this.currentStationIndex];
     this.loading = true;
     this.loadBoard();
   }
+
   public nextStation() {
-    this.currentStationIndex ++;
-    if (this.currentStationIndex > this.nearestStationsIds.length - 1) { this.currentStationIndex = 0; }
+    this.currentStationIndex++;
+    if (this.currentStationIndex > this.nearestStationsIds.length - 1) {
+      this.currentStationIndex = 0;
+    }
     this.stationId = this.nearestStationsIds[this.currentStationIndex];
     this.loading = true;
     this.loadBoard();
@@ -70,6 +107,8 @@ export class BoardComponent implements OnInit {
   public ngOnInit() {
     this.error = null;
     this.loading = true;
+    console.log(this.settings.fit);
+    this.fit = this.settings.fit;
     if (this.board === undefined) {
       // Load nearest Station
       if (this.stationId === null) {
@@ -106,6 +145,7 @@ export class BoardComponent implements OnInit {
       newBoard.station = data.station as Station;
       newBoard.trains = data.stationboard as Train[];
       this.board = newBoard;
+      this.fontSize = Math.min(this.itemHeight - 20, 30);
       this.displayTable = [...this.headerRow, ...this.fillCellsWithTrains(this.board.trains)];
       this.loading = false;
       this.error = null;
@@ -140,7 +180,9 @@ export class BoardComponent implements OnInit {
       }
     );
   }
-
+  public trainLabel(train) {
+    return GetTrainLabel(train.category, train.number);
+  }
   private fillCellsWithTrains(trains: Train[]): TrainCellItem[] {
     const trainList: TrainCellItem[] = [];
     trains.forEach((train) => {
@@ -153,5 +195,9 @@ export class BoardComponent implements OnInit {
       trainList.push({label: train.stop.platform, classes: 'cell center'});
     });
     return trainList;
+  }
+
+  ngAfterViewInit(): void {
+
   }
 }

@@ -21,7 +21,8 @@ export class UsersettingsComponent implements OnInit {
       clockType: settingsService.clockType,
       stationCount: settingsService.stationCount,
       updateRate: settingsService.updateRate,
-      showDuration: settingsService.showDuration
+      showDuration: settingsService.showDuration,
+      fit: this.settingsService.fit
     };
   }
 
@@ -31,6 +32,9 @@ export class UsersettingsComponent implements OnInit {
 
   public onShowDurationChange() {
     this.settingsService.switchDuration();
+  }
+  public onFitChange() {
+    this.settingsService.changeFit();
   }
 
   public onStationCountChange(event: MatSliderChange) {

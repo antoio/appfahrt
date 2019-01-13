@@ -10,6 +10,10 @@
       <mat-slide-toggle [checked]="settings.showDuration" (change)="onShowDurationChange()"></mat-slide-toggle>
     </mat-list-item>
     <mat-list-item>
+      <div>Grösse passt sich dem Bildschirm an</div>
+      <mat-slide-toggle [checked]="settings.fit" (change)="onFitChange()"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
       <div>Anzahl Abfahrten pro Station</div>
       <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
         thumbLabel
@@ -17,7 +21,7 @@
         tickInterval="2"
         step="1"
         min="6"
-        max="16"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
+        max="20"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
     </mat-list-item>
     <mat-list-item>
       <div>Anzahl Stationen im Dashboard</div>

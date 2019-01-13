@@ -6,6 +6,7 @@ export interface ISettings {
   stationCount: number;
   updateRate: number;
   showDuration: boolean;
+  fit: boolean;
 }
 
 @Injectable({
@@ -23,7 +24,8 @@ export class SettingsService {
         clockType: 'analog',
         stationCount: 10,
         updateRate: 60,
-        showDuration: false
+        showDuration: false,
+        fit: false
       });
     }
   }
@@ -38,6 +40,14 @@ export class SettingsService {
   }
   public get showDuration(): boolean {
     return this.loadStorageSettings().showDuration;
+  }
+  public get fit(): boolean {
+    return this.loadStorageSettings().fit;
+  }
+  public changeFit() {
+    const s = this.loadStorageSettings();
+    s.fit = !s.fit;
+    this.saveStorageSettings(s);
   }
   public switchDuration() {
     const s = this.loadStorageSettings();
