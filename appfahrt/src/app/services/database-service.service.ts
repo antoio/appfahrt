@@ -35,7 +35,7 @@ export class DatabaseService {
   }
   public getShownFavorites(userId: string) {
     return this._db.collection<Favorite>('favorites', ref =>
-      ref.where('userId', '==', userId).where('display', '>', 0).limit(this.settings.maxDashboards)
+      ref.where('userId', '==', userId).where('display', '>', 0).limit(4)
     ).valueChanges();
   }
   public addFavorite(stationId: string, userId: string, stationName: string) {

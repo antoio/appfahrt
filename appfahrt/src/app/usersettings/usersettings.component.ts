@@ -17,7 +17,6 @@ export class UsersettingsComponent implements OnInit {
 
   constructor(private settingsService: SettingsService, public dialog: MatDialog, private auth: AuthServiceService) {
     this.settings = {
-      maxDashboards: settingsService.maxDashboards,
       clockType: settingsService.clockType,
       stationCount: settingsService.stationCount,
       updateRate: settingsService.updateRate,
@@ -45,16 +44,6 @@ export class UsersettingsComponent implements OnInit {
     }
     this.settings.stationCount = newValue;
     this.settingsService.stationCount = newValue;
-  }
-
-  public onMaxDashboardsChange(event: MatSliderChange) {
-    const newValue = event.value;
-    if (newValue === NaN) {
-      console.error('not a value');
-      return;
-    }
-    this.settings.maxDashboards = newValue;
-    this.settingsService.maxDashboards = newValue;
   }
 
   public onUpdateIntervalChange(event: MatSliderChange) {
