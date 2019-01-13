@@ -1,5 +1,7 @@
 # Appfahrt v 0.8.0
 
+![Appfahrt Icon](https://github.com/antoio/appfahrt/blob/master/appfahrt/src/assets/icons/icon-384x384.png "Appfahrt")
+
 This project is currently work in progress. 🏗  
 visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the current Version
 
