@@ -1,7 +1,20 @@
 # Appfahrt v 0.8.0
 
+![Appfahrt Icon](https://github.com/antoio/appfahrt/blob/master/appfahrt/src/assets/icons/icon-384x384.png "Appfahrt")
+
 This project is currently work in progress. 🏗  
+
+Appfahrt lets you check the stationboards from your nearest location. All mayor train, bus and tramstations in Switzerland are available and fetched from https://transport.opendata.ch.
+
+As a registered user you are able to create and order Favorite stations.
+
 visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the current Version
+
+## Features
+- Traindata API from opendata.ch
+- PWA functionalities for best mobile experience
+- Fully configurable Dashboard
+- Find nearest station with a Google Maps integration
 
 # 🔁 Dependencies
 
