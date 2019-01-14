@@ -8,7 +8,7 @@ Appfahrt lets you check the stationboards from your nearest location. All mayor 
 
 As a registered user you are able to create and order Favorite stations.
 
-visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the current Version
+visit [go.appfahrt.ch](https://go.appfahrt.ch) for the current Version
 
 ## Features
 - Traindata API from opendata.ch
