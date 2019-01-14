@@ -1,4 +1,4 @@
-<div class="favorites max-width-4 mx-auto mt4" fxLayout="column">
+<div class="favorites max-width-4 mx-auto mt4 px2" fxLayout="column">
   <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
@@ -9,9 +9,9 @@
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>
-    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" class="mat-typography">
-      <div fxFlex="50%" fxLayout="column">
-        <h1>Favoriten</h1>
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row">
+      <div fxFlex="46%" fxLayout="column">
+        <h2 class="mat-h2">Favoriten</h2>
         <div
           cdkDropList
           #inactiveList="cdkDropList"
@@ -28,8 +28,13 @@
           <button mat-raised-button color="primary" routerLink="/search">Favorit hinzufügen</button>
         </div>
       </div>
-      <div fxFlex="50%" fxFlexOffset="10px">
-        <h1>Dashboard</h1>
+      <div fxFlex="8%" fxLayout="column" fxLayoutAlign="space-around center">
+        <mat-icon>
+          swap_horiz
+        </mat-icon>
+      </div>
+      <div fxFlex="46%" fxFlexOffset="10px">
+        <h2 class="mat-h2">Dashboard</h2>
         <div
           cdkDropList
           #activeList="cdkDropList"

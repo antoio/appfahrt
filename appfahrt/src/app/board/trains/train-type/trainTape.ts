@@ -30,7 +30,8 @@ const hideNumberWhenCategory = ['re', 'ic', 'ir'];
 export const GetTrainLabel = (cat: string, number: string = '') => {
   let label = cat;
   if (number !== '' && (hideNumberWhenCategory.indexOf(cat.toLowerCase()) === -1)) {
-    label = cat.charAt(0) + ' ' + number;
+    const n = number.indexOf(' ');
+    label = cat.charAt(0) + ' ' + number.substring(0, n !== -1 ? n : number.length);
   }
   return label;
 };

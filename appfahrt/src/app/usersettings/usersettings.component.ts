@@ -15,7 +15,7 @@ export class UsersettingsComponent implements OnInit {
   settings: ISettings;
   email = null;
 
-  constructor(private settingsService: SettingsService, public dialog: MatDialog, private auth: AuthServiceService) {
+  constructor(public settingsService: SettingsService, public dialog: MatDialog, private auth: AuthServiceService) {
     this.settings = {
       clockType: settingsService.clockType,
       stationCount: settingsService.stationCount,
@@ -24,7 +24,6 @@ export class UsersettingsComponent implements OnInit {
       fit: this.settingsService.fit
     };
   }
-
   public onClockChange() {
     this.settingsService.changeClockType();
   }

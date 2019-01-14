@@ -54,6 +54,13 @@ router-outlet + *{
 router-outlet + * > div{
   width: 100%;
 }
+/* helpers */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Material Overwrites */
 .mat-list-item .mat-list-item-content {
   width: 100%;
