@@ -30,9 +30,16 @@ visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the c
 # ⏏️ Installation
 
 - npm install https://github.com/antoio/appfahrt/appfahrt
-- yarn install
+- `cd appfahrt`
 - rename `app/config.template` to `app/config.ts` and include keys for google maps and firbease. If the developers didn't provide you with the keys, feel free to create your own: [Google Maps](https://console.cloud.google.com/google/maps-apis) and [Firebase](http://console.firebase.google.com/)
-- Run dev mode: `ng serve` for a server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files. Note: For proper pwa usage the app needs to be served through https.
+- install dependencies `yarn install`
+- run dev mode: `ng serve` for a server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+# ⬆️ Deployment
+For proper pwa usage the projects needs to be served via ssh (https) and in production environment.
+- `ng build --prod` will build the full project onto the `dist/appfahrt` folder
+- `firebase deploy` will deploy your project to firebase. Setup firebase with `firebase init` 
+- Enjoy 😎!
 
 # ℹ️ About us
 
