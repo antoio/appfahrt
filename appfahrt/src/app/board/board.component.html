@@ -5,7 +5,7 @@
   <app-error (retry)="ngOnInit()" [error]="error"></app-error>
 </div>
 <div *ngIf="loading === false && error === null" class="board" fxLayout="column">
-  <div fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutAlign="space-around">
     <div>
       <button *ngIf="nearestStationsIds.length != 0" mat-icon-button (click)="prevStation()">
         <mat-icon>navigate_before</mat-icon>

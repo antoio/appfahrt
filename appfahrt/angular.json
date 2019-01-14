@@ -27,7 +27,8 @@
               "src/styles.css",
               "src/theme.scss",
               "node_modules/basscss/css/basscss-cp.css",
-              "node_modules/basscss/css/basscss.css"
+              "node_modules/basscss/css/basscss.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css"
             ],
             "scripts": []
           },

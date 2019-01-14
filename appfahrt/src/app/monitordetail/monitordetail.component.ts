@@ -1,3 +1,4 @@
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
@@ -27,12 +28,25 @@ export class MonitordetailComponent implements OnInit {
   private favorites: Favorite[];
   private _userId: string;
   private board: Board;
+  smallSize = false;
 
   constructor(
     private route: ActivatedRoute,
     public afAuth: AngularFireAuth,
     private databaseService: DatabaseService,
-    private trainsService: TrainsService) {
+    private trainsService: TrainsService,
+    private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.Handset,
+      Breakpoints.Small
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.smallSize = result.matches;
+        return;
+      } else {
+        this.smallSize = false;
+      }
+    });
   }
 
   get stationId(): string {
@@ -77,7 +91,7 @@ export class MonitordetailComponent implements OnInit {
         this._userId = user.uid;
         this.getFavorites();
       } else {
-        console.error('no user id');
+        // No user
         this.favorites = [];
         this.loading.favorites = false;
       }

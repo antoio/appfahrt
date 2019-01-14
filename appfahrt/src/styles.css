@@ -84,3 +84,6 @@ router-outlet + * > div{
 .bottom-nav .mat-flat-button{
   border-radius: 0;
 }
+.mat-h2.m0{
+  margin: 0;
+}

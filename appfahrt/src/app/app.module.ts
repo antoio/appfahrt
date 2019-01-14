@@ -51,6 +51,8 @@ import 'hammerjs';
 import { ResetPasswordDialogComponent } from './dialogs/reset-password/reset-password-dialog.component';
 import { DeleteUserDialogComponent } from './dialogs/delete-user/delete-user-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { InfoWindowComponent } from './map-view/info-window/info-window.component';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 
 @NgModule({
@@ -100,7 +102,8 @@ export class MaterialModule {}
     EnableGeolocationDialogComponent,
     InstallAppDialogComponent,
     ResetPasswordDialogComponent,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    InfoWindowComponent
   ],
   entryComponents: [
     EnableGeolocationDialogComponent,
@@ -118,6 +121,7 @@ export class MaterialModule {}
       apiKey: config.googleMapsKey,
       libraries: ['places']
     }),
+    AgmSnazzyInfoWindowModule,
     AngularGooglePlaceModule,
     AngularFireModule.initializeApp(environment.firebase, 'appfahrt-1537907755048'),
     AngularFireDatabaseModule,

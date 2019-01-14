@@ -1,5 +1,5 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AppError} from '../other/error/error.component';
@@ -16,16 +16,17 @@ export class FavoritesComponent implements OnInit {
   private favorites: Favorite[] = [];
   private inactiveFavorites: Favorite[] = [];
   private activeFavorites: Favorite[] = [];
-  done: Favorite[] = [];
   loading = true;
   error: AppError = null;
   favoritesLoading = false;
+  noUser = false;
 
   constructor(
     private route: ActivatedRoute,
     public afAuth: AngularFireAuth,
     private databaseService: DatabaseService,
-    private settings: SettingsService ) { }
+    private settings: SettingsService) {
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     // if (this.favoritesLoading) { return; }
@@ -39,6 +40,7 @@ export class FavoritesComponent implements OnInit {
     }
     this.saveFavorites();
   }
+
   saveFavorites() {
     this.favoritesLoading = true;
     this.activeFavorites.forEach((f, index) => {
@@ -52,10 +54,12 @@ export class FavoritesComponent implements OnInit {
       });
     });
   }
+
   ngOnInit() {
     this.favorites = [];
     this.error = null;
-      this.afAuth.authState.subscribe(user => {
+    this.noUser = false;
+    this.afAuth.authState.subscribe(user => {
       if (user) {
         this.databaseService.getFavorites(user.uid).subscribe(favorites => {
           this.favorites = favorites;
@@ -73,12 +77,14 @@ export class FavoritesComponent implements OnInit {
         });
       } else {
         this.loading = false;
-        this.error = {
-          status: true,
-          message: 'Favoriten konnten nicht geladen werden'
-        };
-        console.error('no user id');
+        this.noUser = true;
       }
+    }, (error) => {
+      this.loading = false;
+      this.error = {
+        status: true,
+        message: 'Favoriten konnten nicht geladen werden'
+      };
     });
   }
 }

@@ -33,6 +33,10 @@ export class DatabaseService {
   public getFavorites(userId: string) {
     return this._db.collection<Favorite>('favorites', ref => ref.where('userId', '==', userId)).valueChanges();
   }
+  public getFavoriteByStationId(userId: string, stationId: number) {
+    return this._db.collection<Favorite>('favorites', ref => ref.where('userId', '==', userId)
+      .where('stationId', '==', String(stationId)).limit(1)).valueChanges();
+  }
   public getShownFavorites(userId: string) {
     return this._db.collection<Favorite>('favorites', ref =>
       ref.where('userId', '==', userId).where('display', '>', 0).limit(4)

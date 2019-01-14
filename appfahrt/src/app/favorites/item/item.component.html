@@ -1,8 +1,12 @@
-<div class="favorites___item m1 mat-typography">
+<div class="m1 mat-typography" [style.width]="'100%'" fxFlexFill fxFlex="100%">
   <div *ngIf="favorite === null">
     empty
   </div>
-  <div *ngIf="favorite != null">
-    <h1>{{favorite.stationName}}</h1>
+  <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-icon class="mr1">drag_handle</mat-icon>
+      <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
+      <button mat-icon-button [routerLink]="['/details', favorite.stationId]">
+        <mat-icon>access_time</mat-icon>
+      </button>
   </div>
 </div>

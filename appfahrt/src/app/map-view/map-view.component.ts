@@ -1,5 +1,5 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
+import {Component, OnInit, OnDestroy, NgZone, Output, EventEmitter} from '@angular/core';
 import {MapsAPILoader, MapTypeStyle} from '@agm/core';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -63,6 +63,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   windowHeight: number = window.innerHeight;
+
+  @Output() changeCurrent: EventEmitter<number> = new EventEmitter<number>();
 
   get mapHeight(): number {
     return this.windowHeight - 64 - (this.smallSize ? 46 : 0);
@@ -129,6 +131,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   markerClick(station: Station) {
+    this.changeCurrent.emit(station.id);
   }
 
   getLocationFromAutocomplete(location: { x: number, y: number }) {
@@ -151,13 +154,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
         x: position.coords.longitude,
         y: position.coords.latitude
       };
+      this.geolocationDenied = false;
       this.getStations();
     }, error => {
       if (error.code === 1) {
         console.warn('Geolocation is denied by user.');
-        this.geolocationDenied = true;
-        this.getStations();
       }
+      this.geolocationDenied = true;
+      this.getStations();
     });
   }
 
@@ -205,7 +209,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                 y: station.coordinate.y
               }
             };
-            if (newStation.name && newStation.id) {
+            if (newStation.name && newStation.id) { // Verify station has name and an id
               this.stations.push(newStation as Station);
             }
           });

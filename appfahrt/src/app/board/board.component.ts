@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {getTimeDifferenceFromTimestamp, getTimeFromTimestamp} from '../helpers/dateFormat';
+import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
 import {SettingsService} from '../services/settings.service';
 import {Station} from './stations/station';
@@ -16,10 +17,6 @@ export interface Board {
   trains: Train[];
 }
 
-interface TrainCellItem {
-  label: string;
-  classes: string;
-}
 
 @Component({
   selector: 'app-board',
@@ -28,11 +25,9 @@ interface TrainCellItem {
   providers: [StationsService]
 })
 
-export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BoardComponent extends LoadableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() stationId: string;
   @Input() board: Board;
-  loading = true;
-  displayTable: TrainCellItem[] = [];
   nearestStationsIds: string[] = [];
   currentStationIndex = 0;
   error: AppError = null;
@@ -44,16 +39,11 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
 
-  headerRow: TrainCellItem[] = [
-    {label: 'Ab', classes: 'header center'},
-    {label: '', classes: 'header'},
-    {label: 'Nach', classes: 'header pl1'},
-    {label: 'Gleis', classes: 'header center'}
-  ];
 
   constructor(private trainsService: TrainsService, private stationService: StationsService,
               private settings: SettingsService,
               private el: ElementRef) {
+    super();
   }
 
   public translateItem(index) {
@@ -133,6 +123,8 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } else {
       // Board already loaded
+      const rect = this.el.nativeElement.getBoundingClientRect();
+      this.updateRatio(rect.width, rect.height);
       this.loading = false;
     }
   }
@@ -202,6 +194,4 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
   }
-
-
 }

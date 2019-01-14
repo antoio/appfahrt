@@ -19,12 +19,11 @@
                     [latitude]="station.coordinate.x" [longitude]="station.coordinate.y"
                     [iconUrl]="marker"
                     (markerClick)="markerClick(station)">
-          <agm-info-window class="map-view___map___info-window">
-            <h3>{{station.name}}</h3>
-            <button mat-button color="primary" class="map-view___map___info-window___button"
-                    [routerLink]="['/details', station.id]">Ansehen
-            </button>
-          </agm-info-window>
+          <agm-snazzy-info-window [maxWidth]="300" [maxHeight]="300" [closeWhenOthersOpen]="true">
+            <ng-template>
+              <app-info-window [station]="station"></app-info-window>
+            </ng-template>
+          </agm-snazzy-info-window>
         </agm-marker>
       </agm-map>
       <div *ngIf="geolocationDenied">

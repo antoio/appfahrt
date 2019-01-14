@@ -5,11 +5,18 @@
   <div *ngIf="loading === false && error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-error (retry)="ngOnInit()" [error]="error"></app-error>
   </div>
-  <div *ngIf="loading == false" fxFlex="auto">
+  <div *ngIf="loading === false && noUser" fxFlexFill fxLayout="row" fxLayoutAlign="center">
+    <div class="mat-typography center" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/appicon.svg" alt="appfahrt icon"/>
+      <div fxFlexOffset="10px">Bitte Registrieren Sie sich um die Favoriten benutzen zu können</div>
+      <button mat-raised-button color="primary" routerLink="/register" fxFlexOffset="20px">Registrieren</button>
+    </div>
+  </div>
+  <div *ngIf="loading == false && noUser === false" fxFlex="auto">
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>
-    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row">
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" fxLayout.xs="column">
       <div fxFlex="46%" fxLayout="column">
         <h2 class="mat-h2">Favoriten</h2>
         <div
@@ -29,8 +36,11 @@
         </div>
       </div>
       <div fxFlex="8%" fxLayout="column" fxLayoutAlign="space-around center">
-        <mat-icon>
+        <mat-icon fxShow="true" fxShow.xs="false">
           swap_horiz
+        </mat-icon>
+        <mat-icon fxShow="false" fxShow.xs="true">
+          swap_vert
         </mat-icon>
       </div>
       <div fxFlex="46%" fxFlexOffset="10px">

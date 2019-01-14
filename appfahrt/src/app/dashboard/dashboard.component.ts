@@ -75,7 +75,6 @@ export class DashboardComponent implements OnInit {
           this.loading = false;
         });
       } else {
-        console.error('no user id');
         this.favorites = [Nearest];
         this.loading = false;
       }
