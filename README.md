@@ -6,7 +6,7 @@ This project is currently work in progress. 🏗
 
 Appfahrt lets you check the stationboards from your nearest location. All mayor train, bus and tramstations in Switzerland are available and fetched from https://transport.opendata.ch.
 
-As a registered user you are able to create and order Favorite stations.
+As a registered user you are able to create and sor yourt Favorite stations.
 
 visit [go.appfahrt.ch](https://go.appfahrt.ch) for the current Version
 
