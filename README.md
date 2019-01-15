@@ -41,7 +41,7 @@ For proper pwa usage the projects needs to be served via ssh (https) and in prod
 - `firebase deploy` will deploy your project to firebase. Setup firebase with `firebase init` 
 - Enjoy 😎!
 
-#🔓Security
+# 🔐Security
 Add following rule to prevent favorites beeing modified by unauthorized Users
 ```javascript
 service cloud.firestore {
