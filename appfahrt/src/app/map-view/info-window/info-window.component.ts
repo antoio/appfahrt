@@ -24,7 +24,7 @@ export class InfoWindowComponent extends LoadableComponent implements OnInit {
     if (!this.user) { return; }
     if (this.isFavorite) {
       this.databaseService.getFavoriteSnapshot(String(this.station.id), this.user.uid).subscribe(favorite => {
-        this.databaseService.deleteFavorite(favorite.docs[0].id);
+        this.databaseService.deleteFavorite(favorite.docs[0].id, this.user.uid);
         this.isFavorite = false;
       });
     } else {

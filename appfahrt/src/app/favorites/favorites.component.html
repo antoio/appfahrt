@@ -16,7 +16,7 @@
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>
-    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" fxLayout.xs="column">
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" fxLayout.xs="column-reverse">
       <div fxFlex="46%" fxLayout="column">
         <h2 class="mat-h2">Favoriten</h2>
         <div
@@ -39,7 +39,7 @@
         <mat-icon fxShow="true" fxShow.xs="false">
           swap_horiz
         </mat-icon>
-        <mat-icon fxShow="false" fxShow.xs="true">
+        <mat-icon fxShow="false" class="m2" fxShow.xs="true">
           swap_vert
         </mat-icon>
       </div>

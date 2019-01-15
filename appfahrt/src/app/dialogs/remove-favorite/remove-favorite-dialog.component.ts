@@ -14,7 +14,7 @@ export class RemoveFavoriteDialogComponent {
   }
   onDelete() {
     this.databaseService.getFavoriteSnapshot(this.favorite.stationId, this.favorite.userId).subscribe(favorite => {
-      this.databaseService.deleteFavorite(favorite.docs[0].id);
+      this.databaseService.deleteFavorite(favorite.docs[0].id, this.favorite.userId);
       this.dialogRef.close();
     });
   }

@@ -31,20 +31,20 @@ export class DatabaseService {
     this._db = db;
   }
   public getFavorites(userId: string) {
-    return this._db.collection<Favorite>('favorites', ref => ref.where('userId', '==', userId)).valueChanges();
+    return this._db.collection<Favorite>('users/' + userId + '/favorites').valueChanges();
   }
   public getFavoriteByStationId(userId: string, stationId: number) {
-    return this._db.collection<Favorite>('favorites', ref => ref.where('userId', '==', userId)
-      .where('stationId', '==', String(stationId)).limit(1)).valueChanges();
+    return this._db.collection<Favorite>('users/' + userId + '/favorites',
+        ref => ref.where('stationId', '==', String(stationId)).limit(1)).valueChanges();
   }
   public getShownFavorites(userId: string) {
-    return this._db.collection<Favorite>('favorites', ref =>
-      ref.where('userId', '==', userId).where('display', '>', 0).limit(4)
+    return this._db.collection<Favorite>('users/' + userId + '/favorites', ref =>
+      ref.where('display', '>', 0).limit(4)
     ).valueChanges();
   }
   public addFavorite(stationId: string, userId: string, stationName: string) {
     const added = new Date();
-    this._db.collection<Favorite>('favorites').add({
+    this._db.collection<Favorite>('users/' + userId + '/favorites').add({
       userId: userId,
       stationId: stationId,
       stationName: stationName,
@@ -55,10 +55,10 @@ export class DatabaseService {
   public addNearestFavorite(userId: string) {
     const nearest = Nearest;
     nearest.userId = userId;
-    this._db.collection<Favorite>('favorites').add(nearest);
+    this._db.collection<Favorite>('users/' + userId + '/favorites').add(nearest);
   }
   public changeFavoriteDisplayStatus(docId: string, index: number, favorite: Favorite) {
-    this._db.doc(`favorites/${docId}`).update({
+    this._db.doc(`users/${favorite.userId}/favorites/${docId}`).update({
       userId: favorite.userId,
       stationId: favorite.stationId,
       stationName: favorite.stationName,
@@ -67,12 +67,11 @@ export class DatabaseService {
     });
   }
   public getFavoriteSnapshot(stationId: string, userId: string) {
-    return this._db.collection<Favorite>('favorites', ref => ref
-      .where('userId', '==', userId)
-      .where('stationId', '==', stationId)).get();
+    return this._db.collection<Favorite>('users/' + userId + '/favorites', ref =>
+      ref.where('stationId', '==', stationId)).get();
   }
-  public deleteFavorite(docId: string) {
-    this._db.doc(`favorites/${docId}`).delete();
+  public deleteFavorite(docId: string, userId: string) {
+    this._db.doc(`users/${userId}/favorites/${docId}`).delete();
   }
   private getUserId(): Observable<any> {
     return this.afAuth.authState;

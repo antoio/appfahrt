@@ -32,7 +32,7 @@ export class MonitordetailComponent implements OnInit {
   get userId() {
     return this._userId;
   }
-  private board: Board;
+  public board: Board;
   smallSize = false;
 
   constructor(
@@ -63,7 +63,7 @@ export class MonitordetailComponent implements OnInit {
   }
   onUnFavorite() {
     this.databaseService.getFavoriteSnapshot(this._stationId, this._userId).subscribe(favorite => {
-      this.databaseService.deleteFavorite(favorite.docs[0].id);
+      this.databaseService.deleteFavorite(favorite.docs[0].id, this._userId);
       this.isFavorite = false;
     });
   }
