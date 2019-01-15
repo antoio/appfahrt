@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {tap} from 'rxjs/operators';
 import {Station} from '../../board/stations/station';
 import {LoadableComponent} from '../../helpers/loadable';
-import {DatabaseService} from '../../services/database-service.service';
+import {AuthServiceService} from '../../services/auth-service.service';
+import {DatabaseService, Nearest} from '../../services/database-service.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
@@ -14,7 +16,7 @@ export class InfoWindowComponent extends LoadableComponent implements OnInit {
   isFavorite = false;
   user = null;
   constructor(
-    public afAuth: AngularFireAuth,
+    private authService: AuthServiceService,
     private databaseService: DatabaseService) {
     super();
   }
@@ -33,18 +35,20 @@ export class InfoWindowComponent extends LoadableComponent implements OnInit {
   ngOnInit() {
     this.user = null;
     this.isFavorite = false;
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-        this.databaseService.getFavoriteByStationId(user.uid, this.station.id).subscribe(favorite => {
-          if (favorite.length === 1) {
-            this.isFavorite = true;
-          }
+    this.authService.userIsSigenedIn().pipe(
+      tap((user: any) => {
+        if (user) {
+          this.user = user;
+          this.databaseService.getFavoriteByStationId(user.uid, this.station.id).subscribe(favorite => {
+            if (favorite.length === 1) {
+              this.isFavorite = true;
+            }
+            this.loading = false;
+          });
+        } else {
           this.loading = false;
-        });
-      } else {
-        this.loading = false;
-      }
-    });
+        }
+      })
+    ).subscribe();
   }
 }

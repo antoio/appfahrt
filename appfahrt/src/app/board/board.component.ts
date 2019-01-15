@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, Input, OnInit, ElementRef, AfterViewInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {getTimeDifferenceFromTimestamp, getTimeFromTimestamp} from '../helpers/dateFormat';
 import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
@@ -42,7 +42,7 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
 
   constructor(private trainsService: TrainsService, private stationService: StationsService,
               private settings: SettingsService,
-              private el: ElementRef) {
+              private el: ElementRef, private cdRef: ChangeDetectorRef) {
     super();
   }
 
@@ -55,6 +55,9 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
   }
 
   get itemHeight() {
+    if (!this.board) {
+      return 0;
+    }
     return (this.relativeHeight - 44) / this.board.trains.length;
   }
 
@@ -91,8 +94,7 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
 
     this.resizeObservable$ = fromEvent(window, 'resize');
     this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
-      const rect = this.el.nativeElement.getBoundingClientRect();
-      this.updateRatio(rect.width, rect.height);
+      this.updateRatio();
     });
 
     this.error = null;
@@ -123,9 +125,8 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
       }
     } else {
       // Board already loaded
-      const rect = this.el.nativeElement.getBoundingClientRect();
-      this.updateRatio(rect.width, rect.height);
       this.loading = false;
+      this.updateRatio();
     }
   }
 
@@ -135,11 +136,9 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
       newBoard.station = data.station as Station;
       newBoard.trains = data.stationboard as Train[];
       this.board = newBoard;
-      this.fontSize = Math.min(this.itemHeight - 20, 35);
       this.loading = false;
       this.error = null;
-      const rect = this.el.nativeElement.getBoundingClientRect();
-      this.updateRatio(rect.width, rect.height);
+      this.updateRatio();
     }, (error) => {
       this.error = {
         status: true,
@@ -176,19 +175,22 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
     return GetTrainLabel(train.category, train.number);
   }
 
-  updateRatio(width, height) {
-    if (width > height) {
+  updateRatio() {
+    this.fontSize = Math.min(this.itemHeight - 20, 35);
+    const rect = this.el.nativeElement.getBoundingClientRect();
+    if (rect.width > rect.height) {
       this.relativeWidth = 1024;
       this.relativeHeight = 768;
     } else {
       this.relativeWidth = 768;
       this.relativeHeight = 1024;
     }
+
+    this.cdRef.detectChanges();
   }
 
   ngAfterViewInit(): void {
-    const rect = this.el.nativeElement.getBoundingClientRect();
-    this.updateRatio(rect.width, rect.height);
+    this.updateRatio();
   }
 
   ngOnDestroy(): void {

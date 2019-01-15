@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
+import {first} from 'rxjs/operators';
 
 
 @Injectable({
@@ -23,17 +24,19 @@ export class AuthServiceService {
         } else {
           this.userDetails = null;
         }
-      }
+      }, (error) => console.log('user', error)
     );
   }
 
   public getCurrentUser() {
     return this.user;
   }
+  public userIsSigenedIn() {
+    return this._firebaseAuth.authState.pipe(first());
+  }
 
   signInRegular(email, password) {
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
-
     return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
   }
 

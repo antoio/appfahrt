@@ -3,10 +3,15 @@
     empty
   </div>
   <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-icon class="mr1">drag_handle</mat-icon>
-      <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
-      <button mat-icon-button [routerLink]="['/details', favorite.stationId]">
+    <mat-icon class="mr1">drag_handle</mat-icon>
+    <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
+    <div>
+      <button *ngIf="favorite.stationId" mat-icon-button (click)="onDeleteFavoriteDialog()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="['/details', (favorite.stationId ? favorite.stationId : 'nearest')]">
         <mat-icon>access_time</mat-icon>
       </button>
+    </div>
   </div>
 </div>

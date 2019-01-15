@@ -4,14 +4,20 @@
   </div>
   <div *ngIf="loading.favorites === false && loading.stationBoard === false" fxFlexFill fxLayout="row"
        fxLayoutAlign="center center">
-    <div class="monitor-detail___board mat-typography"><app-board [board]="board"></app-board></div>
+    <div class="monitor-detail___board mat-typography">
+      <app-board [board]="board" [stationId]="stationId"></app-board>
+    </div>
   </div>
 </div>
-<div class="monitor-detail___fab" *ngIf="_userId" [style.bottom.px]="smallSize ? 80 : 20">
+<div class="monitor-detail___fab" *ngIf="userId && board" [style.bottom.px]="smallSize ? 80 : 20">
   <div *ngIf="isFavorite">
-    <button mat-fab (click)="onUnFavorite()" color="primary" ><mat-icon>favorite</mat-icon></button>
+    <button mat-fab (click)="onUnFavorite()" color="primary">
+      <mat-icon>favorite</mat-icon>
+    </button>
   </div>
   <div *ngIf="isFavorite === false">
-    <button mat-fab (click)="onFavorite()" color="none"><mat-icon>favorite_border</mat-icon></button>
+    <button mat-fab (click)="onFavorite()" color="none">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
   </div>
 </div>

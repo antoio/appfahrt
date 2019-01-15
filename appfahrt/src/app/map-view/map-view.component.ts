@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
+import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
 import {EnableGeolocationDialogComponent} from '../dialogs/enable-geolocation/enable-geolocation-dialog.component';
 import {Observable} from 'rxjs/Observable';
@@ -23,7 +24,7 @@ interface Coordinates {
   styleUrls: ['./map-view.component.css'],
   providers: [StationsService]
 })
-export class MapViewComponent implements OnInit, OnDestroy {
+export class MapViewComponent extends LoadableComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private mapsAPILoader: MapsAPILoader,
@@ -32,6 +33,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
               public dialog: MatDialog,
               public router: Router,
               private breakpointObserver: BreakpointObserver) {
+    super();
     breakpointObserver.observe([
       Breakpoints.Handset,
       Breakpoints.Small
@@ -51,7 +53,6 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   userCoordinates: Coordinates | null = null;
 
-  loading = true;
   error: AppError = null;
   stations: Station[];
   geolocationDenied = false;
@@ -188,7 +189,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
-    if (this.map.event) {
+    if (this.map && this.map.event) {
       this.map.event.removeListener(this.dragEventListener);
     }
   }

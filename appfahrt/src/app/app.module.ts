@@ -16,7 +16,6 @@ import {StationsComponent} from './board/stations/stations.component';
 import {TrainsComponent} from './board/trains/trains.component';
 import {SettingsService} from './services/settings.service';
 import {UsersettingsComponent} from './usersettings/usersettings.component';
-import {MonitoroverviewComponent} from './monitoroverview/monitoroverview.component';
 import {MonitordetailComponent} from './monitordetail/monitordetail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
@@ -41,8 +40,6 @@ import { SpinnerComponent } from './other/spinner/spinner.component';
 import { ClockComponent } from './other/clock/clock.component';
 import { ItemComponent } from './favorites/item/item.component';
 import { EmptyfavoritesComponent } from './other/emptyfavorites/emptyfavorites.component';
-import { LayoutBoardComponent } from './favorites/layout-board/layout-board.component';
-import { LayoutContainerComponent } from './favorites/layout-board/layout-container/layout-container.component';
 import { EnableGeolocationDialogComponent } from './dialogs/enable-geolocation/enable-geolocation-dialog.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { InstallAppDialogComponent } from './dialogs/install-app/install-app-dialog.component';
@@ -53,6 +50,7 @@ import { DeleteUserDialogComponent } from './dialogs/delete-user/delete-user-dia
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { InfoWindowComponent } from './map-view/info-window/info-window.component';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { RemoveFavoriteDialogComponent } from './dialogs/remove-favorite/remove-favorite-dialog.component';
 
 
 @NgModule({
@@ -82,7 +80,6 @@ export class MaterialModule {}
     MapViewComponent,
     AboutComponent,
     UsersettingsComponent,
-    MonitoroverviewComponent,
     MonitordetailComponent,
     StationsComponent,
     TrainsComponent,
@@ -97,19 +94,19 @@ export class MaterialModule {}
     ClockComponent,
     ItemComponent,
     EmptyfavoritesComponent,
-    LayoutBoardComponent,
-    LayoutContainerComponent,
     EnableGeolocationDialogComponent,
     InstallAppDialogComponent,
     ResetPasswordDialogComponent,
     DeleteUserDialogComponent,
-    InfoWindowComponent
+    InfoWindowComponent,
+    RemoveFavoriteDialogComponent
   ],
   entryComponents: [
     EnableGeolocationDialogComponent,
     ResetPasswordDialogComponent,
     InstallAppDialogComponent,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    RemoveFavoriteDialogComponent
   ],
   imports: [
     BrowserModule,

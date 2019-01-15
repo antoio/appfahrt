@@ -1,4 +1,4 @@
-<div *ngIf="loading === true" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+<div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
   <app-spinner></app-spinner>
 </div>
 <div *ngIf="loading === false && error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
@@ -45,13 +45,13 @@
       <rect x="0" y="0" class="bgBoard1" [attr.width]="relativeWidth" [attr.height]="itemHeight / 2"/>
 
       <rect x="0" y="0" class="bgBoard2" [attr.width]="relativeWidth * 0.16" [attr.height]="itemHeight"/>
-      <text [attr.x]="0 + 20" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize">{{getTime(train.stop.departureTimestamp * 1000)}}</text>
+      <text [attr.x]="0 + 20" [attr.y]="textItemPos" class="i3" [style.fontSize.px]="fontSize">{{getTime(train.stop.departureTimestamp * 1000)}}</text>
       <rect [attr.x]="relativeWidth * 0.16" y="0" class="bgBoard2" [attr.width]="relativeWidth * 0.16" [attr.height]="itemHeight"/>
-      <text [attr.x]="relativeWidth * 0.16 + 20" [attr.y]="textItemPos - (fontSize * 0.1)" class="i3" [style.fontSize]="fontSize * 0.8">{{trainLabel(train)}}</text>
+      <text [attr.x]="relativeWidth * 0.16 + 20" [attr.y]="textItemPos - (fontSize * 0.1)" class="i3" [style.fontSize.px]="fontSize * 0.8">{{trainLabel(train)}}</text>
       <rect [attr.x]="relativeWidth * 0.32" y="0" class="bgBoard2" [attr.width]="relativeWidth * 0.6" [attr.height]="itemHeight"/>
-      <text [attr.x]="relativeWidth * 0.32 + 20" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize">{{train.to}}</text>
+      <text [attr.x]="relativeWidth * 0.32 + 20" [attr.y]="textItemPos" class="i3" [style.fontSize.px]="fontSize">{{train.to}}</text>
       <rect [attr.x]="relativeWidth * 0.92" y="0" class="bgBoard2" [attr.width]="relativeWidth * 0.08" [attr.height]="itemHeight"/>
-      <text [attr.x]="relativeWidth - 22" [attr.y]="textItemPos" class="i3" [style.fontSize]="fontSize" text-anchor="end">{{train.stop.platform}}</text>
+      <text [attr.x]="relativeWidth - 22" [attr.y]="textItemPos" class="i3" [style.fontSize.px]="fontSize" text-anchor="end">{{train.stop.platform}}</text>
     </svg>
     <g>
 

@@ -2,8 +2,11 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {tap} from 'rxjs/operators';
+import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
-import {DatabaseService, Favorite} from '../services/database-service.service';
+import {AuthServiceService} from '../services/auth-service.service';
+import {DatabaseService, Favorite, Nearest} from '../services/database-service.service';
 import {SettingsService} from '../services/settings.service';
 
 @Component({
@@ -11,21 +14,21 @@ import {SettingsService} from '../services/settings.service';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css']
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent extends LoadableComponent implements OnInit {
 
   private favorites: Favorite[] = [];
   private inactiveFavorites: Favorite[] = [];
   private activeFavorites: Favorite[] = [];
-  loading = true;
   error: AppError = null;
   favoritesLoading = false;
   noUser = false;
 
   constructor(
     private route: ActivatedRoute,
+    private authService: AuthServiceService,
     public afAuth: AngularFireAuth,
-    private databaseService: DatabaseService,
-    private settings: SettingsService) {
+    private databaseService: DatabaseService) {
+    super();
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -59,32 +62,29 @@ export class FavoritesComponent implements OnInit {
     this.favorites = [];
     this.error = null;
     this.noUser = false;
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.databaseService.getFavorites(user.uid).subscribe(favorites => {
-          this.favorites = favorites;
-          this.activeFavorites = new Array<Favorite>(4);
-          this.inactiveFavorites = [];
-          this.favorites.forEach((f) => {
-            if (f.display !== 0) {
-              this.activeFavorites[f.display - 1] = f;
-            } else {
-              this.inactiveFavorites.push(f);
-            }
+
+    this.authService.userIsSigenedIn().pipe(
+      tap(user => {
+        if (user) {
+          this.databaseService.getFavorites(user.uid).subscribe(favorites => {
+            this.favorites = favorites;
+            this.activeFavorites = new Array<Favorite>(4);
+            this.inactiveFavorites = [];
+            this.favorites.forEach((f) => {
+              if (f.display !== 0) {
+                this.activeFavorites[f.display - 1] = f;
+              } else {
+                this.inactiveFavorites.push(f);
+              }
+            });
+            this.error = null;
+            this.loading = false;
           });
-          this.error = null;
+        } else {
           this.loading = false;
-        });
-      } else {
-        this.loading = false;
-        this.noUser = true;
-      }
-    }, (error) => {
-      this.loading = false;
-      this.error = {
-        status: true,
-        message: 'Favoriten konnten nicht geladen werden'
-      };
-    });
+          this.noUser = true;
+        }
+      })
+    ).subscribe();
   }
 }
