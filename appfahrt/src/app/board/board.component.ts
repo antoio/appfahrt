@@ -113,7 +113,7 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
           if (error.code === 1) {
             console.warn('Geolocation is denied by user.');
             this.error = {
-              status: true,
+              status: 1,
               message: 'Geolocation ist deaktiviert. Diese kann in den Browsereinstellungen aktiviert werden.'
             };
             this.loading = false;
@@ -141,7 +141,7 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
       this.updateRatio();
     }, (error) => {
       this.error = {
-        status: true,
+        status: 1,
         message: String(error)
       };
       this.loading = false;
@@ -163,7 +163,7 @@ export class BoardComponent extends LoadableComponent implements OnInit, AfterVi
       },
       (error) => {
         this.error = {
-          status: true,
+          status: 1,
           message: String(error)
         };
         this.loading = false;

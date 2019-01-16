@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
+import {ConnectionService, ConnectionServiceModule} from 'ng-connection-service';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AppComponent} from './app.component';
 import {AutocompleteComponent} from './map-view/autocomplete/autocomplete.component';
@@ -128,11 +129,16 @@ export class MaterialModule {}
     AngularGooglePlaceModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DragDropModule
+    DragDropModule,
+    ConnectionServiceModule
   ],
-  providers: [NavigationService, AuthServiceService, DatabaseService, SettingsService],
+  providers: [NavigationService, AuthServiceService, DatabaseService, SettingsService, ConnectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  static injector: Injector;
+  constructor(injector: Injector) {
+    AppModule.injector = injector;
+  }
 }
 

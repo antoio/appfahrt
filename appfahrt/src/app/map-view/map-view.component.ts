@@ -219,7 +219,7 @@ export class MapViewComponent extends LoadableComponent implements OnInit, OnDes
         (error) => {
           this.loading = false;
           this.error = {
-            status: true,
+            status: 1,
             message: String(error)
           };
         });

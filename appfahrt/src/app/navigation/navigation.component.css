@@ -21,11 +21,10 @@
   padding: 0 14px;
 }
 .toolbar___left{
-  flex: .2;
 }
 .toolbar___middle{
-  flex: .6;
-  text-align: center;
+  flex: .8;
+  text-align: left;
 }
 .toolbar___right{
   flex: .2;

@@ -2,12 +2,17 @@
   <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
-  <div *ngIf="favorites.length === 0 && loading === false" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
-    <app-emptyfavorites></app-emptyfavorites>
-  </div>
-  <div *ngIf="loading === false && favorites.length != 0" fxLayout="row wrap" fxLayout.xs="column">
-    <div *ngFor="let favorite of favorites" class="dashboard___card mat-typography" [ngStyle]="getDashboardStyle()">
-      <app-board [stationId]="favorite.stationId"></app-board>
+  <div *ngIf="loading === false">
+    <div *ngIf="favorites.length === 0 && error === null" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+      <app-emptyfavorites></app-emptyfavorites>
+    </div>
+    <div *ngIf="favorites.length != 0 && error === null" fxLayout="row wrap" fxLayout.xs="column">
+      <div *ngFor="let favorite of favorites" class="dashboard___card mat-typography" [ngStyle]="getDashboardStyle()">
+        <app-board [stationId]="favorite.stationId"></app-board>
+      </div>
+    </div>
+    <div *ngIf="error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+      <app-error [error]="error" (retry)="ngOnInit()"></app-error>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {tap} from 'rxjs/operators';
+import {LoadableComponent} from '../helpers/loadable';
 import {NavigationService} from '../navigation/navigation.service';
 import {TrainsService} from '../board/trains/trains.service';
 import {AngularFireAuth} from 'angularfire2/auth';
@@ -15,12 +16,10 @@ import {SettingsService} from '../services/settings.service';
   styleUrls: ['./dashboard.component.css'],
   providers: [TrainsService, NavigationService]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends LoadableComponent implements OnInit {
   favorites: Favorite[] = [];
-  loading = true;
   smallSize = false;
   maxDashboards = 4;
-
   getDashboardStyle() {
     const maxBoards = Math.min(this.favorites.length, this.maxDashboards);
     let height = 100;
@@ -50,6 +49,7 @@ export class DashboardComponent implements OnInit {
     private databaseService: DatabaseService,
     private settings: SettingsService,
     private breakpointObserver: BreakpointObserver) {
+    super();
     breakpointObserver.observe([
       Breakpoints.Handset,
       Breakpoints.Small
@@ -81,6 +81,6 @@ export class DashboardComponent implements OnInit {
           this.loading = false;
         }
       })
-    ).subscribe();
+    ).subscribe(() => console.log('success'), (error) => console.error(error));
   }
 }

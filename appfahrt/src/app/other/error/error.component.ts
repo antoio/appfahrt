@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 export interface AppError {
-  status: boolean;
+  status: number;
   message: String;
 }
 
@@ -13,7 +13,14 @@ export interface AppError {
 export class ErrorComponent {
   @Input() error: AppError;
   @Output() retry: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor() {
+    if ( this.error === undefined ) {
+      this.error = {
+        message: 'Fehler',
+        status: 1
+      };
+    }
+  }
   onRetry() {
     this.retry.emit();
   }

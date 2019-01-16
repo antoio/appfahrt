@@ -1,4 +1,5 @@
 <mat-sidenav-container class="sidenav" (backdropClick)="close()">
+
   <mat-sidenav fxLayout="column" #sidenav (keydown.escape)="close()" disableClose position="end" class="sidenav">
     <div class="sidenav___info" fxLayout="column" fxLayoutAlign="center center">
       <div class="sidenav___info___icon"><img class="fit" src="/assets/icons/icon-384x384.png"></div>
@@ -32,19 +33,24 @@
   <mat-sidenav-content class="sidenav___content">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <div class="toolbar___left">
+        <div class="toolbar___left" [style.width.px]="smallSize ? 60 : 140">
           <app-clock></app-clock>
         </div>
         <div class="toolbar___middle">
           <span>{{title}}</span>
         </div>
-        <div class="toolbar___right">
-          <button *ngIf="!smallSize" mat-icon-button routerLink="dashboard">
-            <mat-icon class="navigation-icon">access_time</mat-icon>
+        <div class="toolbar___right" *ngIf="!smallSize">
+          <button mat-button routerLink="dashboard">
+            <mat-icon class="navigation-icon">access_time</mat-icon>Abfahrten
           </button>
-          <button *ngIf="!smallSize" mat-icon-button routerLink="search">
-            <mat-icon class="navigation-icon">search</mat-icon>
+          <button mat-button routerLink="search">
+            <mat-icon class="navigation-icon">search</mat-icon>Suche
           </button>
+          <button mat-button (click)="onUser()">
+            <mat-icon class="navigation-icon">person</mat-icon>Benutzer
+          </button>
+        </div>
+        <div class="toolbar___right" *ngIf="smallSize">
           <button mat-icon-button (click)="onUser()">
             <mat-icon class="navigation-icon">person</mat-icon>
           </button>

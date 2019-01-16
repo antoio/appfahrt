@@ -36,6 +36,7 @@
     "hammerjs": "^2.0.8",
     "http-server": "^0.11.1",
     "moment": "^2.22.2",
+    "ng-connection-service": "^1.0.4",
     "rxjs": "6.0.0-beta.1",
     "rxjs-compat": "6.0.0-beta.1",
     "snazzy-info-window": "^1.1.0",
