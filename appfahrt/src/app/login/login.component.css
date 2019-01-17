@@ -1,5 +1,6 @@
 .error{
-	color: red;
+	color: white;
+	background-color: Tomato;
 	text-align: center;
 }
 .error___card{
