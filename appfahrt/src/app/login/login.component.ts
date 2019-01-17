@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         this.error = err;
         console.log(err);
         //reset the error message
-        setInterval(() => {this.error = null}, 5000);
+        setTimeout(() => {this.error = null}, 7000);
       });
   }
 
