@@ -1,6 +1,17 @@
-<mat-card class="favorites___item m1">
-  <h1>{{favorite.stationName}}</h1>
-  <button mat-button [routerLink]="['/details', favorite.stationId]">edit</button>
-  <button mat-button (click)="onChangeDisplayStatus(1)">Show in Dashboard</button>
-  <button mat-button (click)="onChangeDisplayStatus(null)">Hide in Dashboard</button>
-</mat-card>
+<div class="m1 mat-typography" [style.width]="'100%'" fxFlexFill fxFlex="100%">
+  <div *ngIf="favorite === null">
+    empty
+  </div>
+  <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-icon class="mr1">drag_handle</mat-icon>
+    <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
+    <div>
+      <button *ngIf="favorite.stationId" mat-icon-button (click)="onDeleteFavoriteDialog()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button [routerLink]="['/details', (favorite.stationId ? favorite.stationId : 'nearest')]">
+        <mat-icon>access_time</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

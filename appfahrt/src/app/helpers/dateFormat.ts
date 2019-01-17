@@ -6,5 +6,5 @@ export const getTimeFromTimestamp = (date: number) => {
 }
 export const getTimeDifferenceFromTimestamp = (diff: number) => {
   const min = Math.round(diff / 1000 / 60);
-  return String(min) + 'min';
+  return String(Math.max(min, 0)) + 'min';
 }

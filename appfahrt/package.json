@@ -3,7 +3,7 @@
   "version": "0.8.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0 --ssl --ssl-key certificate/localhost.key  --ssl-cert certificate/localhost.crt",
+    "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
+    "@agm/snazzy-info-window": "^1.0.0-beta.5",
     "@angular/animations": "^7.0.0",
     "@angular/cdk": "^7.0.1",
     "@angular/common": "^6.1.0",
@@ -37,6 +38,7 @@
     "moment": "^2.22.2",
     "rxjs": "6.0.0-beta.1",
     "rxjs-compat": "6.0.0-beta.1",
+    "snazzy-info-window": "^1.1.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

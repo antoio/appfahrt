@@ -1,12 +1,15 @@
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {tap} from 'rxjs/operators';
 import {Board} from '../board/board.component';
 import {NavigationService} from '../navigation/navigation.service';
 import {Station} from '../board/stations/station';
 import {TrainsService} from '../board/trains/trains.service';
 import {Subscription} from 'rxjs';
 import { Train } from '../board/trains/train';
+import {AuthServiceService} from '../services/auth-service.service';
 import {DatabaseService, Favorite} from '../services/database-service.service';
 
 @Component({
@@ -26,13 +29,29 @@ export class MonitordetailComponent implements OnInit {
   private _stationId: string;
   private favorites: Favorite[];
   private _userId: string;
-  private board: Board;
+  get userId() {
+    return this._userId;
+  }
+  public board: Board;
+  smallSize = false;
 
   constructor(
     private route: ActivatedRoute,
-    public afAuth: AngularFireAuth,
+    private authService: AuthServiceService,
     private databaseService: DatabaseService,
-    private trainsService: TrainsService) {
+    private trainsService: TrainsService,
+    private breakpointObserver: BreakpointObserver) {
+    breakpointObserver.observe([
+      Breakpoints.Handset,
+      Breakpoints.Small
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.smallSize = result.matches;
+        return;
+      } else {
+        this.smallSize = false;
+      }
+    });
   }
 
   get stationId(): string {
@@ -44,7 +63,7 @@ export class MonitordetailComponent implements OnInit {
   }
   onUnFavorite() {
     this.databaseService.getFavoriteSnapshot(this._stationId, this._userId).subscribe(favorite => {
-      this.databaseService.deleteFavorite(favorite.docs[0].id);
+      this.databaseService.deleteFavorite(favorite.docs[0].id, this._userId);
       this.isFavorite = false;
     });
   }
@@ -63,6 +82,13 @@ export class MonitordetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      if ( params.id === 'nearest') {
+        this.loading.stationBoard = false;
+        this.loading.favorites = false;
+        this.board = undefined;
+        this._stationId = null;
+        return;
+      }
       this._stationId = params.id;
       this.trainsService.getTrains(this._stationId).subscribe((data: any) => {
         const newBoard: Board = {station: null, trains: null};
@@ -72,16 +98,17 @@ export class MonitordetailComponent implements OnInit {
         this.loading.stationBoard = false;
       });
     });
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this._userId = user.uid;
-        this.getFavorites();
-      } else {
-        console.error('no user id');
-        this.favorites = [];
-        this.loading.favorites = false;
-      }
-    });
+    this.authService.userIsSigenedIn().pipe(
+      tap(user => {
+        if (user) {
+          this._userId = user.uid;
+          this.getFavorites();
+        } else {
+          this.favorites = [];
+          this.loading.favorites = false;
+        }
+      })
+    ).subscribe();
   }
 
 }

@@ -21,13 +21,16 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.json"
+              "src/manifest.json",
+              "src/apple-touch-icon.png",
+              "src/apple-touch-launch.png"
             ],
             "styles": [
               "src/styles.css",
               "src/theme.scss",
               "node_modules/basscss/css/basscss-cp.css",
-              "node_modules/basscss/css/basscss.css"
+              "node_modules/basscss/css/basscss.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css"
             ],
             "scripts": []
           },

@@ -1,21 +1,62 @@
-<div class="favorites max-width-4 mx-auto mt4" fxLayout="column">
+<div class="favorites max-width-4 mx-auto mt4 px2" fxLayout="column">
   <div *ngIf="loading" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-spinner></app-spinner>
   </div>
   <div *ngIf="loading === false && error" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
     <app-error (retry)="ngOnInit()" [error]="error"></app-error>
   </div>
-  <div *ngIf="loading == false" fxFlex="auto">
+  <div *ngIf="loading === false && noUser" fxFlexFill fxLayout="row" fxLayoutAlign="center">
+    <div class="mat-typography center" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/appicon.svg" alt="appfahrt icon"/>
+      <div fxFlexOffset="10px">Bitte Registrieren Sie sich um die Favoriten benutzen zu können</div>
+      <button mat-raised-button color="primary" routerLink="/register" fxFlexOffset="20px">Registrieren</button>
+    </div>
+  </div>
+  <div *ngIf="loading == false && noUser === false" fxFlex="auto">
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>
-    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="column">
-      <div fxFlexFill fxLayout="row wrap" fxLayout.xs = "column">
-        <app-item fxFlex="25" fxFlex.md="33" fxFlex.sm="50" *ngFor="let favorite of favorites" [favorite]="favorite"></app-item>
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" fxLayout.xs="column-reverse">
+      <div fxFlex="46%" fxLayout="column">
+        <h2 class="mat-h2">Favoriten</h2>
+        <div
+          cdkDropList
+          #inactiveList="cdkDropList"
+          [cdkDropListData]="inactiveFavorites"
+          [cdkDropListConnectedTo]="[activeList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let f of inactiveFavorites" cdkDrag>
+            <app-item [favorite]="f"></app-item>
+          </div>
+        </div>
+
+        <div class="center" fxFlexOffset="20px">
+          <button mat-raised-button color="primary" routerLink="/search">Favorit hinzufügen</button>
+        </div>
       </div>
-      <section class="mat-typography" fxLayout="column" fxFlexAlign="center">
-        <button mat-raised-button color="primary" fxFlexOffset="20px" routerLink="/search">Favorit hinzufügen</button>
-      </section>
+      <div fxFlex="8%" fxLayout="column" fxLayoutAlign="space-around center">
+        <mat-icon fxShow="true" fxShow.xs="false">
+          swap_horiz
+        </mat-icon>
+        <mat-icon fxShow="false" class="m2" fxShow.xs="true">
+          swap_vert
+        </mat-icon>
+      </div>
+      <div fxFlex="46%" fxFlexOffset="10px">
+        <h2 class="mat-h2">Dashboard</h2>
+        <div
+          cdkDropList
+          #activeList="cdkDropList"
+          [cdkDropListData]="activeFavorites"
+          [cdkDropListConnectedTo]="[inactiveList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let f of activeFavorites" cdkDrag>
+            <app-item [favorite]="f"></app-item>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

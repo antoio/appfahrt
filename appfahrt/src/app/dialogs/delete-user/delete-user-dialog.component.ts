@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
+import {LoadableComponent} from '../../helpers/loadable';
 import {AuthServiceService} from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user-dialog.component.html'
 })
-export class DeleteUserDialogComponent implements OnInit{
-  loading = false;
+export class DeleteUserDialogComponent extends LoadableComponent implements OnInit {
   deleteForm: FormGroup;
   get form() {
     return this.deleteForm.controls;
@@ -17,7 +17,7 @@ export class DeleteUserDialogComponent implements OnInit{
   submitted = false;
   constructor(public dialogRef: MatDialogRef<DeleteUserDialogComponent>,
               private formBuilder: FormBuilder,
-              private authService: AuthServiceService) { }
+              private authService: AuthServiceService) { super(); }
 
   onSubmit() {
     this.loading = true;

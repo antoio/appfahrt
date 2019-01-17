@@ -1,7 +1,20 @@
 # Appfahrt v 0.8.0
 
+![Appfahrt Icon](https://github.com/antoio/appfahrt/blob/master/appfahrt/src/assets/icons/icon-384x384.png "Appfahrt")
+
 This project is currently work in progress. 🏗  
-visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the current Version
+
+Appfahrt lets you check the stationboards from your nearest location. All mayor train, bus and tramstations in Switzerland are available and fetched from https://transport.opendata.ch.
+
+As a registered user you are able to create and sor yourt Favorite stations.
+
+visit [go.appfahrt.ch](https://go.appfahrt.ch) for the current Version
+
+## Features
+- Traindata API from opendata.ch
+- PWA functionalities for best mobile experience
+- Fully configurable Dashboard
+- Find nearest station with a Google Maps integration
 
 # 🔁 Dependencies
 
@@ -17,9 +30,28 @@ visit [www.appfahrt.ch](http://appfahrt-1537907755048.firebaseapp.com) for the c
 # ⏏️ Installation
 
 - npm install https://github.com/antoio/appfahrt/appfahrt
-- yarn install
+- `cd appfahrt`
 - rename `app/config.template` to `app/config.ts` and include keys for google maps and firbease. If the developers didn't provide you with the keys, feel free to create your own: [Google Maps](https://console.cloud.google.com/google/maps-apis) and [Firebase](http://console.firebase.google.com/)
-- Run dev mode: `ng serve` for a server. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files. Note: For proper pwa usage the app needs to be served through https.
+- install dependencies `yarn install`
+- run dev mode: `ng serve` for a server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+# ⬆️ Deployment
+For proper pwa usage the projects needs to be served via ssh (https) and in production environment.
+- `ng build --prod` will build the full project onto the `dist/appfahrt` folder
+- `firebase deploy` will deploy your project to firebase. Setup firebase with `firebase init` 
+- Enjoy 😎!
+
+# 🔐Security
+Add following rule to prevent favorites beeing modified by unauthorized Users
+```javascript
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/favorites/{document=**} {
+        allow read, write, update, delete: if request.auth.uid == userId;
+    }
+  }
+}
+```
 
 # ℹ️ About us
 

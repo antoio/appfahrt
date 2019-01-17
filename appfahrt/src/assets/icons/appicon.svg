@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:#0D47A1;}
+	.st2{fill:#1565C0;}
+	.st3{fill:#F2F2F2;}
+	.st4{fill:#B3B3B3;}
+	.st5{fill:#B0BEC5;}
+	.st6{fill:#1A237E;}
+	.st7{fill:#DADADA;}
+	.st8{fill:none;stroke:#B0BEC5;stroke-width:6;stroke-miterlimit:10;}
+	.st9{fill:#B0BEC5;stroke:#B0BEC5;stroke-miterlimit:10;}
+	.st10{fill:#43A047;}
+	.st11{fill:#1B5E20;}
+	.st12{fill:none;stroke:#B0BEC5;stroke-width:15;stroke-miterlimit:10;}
+	.st13{fill:#FFFFFF;}
+	.st14{fill:none;stroke:#1D1D1B;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st15{fill:none;stroke:#D50000;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st16{fill:#D50000;}
+</style>
+<rect class="st0" width="512" height="512"/>
+<g>
+	<g>
+		<circle class="st1" cx="278.9" cy="281" r="206.1"/>
+		<path class="st2" d="M278.9,487.1c-113.8,0-206.1-92.3-206.1-206.1S165.1,74.9,278.9,74.9V487.1z"/>
+		<g>
+			<path class="st3" d="M278.7,202.8l-30.4,72.1h30.1l0,30.3h-43.5l-20.5,51.2l-38.1,0.7L278.4,130L278.7,202.8z"/>
+			<path class="st4" d="M278.6,130l102.1,227.1l-38.1-0.7l-20.5-51.2h-43.5l0-30.3h30.1l-30.4-72.1L278.6,130z"/>
+		</g>
+	</g>
+	<polygon class="st5" points="90.5,316.4 89.3,136 64.8,136 66.1,316.4 57.5,340.9 57.5,492.6 99.1,492.6 99.1,340.9 	"/>
+	<g>
+		<rect x="72.8" y="149.5" class="st6" width="84.2" height="164.3"/>
+		<rect x="78.2" y="149.5" class="st1" width="84.2" height="164.3"/>
+		<rect x="89.9" y="166.6" class="st7" width="62.4" height="134.9"/>
+		<rect x="148.6" y="166.6" class="st1" width="3.7" height="134.9"/>
+	</g>
+	<g>
+		<g>
+			<path class="st8" d="M140.5,492.5c0-27.9,15-50.5,33.6-50.5s33.6,22.6,33.6,50.5"/>
+			<rect x="134.7" y="485.2" class="st9" width="11.5" height="7.2"/>
+			<rect x="202.6" y="485.2" class="st9" width="11.5" height="7.2"/>
+		</g>
+		<g>
+			<path class="st8" d="M282.3,493.2c0-27.9,15-50.5,33.6-50.5s33.6,22.6,33.6,50.5"/>
+			<rect x="276.6" y="486" class="st9" width="11.5" height="7.2"/>
+			<rect x="344.4" y="486" class="st9" width="11.5" height="7.2"/>
+		</g>
+		<rect x="105.2" y="420.4" class="st10" width="276.8" height="21.5"/>
+		<polygon class="st11" points="343.8,412 95.8,412 91,371.5 338.9,371.5 		"/>
+		<polygon class="st10" points="353.5,412 105.6,412 100.7,371.5 348.7,371.5 		"/>
+		<polygon class="st11" points="336,362.9 88,362.9 83.2,322.4 331.2,322.4 		"/>
+		<polygon class="st10" points="345.7,362.9 97.8,362.9 92.9,322.4 340.9,322.4 		"/>
+		<rect x="105.2" y="420.4" class="st11" width="54.5" height="21.5"/>
+	</g>
+	<path class="st12" d="M219.6,103V90.8c0-39.2-31.8-70.9-70.9-70.9S77.7,51.6,77.7,90.8v47.7"/>
+	<g>
+		<circle class="st5" cx="221.4" cy="91.4" r="64.2"/>
+		<circle class="st13" cx="221.4" cy="91.4" r="46.8"/>
+		<polyline class="st14" points="219.3,52.4 219.3,101.8 250,81.4 		"/>
+		<line class="st15" x1="219.7" y1="96.6" x2="186.1" y2="103.5"/>
+		<circle class="st16" cx="186.1" cy="103.5" r="9.3"/>
+	</g>
+</g>
+</svg>

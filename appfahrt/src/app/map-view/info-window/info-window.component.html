@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+  <div *ngIf="loading === false" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="mat-h2 center">{{station.name}}</h2>
+    <div *ngIf="user" fxLayout="column" fxLayoutAlign="center center">
+      <p>Zu Favoriten Hinzufügen</p>
+      <button mat-icon-button color="primary" (click)="onChangeFavorite()">
+        <mat-icon *ngIf="isFavorite">
+          favorite
+        </mat-icon>
+        <mat-icon *ngIf="isFavorite === false">
+          favorite_border
+        </mat-icon>
+      </button>
+    </div>
+    <button mat-button color="primary" [routerLink]="['/details', station.id]" fxFlexOffset="10px">Ansehen</button>
+  </div>
+</div>

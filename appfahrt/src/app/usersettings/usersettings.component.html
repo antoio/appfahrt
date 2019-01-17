@@ -10,6 +10,10 @@
       <mat-slide-toggle [checked]="settings.showDuration" (change)="onShowDurationChange()"></mat-slide-toggle>
     </mat-list-item>
     <mat-list-item>
+      <div>Grösse passt sich dem Bildschirm an</div>
+      <mat-slide-toggle [checked]="settings.fit" (change)="onFitChange()"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
       <div>Anzahl Abfahrten pro Station</div>
       <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
         thumbLabel
@@ -17,17 +21,7 @@
         tickInterval="2"
         step="1"
         min="6"
-        max="16"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
-    </mat-list-item>
-    <mat-list-item>
-      <div>Anzahl Stationen im Dashboard</div>
-      <div fxLayout="row" fxLayoutAlign="start center"><mat-slider
-        thumbLabel
-        (change)="onMaxDashboardsChange($event)" [value]="settingsService.maxDashboards"
-        tickInterval="1"
-        step="1"
-        min="1"
-        max="4"></mat-slider><div fxFlex="30px" class="right-align">{{settings.maxDashboards}}</div></div>
+        max="20"></mat-slider><div fxFlex="30px" class="right-align">{{settings.stationCount}}</div></div>
     </mat-list-item>
     <mat-list-item>
       <div>Aktualisierungs Intervall (sec)</div>
@@ -43,7 +37,7 @@
     <mat-list-item>
       <div>E-Mail</div>
       <mat-form-field>
-        <input class="right-align" matInput type="email" [value]="email" disabled>
+        <input class="right-align truncate" matInput type="email" [value]="email" disabled>
       </mat-form-field>
     </mat-list-item>
     <mat-list-item>

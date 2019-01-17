@@ -1,0 +1,10 @@
+.monitor-detail___fab{
+  position: fixed;
+  text-align: right;
+  right: 20px;
+  width: 100px;
+}
+.monitor-detail___board{
+  width: 100%;
+  height: 100%;
+}

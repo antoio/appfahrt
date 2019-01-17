@@ -6,8 +6,8 @@
     <app-emptyfavorites></app-emptyfavorites>
   </div>
   <div *ngIf="loading === false && favorites.length != 0" fxLayout="row wrap" fxLayout.xs="column">
-    <mat-card *ngFor="let favorite of favorites" class="dashboard___card" [ngStyle]="getDashboardStyle()">
+    <div *ngFor="let favorite of favorites" class="dashboard___card mat-typography" [ngStyle]="getDashboardStyle()">
       <app-board [stationId]="favorite.stationId"></app-board>
-    </mat-card>
+    </div>
   </div>
 </div>

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 
 export interface ISettings {
-  maxDashboards: number;
   clockType: string;
   stationCount: number;
   updateRate: number;
   showDuration: boolean;
+  fit: boolean;
 }
 
 @Injectable({
@@ -19,25 +19,25 @@ export class SettingsService {
     if (this.loadStorageSettings() === null) {
       // Defaults
       this.saveStorageSettings({
-        maxDashboards: 1,
         clockType: 'analog',
         stationCount: 10,
         updateRate: 60,
-        showDuration: false
+        showDuration: false,
+        fit: false
       });
     }
   }
 
-  public get maxDashboards(): number {
-    return +this.loadStorageSettings().maxDashboards;
-  }
-  public set maxDashboards(value: number) {
-    const s = this.loadStorageSettings();
-    s.maxDashboards = value;
-    this.saveStorageSettings(s);
-  }
   public get showDuration(): boolean {
     return this.loadStorageSettings().showDuration;
+  }
+  public get fit(): boolean {
+    return this.loadStorageSettings().fit;
+  }
+  public changeFit() {
+    const s = this.loadStorageSettings();
+    s.fit = !s.fit;
+    this.saveStorageSettings(s);
   }
   public switchDuration() {
     const s = this.loadStorageSettings();

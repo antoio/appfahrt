@@ -1,25 +1,22 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Board} from '../../board/board.component';
-import {DatabaseService, Favorite} from '../../services/database-service.service';
+import {MatDialog} from '@angular/material';
+import {RemoveFavoriteDialogComponent} from '../../dialogs/remove-favorite/remove-favorite-dialog.component';
+import {Favorite} from '../../services/database-service.service';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent {
   @Input() favorite: Favorite;
 
 
-  constructor( private databaseService: DatabaseService) { }
+  constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {
-  }
-
-  onChangeDisplayStatus(index: number) {
-    this.databaseService.getFavoriteSnapshot(this.favorite.stationId, this.favorite.userId).subscribe(favorite => {
-      this.databaseService.changeFavoriteDisplayStatus(favorite.docs[0].id, index, this.favorite);
-    });
+  public onDeleteFavoriteDialog() {
+    const dremoveFavoriteDialog = this.dialog.open(RemoveFavoriteDialogComponent);
+    dremoveFavoriteDialog.componentInstance.favorite = this.favorite;
   }
 
 }

@@ -1,10 +1,11 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
-import {MapsAPILoader} from '@agm/core';
+import {Component, OnInit, OnDestroy, NgZone, Output, EventEmitter} from '@angular/core';
+import {MapsAPILoader, MapTypeStyle} from '@agm/core';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StationsService} from '../board/stations/stations.service';
 import {Station} from '../board/stations/station';
+import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
 import {EnableGeolocationDialogComponent} from '../dialogs/enable-geolocation/enable-geolocation-dialog.component';
 import {Observable} from 'rxjs/Observable';
@@ -23,7 +24,7 @@ interface Coordinates {
   styleUrls: ['./map-view.component.css'],
   providers: [StationsService]
 })
-export class MapViewComponent implements OnInit, OnDestroy {
+export class MapViewComponent extends LoadableComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private mapsAPILoader: MapsAPILoader,
@@ -32,6 +33,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
               public dialog: MatDialog,
               public router: Router,
               private breakpointObserver: BreakpointObserver) {
+    super();
     breakpointObserver.observe([
       Breakpoints.Handset,
       Breakpoints.Small
@@ -51,17 +53,19 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   userCoordinates: Coordinates | null = null;
 
-  loading = true;
   error: AppError = null;
   stations: Station[];
   geolocationDenied = false;
   map: any;
   dragEventListener: any;
   smallSize = false;
+  style = STYLE;
 
   resizeObservable$: Observable<Event>;
   resizeSubscription$: Subscription;
   windowHeight: number = window.innerHeight;
+
+  @Output() changeCurrent: EventEmitter<number> = new EventEmitter<number>();
 
   get mapHeight(): number {
     return this.windowHeight - 64 - (this.smallSize ? 46 : 0);
@@ -115,11 +119,10 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   mapReady(map) {
-    console.log(map);
-    map.styles = STYLE;
     // Hack: https://github.com/SebastianM/angular-google-maps/issues/1092
     // GMaps events: https://developers.google.com/maps/documentation/javascript/events
     this.map = map;
+    // this.map.style = JSON.parse(STYLE);
     this.dragEventListener = this.map.addListener('dragend', () => {
       if (this._tempCoordintes) {
         this.setCoordinates(this._tempCoordintes.x, this._tempCoordintes.y);
@@ -129,6 +132,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
   }
 
   markerClick(station: Station) {
+    this.changeCurrent.emit(station.id);
   }
 
   getLocationFromAutocomplete(location: { x: number, y: number }) {
@@ -151,13 +155,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
         x: position.coords.longitude,
         y: position.coords.latitude
       };
+      this.geolocationDenied = false;
       this.getStations();
     }, error => {
       if (error.code === 1) {
         console.warn('Geolocation is denied by user.');
-        this.geolocationDenied = true;
-        this.getStations();
       }
+      this.geolocationDenied = true;
+      this.getStations();
     });
   }
 
@@ -184,7 +189,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
-    if (this.map.event) {
+    if (this.map && this.map.event) {
       this.map.event.removeListener(this.dragEventListener);
     }
   }
@@ -205,7 +210,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
                 y: station.coordinate.y
               }
             };
-            if (newStation.name && newStation.id) {
+            if (newStation.name && newStation.id) { // Verify station has name and an id
               this.stations.push(newStation as Station);
             }
           });

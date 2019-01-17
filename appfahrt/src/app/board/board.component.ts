@@ -1,22 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ElementRef, AfterViewInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {getTimeDifferenceFromTimestamp, getTimeFromTimestamp} from '../helpers/dateFormat';
+import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
 import {SettingsService} from '../services/settings.service';
 import {Station} from './stations/station';
 import {StationsService} from './stations/stations.service';
 import {Train} from './trains/train';
-import {GetTrainLabel, GetTrainType} from './trains/train-type/trainTape';
+import {GetTrainLabel} from './trains/train-type/trainTape';
 import {TrainsService} from './trains/trains.service';
+import {fromEvent} from 'rxjs/observable/fromEvent';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 export interface Board {
   station: Station;
   trains: Train[];
 }
 
-interface TrainCellItem {
-  label: string;
-  classes: string;
-}
 
 @Component({
   selector: 'app-board',
@@ -25,23 +25,40 @@ interface TrainCellItem {
   providers: [StationsService]
 })
 
-export class BoardComponent implements OnInit {
+export class BoardComponent extends LoadableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() stationId: string;
   @Input() board: Board;
-  loading = true;
-  displayTable: TrainCellItem[] = [];
   nearestStationsIds: string[] = [];
   currentStationIndex = 0;
   error: AppError = null;
+  fontSize = 18;
+  relativeWidth = 1024;
+  relativeHeight = 768;
+  fit = false;
 
-  headerRow: TrainCellItem[] = [
-    {label: 'Time', classes: 'header center'},
-    {label: '', classes: 'header'},
-    {label: 'Destination', classes: 'header pl1'},
-    {label: 'Platform', classes: 'header center'}
-  ];
+  resizeObservable$: Observable<Event>;
+  resizeSubscription$: Subscription;
 
-  constructor(private trainsService: TrainsService, private stationService: StationsService, private settings: SettingsService) {
+
+  constructor(private trainsService: TrainsService, private stationService: StationsService,
+              private settings: SettingsService,
+              private el: ElementRef, private cdRef: ChangeDetectorRef) {
+    super();
+  }
+
+  public translateItem(index) {
+    return `translate(0 ${44 + (index * this.itemHeight)})`;
+  }
+
+  get textItemPos() {
+    return (this.itemHeight / 2 + (this.fontSize / 2)) - (this.fontSize * 0.2);
+  }
+
+  get itemHeight() {
+    if (!this.board) {
+      return 0;
+    }
+    return (this.relativeHeight - 44) / this.board.trains.length;
   }
 
   public getTime(timestamp: number): string {
@@ -52,24 +69,37 @@ export class BoardComponent implements OnInit {
       return getTimeFromTimestamp(timestamp);
     }
   }
+
   public prevStation() {
-    this.currentStationIndex --;
-    if (this.currentStationIndex < 0) { this.currentStationIndex = this.nearestStationsIds.length - 1; }
+    this.currentStationIndex--;
+    if (this.currentStationIndex < 0) {
+      this.currentStationIndex = this.nearestStationsIds.length - 1;
+    }
     this.stationId = this.nearestStationsIds[this.currentStationIndex];
     this.loading = true;
     this.loadBoard();
   }
+
   public nextStation() {
-    this.currentStationIndex ++;
-    if (this.currentStationIndex > this.nearestStationsIds.length - 1) { this.currentStationIndex = 0; }
+    this.currentStationIndex++;
+    if (this.currentStationIndex > this.nearestStationsIds.length - 1) {
+      this.currentStationIndex = 0;
+    }
     this.stationId = this.nearestStationsIds[this.currentStationIndex];
     this.loading = true;
     this.loadBoard();
   }
 
   public ngOnInit() {
+
+    this.resizeObservable$ = fromEvent(window, 'resize');
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
+      this.updateRatio();
+    });
+
     this.error = null;
     this.loading = true;
+    this.fit = this.settings.fit;
     if (this.board === undefined) {
       // Load nearest Station
       if (this.stationId === null) {
@@ -95,8 +125,8 @@ export class BoardComponent implements OnInit {
       }
     } else {
       // Board already loaded
-      this.displayTable = [...this.headerRow, ...this.fillCellsWithTrains(this.board.trains)];
       this.loading = false;
+      this.updateRatio();
     }
   }
 
@@ -106,9 +136,9 @@ export class BoardComponent implements OnInit {
       newBoard.station = data.station as Station;
       newBoard.trains = data.stationboard as Train[];
       this.board = newBoard;
-      this.displayTable = [...this.headerRow, ...this.fillCellsWithTrains(this.board.trains)];
       this.loading = false;
       this.error = null;
+      this.updateRatio();
     }, (error) => {
       this.error = {
         status: true,
@@ -141,17 +171,29 @@ export class BoardComponent implements OnInit {
     );
   }
 
-  private fillCellsWithTrains(trains: Train[]): TrainCellItem[] {
-    const trainList: TrainCellItem[] = [];
-    trains.forEach((train) => {
-      trainList.push({label: this.getTime(train.stop.departureTimestamp * 1000), classes: 'cell center'});
-      trainList.push({
-        label: `${GetTrainLabel(train.category, train.number || '')}`,
-        classes: `cell train-type ${GetTrainType(train.category, train.operator)}`
-      });
-      trainList.push({label: train.to, classes: 'cell pl1'});
-      trainList.push({label: train.stop.platform, classes: 'cell center'});
-    });
-    return trainList;
+  public trainLabel(train) {
+    return GetTrainLabel(train.category, train.number);
+  }
+
+  updateRatio() {
+    this.fontSize = Math.min(this.itemHeight - 20, 35);
+    const rect = this.el.nativeElement.getBoundingClientRect();
+    if (rect.width > rect.height) {
+      this.relativeWidth = 1024;
+      this.relativeHeight = 768;
+    } else {
+      this.relativeWidth = 768;
+      this.relativeHeight = 1024;
+    }
+
+    this.cdRef.detectChanges();
+  }
+
+  ngAfterViewInit(): void {
+    this.updateRatio();
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription$.unsubscribe();
   }
 }
