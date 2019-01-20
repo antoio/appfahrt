@@ -26,12 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthServiceService,
     private router: Router,
-    private formBuilder: FormBuilder) {
-    // if (this.authService.isLoggedIn) {
-    //   console.log('Already logged in. Navigate to home.');
-    //   this.router.navigate(['/']);
-    // }
-  }
+    private formBuilder: FormBuilder) { }
 
   get form() {
     return this.loginForm.controls;
@@ -55,7 +50,7 @@ export class LoginComponent implements OnInit {
       .catch((err) => {
         this.error = err;
         console.log(err);
-        //reset the error message
+        // reset the error message
         setTimeout(() => {this.error = null}, 7000);
       });
   }

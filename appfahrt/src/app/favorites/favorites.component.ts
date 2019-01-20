@@ -86,8 +86,7 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
       this.favorites.forEach((fav) => {
         if (fav.display !== 0) {
           this.activeFavorites[fav.display - 1] = fav;
-        }
-        else {
+        } else {
           this.inactiveFavorites.push(fav);
         }
       });

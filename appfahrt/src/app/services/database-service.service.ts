@@ -12,13 +12,15 @@ export interface Favorite {
   stationName: string;
   addedAt: number;
   display: number;
+  favoritetags: Array<string>;
 }
 export const Nearest: Favorite = {
   addedAt: 0,
   display: 1,
-  stationName: 'Näheste',
+  stationName: 'Aktueller Standort',
   stationId: null,
-  userId: null
+  userId: null,
+  favoritetags: []
 }
 
 @Injectable({
@@ -49,7 +51,8 @@ export class DatabaseService {
       stationId: stationId,
       stationName: stationName,
       addedAt: added.getTime(),
-      display: 0
+      display: 0,
+      favoritetags: []
     });
   }
   public addNearestFavorite(userId: string) {

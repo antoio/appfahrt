@@ -2,29 +2,31 @@
   <div *ngIf="favorite === null">
     <p>empty</p>
   </div>
-  <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
-    <mat-icon class="mr1">drag_handle</mat-icon>
-    <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
-    <div>
-      <button *ngIf="favorite.stationId" mat-icon-button (click)="onDeleteFavoriteDialog()">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <button mat-icon-button [routerLink]="['/details', (favorite.stationId ? favorite.stationId : 'nearest')]">
-        <mat-icon>access_time</mat-icon>
-      </button>
+  <div fxFlexFill *ngIf="favorite != null" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-icon class="mr1">drag_handle</mat-icon>
+      <h2 class="mat-h2 m0">{{favorite.stationName}}</h2>
+      <div>
+        <button *ngIf="favorite.stationId" mat-icon-button (click)="onDeleteFavoriteDialog()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button [routerLink]="['/details', (favorite.stationId ? favorite.stationId : 'nearest')]">
+          <mat-icon>access_time</mat-icon>
+        </button>
+      </div>
     </div>
-  </div>
-  <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
-    <mat-form-field>
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
-          {{tag}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="New tag..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field fxFlexFill>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+            {{tag}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Tags" #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
   </div>
 </div>
