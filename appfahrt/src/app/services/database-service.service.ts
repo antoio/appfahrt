@@ -66,6 +66,13 @@ export class DatabaseService {
       display: index
     });
   }
+
+  public updateTags(docId: string, usertags: string[], favorite: Favorite) {
+    this._db.doc(`users/${favorite.userId}/favorites/${docId}`).update({
+      favoritetags: usertags
+    });
+  }
+
   public getFavoriteSnapshot(stationId: string, userId: string) {
     return this._db.collection<Favorite>('users/' + userId + '/favorites', ref =>
       ref.where('stationId', '==', stationId)).get();

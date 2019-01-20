@@ -1,13 +1,11 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {tap} from 'rxjs/operators';
 import {LoadableComponent} from '../helpers/loadable';
 import {AppError} from '../other/error/error.component';
 import {AuthServiceService} from '../services/auth-service.service';
-import {DatabaseService, Favorite, Nearest} from '../services/database-service.service';
-import {SettingsService} from '../services/settings.service';
+import {DatabaseService, Favorite} from '../services/database-service.service';
 
 @Component({
   selector: 'app-favorites',
@@ -22,9 +20,9 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
   error: AppError = null;
   favoritesLoading = false;
   noUser = false;
+  favorite: Favorite;
 
   constructor(
-    private route: ActivatedRoute,
     private authService: AuthServiceService,
     public afAuth: AngularFireAuth,
     private databaseService: DatabaseService) {
@@ -66,23 +64,10 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
     this.authService.userIsSigenedIn().pipe(
       tap(user => {
         if (user) {
-          this.databaseService.getFavorites(user.uid).subscribe(favorites => {
-            this.favorites = favorites;
-            this.activeFavorites = new Array<Favorite>(4);
-            this.inactiveFavorites = [];
-            this.favorites.forEach((f) => {
-              if (f.display !== 0) {
-                this.activeFavorites[f.display - 1] = f;
-              } else {
-                this.inactiveFavorites.push(f);
-              }
-            });
-            this.error = null;
-            this.loading = false;
-          });
+          this.loadFavorites(user);
         } else {
-          this.loading = false;
           this.noUser = true;
+          this.loading = false;
         }
       })
     ).subscribe(() => console.log('success'), (error) => {
@@ -90,6 +75,24 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
         status: 1,
         message: 'Konnte keine Verbindung herstellen'
       };
+    });
+  }
+
+  private loadFavorites(user) {
+    this.databaseService.getFavorites(user.uid).subscribe(favorites => {
+      this.favorites = favorites;
+      this.activeFavorites = new Array<Favorite>(4);
+      this.inactiveFavorites = [];
+      this.favorites.forEach((fav) => {
+        if (fav.display !== 0) {
+          this.activeFavorites[fav.display - 1] = fav;
+        }
+        else {
+          this.inactiveFavorites.push(fav);
+        }
+      });
+      this.error = null;
+      this.loading = false;
     });
   }
 }
