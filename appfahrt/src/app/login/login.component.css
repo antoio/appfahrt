@@ -1,6 +1,8 @@
-.login{
-
+.error{
+	color: white;
+	background-color: Tomato;
+	text-align: center;
 }
-.login___card{
+.error___card{
 
 }
