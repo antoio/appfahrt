@@ -1,6 +1,6 @@
 <div class="m1 mat-typography" [style.width]="'100%'" fxFlexFill fxFlex="100%">
   <div *ngIf="favorite === null">
-    empty
+    <p>empty</p>
   </div>
   <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
     <mat-icon class="mr1">drag_handle</mat-icon>
@@ -13,5 +13,18 @@
         <mat-icon>access_time</mat-icon>
       </button>
     </div>
+  </div>
+  <div fxFlexFill *ngIf="favorite != null" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+          {{tag}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="New tag..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
   </div>
 </div>

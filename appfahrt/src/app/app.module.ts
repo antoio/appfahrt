@@ -8,7 +8,7 @@ import {MapViewComponent} from './map-view/map-view.component';
 import {AboutComponent} from './about/about.component';
 import {
   MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatSliderModule, MatBottomSheetModule,
-  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule, MatDialogModule
+  MatFormFieldModule, MatInputModule, MatCardModule, MatListModule, MatTableModule, MatSlideToggleModule, MatDialogModule, MatChipsModule, MatOptionModule, MatAutocompleteModule
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {NavigationService} from './navigation/navigation.service';
@@ -68,7 +68,10 @@ import { RemoveFavoriteDialogComponent } from './dialogs/remove-favorite/remove-
     MatSlideToggleModule,
     MatSliderModule,
     MatDialogModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatChipsModule,
+    MatOptionModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule {}

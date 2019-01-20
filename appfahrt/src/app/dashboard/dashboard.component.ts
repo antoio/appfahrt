@@ -71,8 +71,10 @@ export class DashboardComponent implements OnInit {
           this.databaseService.getShownFavorites(user.uid).subscribe(favorites => {
             if (favorites.length > this.maxDashboards) {
               this.favorites = favorites.slice(0, this.maxDashboards);
+              console.debug(`dashboard.component.ts => this.favorites: ${this.favorites}`);
             } else {
               this.favorites = favorites;
+              console.debug(`dashboard.component.ts => this.favorites: ${this.favorites}`);
             }
             this.loading = false;
           });

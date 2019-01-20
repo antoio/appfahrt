@@ -1,5 +1,5 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {tap} from 'rxjs/operators';
@@ -22,6 +22,8 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
   error: AppError = null;
   favoritesLoading = false;
   noUser = false;
+
+  @Output() favorite: Favorite;
 
   constructor(
     private route: ActivatedRoute,
