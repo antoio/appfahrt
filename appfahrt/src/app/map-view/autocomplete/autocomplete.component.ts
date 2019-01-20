@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Address } from 'angular-google-place';
+import {Component, OnInit, Output, EventEmitter, ViewChild, Input} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Address} from 'angular-google-place';
+import {AuthServiceService} from '../../services/auth-service.service';
+import {DatabaseService} from '../../services/database-service.service';
 
 interface HistoryContainer {
   name: string,
@@ -8,6 +10,7 @@ interface HistoryContainer {
   lng: number,
   event: any
 }
+
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
@@ -16,20 +19,28 @@ interface HistoryContainer {
 export class AutocompleteComponent implements OnInit {
   historyExists: boolean = true;
   history: HistoryContainer[] = [];
-  input_entry: string = "";
+  input_entry: string = '';
+  user = null;
 
   ready = false;
   @Input() leftSpace = 100;
 
   public searchControl: FormControl;
   @Output() location: EventEmitter<any> = new EventEmitter<any>();
-  public options = { type: 'address', componentRestrictions: { country: 'CH' } };
+  public options = {type: 'address', componentRestrictions: {country: 'CH'}};
+
+  constructor(
+    private databaseService: DatabaseService) {
+  }
 
   getFormattedAddress(event: any) {
-    console.log("event:")
+    console.log('event:');
     console.log(event);
+    console.log(event);
+    this.databaseService.addHistoryItem(this.createSearchString(event), event.lng, event.lat);
+
     this.putLocationInArray(event);
-    this.location.emit({ x: event.lng, y: event.lat });
+    this.location.emit({x: event.lng, y: event.lat});
   }
 
   private async putLocationInArray(event: any) {
@@ -38,7 +49,7 @@ export class AutocompleteComponent implements OnInit {
       lng: event.lng,
       lat: event.lat,
       event: event
-    }
+    };
 
     // prevent duplicates
     for (let element of this.history) {
@@ -58,25 +69,25 @@ export class AutocompleteComponent implements OnInit {
 
   fillInputField(entry: HistoryContainer) {
     this.input_entry = entry.name;
-    this.location.emit({ x: entry.lng, y: entry.lat });
+    this.location.emit({x: entry.lng, y: entry.lat});
   }
 
   private createSearchString(entry: any) {
-    let searchString = "";
+    let searchString = '';
     if (entry.street) {
       searchString += this.stringOrEmpty(entry.street);
-      searchString += " ";
+      searchString += ' ';
       searchString += this.stringOrEmpty(entry.street_number);
-      searchString += ", ";
+      searchString += ', ';
     }
     if (entry.state) {
       searchString += this.stringOrEmpty(entry.state);
-      searchString += ", ";
+      searchString += ', ';
     }
     if (entry.city) {
       if (entry.postal_code) {
         searchString += this.stringOrEmpty(entry.postal_code);
-        searchString += " ";
+        searchString += ' ';
       }
       searchString += this.stringOrEmpty(entry.city);
     }

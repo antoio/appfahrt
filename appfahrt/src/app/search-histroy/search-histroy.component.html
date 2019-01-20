@@ -1,0 +1,18 @@
+<div class="user-settings max-width-2 mt4 mx-auto">
+  <mat-list>
+    <h3 matSubheader>Verlauf</h3>
+    <div *ngFor="let h of history; let i = index">
+      <mat-list-item>
+        <div>{{h.name}}</div>
+        <button mat-icon-button routerLink="/search" [queryParams]="{x:h.lgn, y: h.lat}">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </mat-list-item>
+    </div>
+    <div *ngIf="history.length === 0">
+      <mat-list-item>
+        <div>Leerer Suchverlauf</div>
+      </mat-list-item>
+    </div>
+  </mat-list>
+</div>

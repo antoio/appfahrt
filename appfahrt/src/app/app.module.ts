@@ -52,6 +52,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { InfoWindowComponent } from './map-view/info-window/info-window.component';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { RemoveFavoriteDialogComponent } from './dialogs/remove-favorite/remove-favorite-dialog.component';
+import { SearchHistroyComponent } from './search-histroy/search-histroy.component';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ export class MaterialModule {}
     ResetPasswordDialogComponent,
     DeleteUserDialogComponent,
     InfoWindowComponent,
-    RemoveFavoriteDialogComponent
+    RemoveFavoriteDialogComponent,
+    SearchHistroyComponent
   ],
   entryComponents: [
     EnableGeolocationDialogComponent,

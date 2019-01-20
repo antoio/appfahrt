@@ -7,6 +7,7 @@ import {LoginComponent} from '../login/login.component';
 import { MapViewComponent } from '../map-view/map-view.component';
 import { AboutComponent } from '../about/about.component';
 import {RegisterComponent} from '../register/register.component';
+import {SearchHistroyComponent} from '../search-histroy/search-histroy.component';
 import { UsersettingsComponent } from '../usersettings/usersettings.component';
 import { MonitordetailComponent } from '../monitordetail/monitordetail.component';
 
@@ -44,6 +45,11 @@ const routes: Routes = [
     path: 'search',
     component: MapViewComponent,
     data: {title: 'Karte', bottomNav: 'search'}
+  },
+  {
+    path: 'search-history',
+    component: SearchHistroyComponent,
+    data: {title: 'Suchverlauf', bottomNav: 'search'}
   },
   {
     path: 'favorites',

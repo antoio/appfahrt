@@ -16,47 +16,54 @@
     <div *ngIf="favorites.length === 0" fxFlexFill fxLayout="row" fxLayoutAlign="center center">
       <app-emptyfavorites></app-emptyfavorites>
     </div>
-    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="row" fxLayout.xs="column-reverse">
-      <div fxFlex="46%" fxLayout="column">
-        <h2 class="mat-h2">Favoriten</h2>
-        <div
-          cdkDropList
-          #inactiveList="cdkDropList"
-          [cdkDropListData]="inactiveFavorites"
-          [cdkDropListConnectedTo]="[activeList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let f of inactiveFavorites" cdkDrag>
-            <app-item [favorite]="f"></app-item>
+    <div *ngIf="favorites.length != 0" fxFlexFill fxLayout="column">
+      <div class="mat-typography my2 center">
+        <p>Ziehe Stationen von der Favorites-Liste in die Dashboard-Liste um diese im Dashboard anzuzeigen. Max. 4 Können dargestellt werden.</p>
+        <p>Füge Tags (z.B. Arbeitsort, Schule, Home,...) hinzu.</p>
+      </div>
+      <div fxFlexFill fxLayout="row" fxLayout.xs="column-reverse">
+        <div fxFlex="46%" fxLayout="column">
+          <h2 class="mat-h2">Favoriten</h2>
+          <div
+            cdkDropList
+            #inactiveList="cdkDropList"
+            [cdkDropListData]="inactiveFavorites"
+            [cdkDropListConnectedTo]="[activeList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let f of inactiveFavorites" cdkDrag>
+              <app-item [favorite]="f"></app-item>
+            </div>
           </div>
-        </div>
 
-        <div class="center" fxFlexOffset="20px">
-          <button mat-raised-button color="primary" routerLink="/search">Favorit hinzufügen</button>
+          <div class="center" fxFlexOffset="20px">
+            <button mat-raised-button color="primary" routerLink="/search">Favorit hinzufügen</button>
+          </div>
         </div>
-      </div>
-      <div fxFlex="8%" fxLayout="column" fxLayoutAlign="space-around center">
-        <mat-icon fxShow="true" fxShow.xs="false">
-          swap_horiz
-        </mat-icon>
-        <mat-icon fxShow="false" class="m2" fxShow.xs="true">
-          swap_vert
-        </mat-icon>
-      </div>
-      <div fxFlex="46%" fxFlexOffset="10px">
-        <h2 class="mat-h2">Dashboard</h2>
-        <div
-          cdkDropList
-          #activeList="cdkDropList"
-          [cdkDropListData]="activeFavorites"
-          [cdkDropListConnectedTo]="[inactiveList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let f of activeFavorites" cdkDrag>
-            <app-item [favorite]="f"></app-item>
+        <div fxFlex="8%" fxLayout="column" fxLayoutAlign="space-around center">
+          <mat-icon fxShow="true" fxShow.xs="false">
+            swap_horiz
+          </mat-icon>
+          <mat-icon fxShow="false" class="m2" fxShow.xs="true">
+            swap_vert
+          </mat-icon>
+        </div>
+        <div fxFlex="46%" fxFlexOffset="10px">
+          <h2 class="mat-h2">Dashboard</h2>
+          <div
+            cdkDropList
+            #activeList="cdkDropList"
+            [cdkDropListData]="activeFavorites"
+            [cdkDropListConnectedTo]="[inactiveList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let f of activeFavorites" cdkDrag [cdkDragDisabled]="f ? false : true">
+              <app-item [favorite]="f"></app-item>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
