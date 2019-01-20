@@ -85,6 +85,11 @@ export class FavoritesComponent extends LoadableComponent implements OnInit {
           this.noUser = true;
         }
       })
-    ).subscribe();
+    ).subscribe(() => console.log('success'), (error) => {
+      this.error = {
+        status: 1,
+        message: 'Konnte keine Verbindung herstellen'
+      };
+    });
   }
 }

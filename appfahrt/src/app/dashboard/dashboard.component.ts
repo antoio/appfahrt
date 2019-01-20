@@ -65,6 +65,7 @@ export class DashboardComponent extends LoadableComponent implements OnInit {
   }
   ngOnInit() {
     this.loading = true;
+    this.error = null;
     this.authService.userIsSigenedIn().pipe(
       tap(user => {
         if (user) {
@@ -81,6 +82,11 @@ export class DashboardComponent extends LoadableComponent implements OnInit {
           this.loading = false;
         }
       })
-    ).subscribe(() => console.log('success'), (error) => console.error(error));
+    ).subscribe(() => console.log('success'), (error) => {
+      this.error = {
+        status: 1,
+        message: 'Konnte keine Verbindung herstellen'
+      };
+    });
   }
 }

@@ -35,6 +35,8 @@ export class InfoWindowComponent extends LoadableComponent implements OnInit {
   ngOnInit() {
     this.user = null;
     this.isFavorite = false;
+    this.error = null;
+    this.loading = true;
     this.authService.userIsSigenedIn().pipe(
       tap((user: any) => {
         if (user) {
@@ -49,6 +51,11 @@ export class InfoWindowComponent extends LoadableComponent implements OnInit {
           this.loading = false;
         }
       })
-    ).subscribe();
+    ).subscribe(() => console.log('success'), (error) => {
+      this.error = {
+        status: 1,
+        message: 'Konnte keine Verbindung herstellen'
+      };
+    });
   }
 }
