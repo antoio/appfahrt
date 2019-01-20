@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, ElementRef, OnInit} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {RemoveFavoriteDialogComponent} from '../../dialogs/remove-favorite/remove-favorite-dialog.component';
 import {DatabaseService, Favorite} from '../../services/database-service.service';
@@ -11,7 +11,7 @@ import {MatChipInputEvent} from '@angular/material';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent {
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -36,17 +36,6 @@ export class ItemComponent implements OnInit {
   }
   set tags(tags: Array<string>) {
     this._tags = tags;
-  }
-  ngOnInit() {
-    if (this.favorite === null || this.favorite === undefined) { return; }
-    this.databaseService.getFavoriteSnapshot(this.favorite.stationId, this.favorite.userId).subscribe(favorite => {
-      const data = favorite.docs[0].data();
-      if (data.favoritetags) {
-        this.tags = data.favoritetags;
-      } else {
-        this.tags = [];
-      }
-    });
   }
 
   add(event: MatChipInputEvent): void {
