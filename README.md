@@ -29,7 +29,7 @@ visit [go.appfahrt.ch](https://go.appfahrt.ch) for the current Version
 
 # ⏏️ Installation
 
-- npm install https://github.com/antoio/appfahrt/appfahrt
+- `git https://github.com/antoio/appfahrt`
 - `cd appfahrt`
 - rename `app/config.template` to `app/config.ts` and include keys for google maps and firbease. If the developers didn't provide you with the keys, feel free to create your own: [Google Maps](https://console.cloud.google.com/google/maps-apis) and [Firebase](http://console.firebase.google.com/)
 - install dependencies `yarn install`
