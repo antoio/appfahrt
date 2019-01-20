@@ -19,7 +19,4 @@ describe('MonitordetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

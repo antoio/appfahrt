@@ -14,7 +14,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   secDeg = this._time.getSeconds() * 6;
   minDeg = this._time.getMinutes() * 6;
   hourDeg = (this._time.getHours() % 12 * 30) + (0.3 * (100 / 360 * this.minDeg));
-  interval: number;
+  interval: any;
   type = this.settings.clockType;
   smallSize = false;
 
