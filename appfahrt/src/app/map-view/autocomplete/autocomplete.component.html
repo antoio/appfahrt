@@ -1,6 +1,13 @@
 <mat-card  *ngIf="ready" class="autocomplete" [ngStyle]="{'left.px': leftSpace}">
   <mat-form-field class="autocomplete___formfield">
     <mat-icon matPrefix="" class="autocomplete___icon">search</mat-icon>
-    <input placeholder="Standort suchen..." matInput (FormatAddress)="getFormattedAddress($event)" [options]="options"  angularGooglePlace/>
+    <input placeholder="Standort suchen..." matInput [(value)]="input_entry" (FormatAddress)="getFormattedAddress($event)" [options]="options"  angularGooglePlace/>
   </mat-form-field>
+  <mat-card *ngIf="history.length > 0">
+    <mat-action-list>
+      <mat-list-item *ngFor="let entry of history" (click)="fillInputField(entry)">
+        {{entry.name}}
+      </mat-list-item>
+    </mat-action-list>
+  </mat-card>
 </mat-card>

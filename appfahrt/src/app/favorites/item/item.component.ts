@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {RemoveFavoriteDialogComponent} from '../../dialogs/remove-favorite/remove-favorite-dialog.component';
 import {DatabaseService, Favorite} from '../../services/database-service.service';
