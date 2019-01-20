@@ -1,4 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="center" class="register">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <mat-card *ngIf="error" class="error" fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column" [@fadeOut]>
+      {{error.message}}
+    </mat-card>
+  </div>
   <div fxFlexOffset="40px" fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex="80%" fxFlex.md="50%" fxFlex.lg="30%" fxLayout="column">
       <form fxLayout="column" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
